@@ -51,3 +51,30 @@ Below are a list of requirements of the application, things that must be created
 ---
 ### Future Ideas
 
+
+---
+### Personal Notes
+
+The directory structure that will be used as a reference will be:
+```
+project_name/
+|-- src/
+|   |-- main.cpp
+|   |-- module1/
+|   |   |-- module1.cpp
+|   |   |-- module1.h
+|   |-- module2/
+|   |   |-- module2.cpp
+|   |   |-- module2.h
+|-- include/
+|   |-- project_name/
+|   |   |-- module1.h
+|   |   |-- module2.h
+|-- lib/
+|-- tests/
+|   |-- unit_tests.cpp
+|-- build/
+|-- doc/
+|-- CMakeLists.txt
+|-- README.md
+```
