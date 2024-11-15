@@ -46,7 +46,18 @@ Below are a list of requirements of the application, things that must be created
 ---
 ### Getting Started
 
+The following will include instructions on how to run the project. At the moment the project is run by building the executable and then running it through your shell.
 
+```bash
+# Build the executable and name it main.out
+g++ main.cpp -o main.out
+
+# If required
+chmod a+x main.out 
+
+# Run the executable
+./main.out
+```
 
 ---
 ### Future Ideas
