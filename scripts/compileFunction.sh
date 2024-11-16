@@ -4,5 +4,5 @@
 # so that you can more easily compile your project
 function comp {
     local filename="${1%.*}.out"
-    sudo g++ -w "$1" -o "$filename" && "./$filename"
+    sudo g++ -std=c++23 -w "$1" -o "$filename" && "./$filename"
 }
