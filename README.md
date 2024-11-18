@@ -6,7 +6,7 @@
 
 <div align="center">
 
-# Papy
+# Papy (Papyrus)
 
 </div>
 
@@ -106,3 +106,8 @@ Todo:
 - Randomize Unix Start times and dates
 	- 1730593150712
 	- Game Duration
+
+
+### Name Meaning
+
+This section is completely for fun. I named the project based off the latin word papyrus for paper. I figured that paper is what contains much of humanities knowledge and it is also where people go to obtain new knowledge from others. So the link between that and a project that generates a ton of information was not a far leap for me in my mind.
