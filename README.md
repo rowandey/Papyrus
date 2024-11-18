@@ -89,3 +89,17 @@ project_name/
 |-- CMakeLists.txt
 |-- README.md
 ```
+
+Fields that will be randomized:
+- Champion Names
+- Items
+- Summoner Spells
+- Runes
+- Champ Level Scaling with game time
+- K / D / A
+- Damage Done
+- Unix Start times and dates
+	- 1730593150712
+- Game Duration
+- Creep Score
+- Player Summoner Name
