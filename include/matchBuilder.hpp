@@ -49,6 +49,10 @@ class matchBuilder {
                 // Only time there is more than 90k damage in an average game length wise is if
                 // there is karthus in the game or something 
                 participant["totalDamageDealtToChampions"] = myRandom::generateRandomInt(1, 90000);
+                participant["totalMinionsKilled"] = myRandom::generateRandomInt(1, 200);
+                participant["totalAllyJungleMinionsKilled"] = myRandom::generateRandomInt(1, 100);
+                participant["totalEnemyJungleMinionsKilled"] = myRandom::generateRandomInt(1, 50);
+                
                 participant["champExperience"] = myRandom::generateRandomInt(1, 12576);
                 // Level 18 is the cap
                 participant["champLevel"] = myRandom::generateRandomInt(1, 18);
