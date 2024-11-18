@@ -18,111 +18,27 @@ class matchBuilder {
         json data;
 
         static std::string getRandomItemFromJson() {
-            // Open and parse the JSON file
-            std::ifstream file("../src/mappingFiles/items.json");
-            if (!file) {
-                throw std::runtime_error("Failed to open the file: ../src/mappingFiles/items.json");
-            }
 
-            json items;
-            file >> items;
-
-            // Collect all the keys into a vector
-            std::vector<std::string> keys;
-            for (auto it = items.begin(); it != items.end(); ++it) {
-                keys.push_back(it.key());
-            }
-
-            // Generate a random index
-            std::random_device rd;  // Seed
-            std::mt19937 gen(rd()); // Random number generator
-            std::uniform_int_distribution<> distrib(0, keys.size() - 1);
-
-            int randomIndex = distrib(gen);
-
-            // Return the random key
-            return keys[randomIndex];
+            return getRandomFromJson("../src/mappingFiles/items.json");
+            
         }
 
         static std::string getRandomSummonerFromJson() {
-            // Open and parse the JSON file
-            std::ifstream file("../src/mappingFiles/summoners.json");
-            if (!file) {
-                throw std::runtime_error("Failed to open the file: ../src/mappingFiles/summoners.json");
-            }
 
-            json items;
-            file >> items;
-
-            // Collect all the keys into a vector
-            std::vector<std::string> keys;
-            for (auto it = items.begin(); it != items.end(); ++it) {
-                keys.push_back(it.key());
-            }
-
-            // Generate a random index
-            std::random_device rd;  // Seed
-            std::mt19937 gen(rd()); // Random number generator
-            std::uniform_int_distribution<> distrib(0, keys.size() - 1);
-
-            int randomIndex = distrib(gen);
-
-            // Return the random key
-            return keys[randomIndex];
+            return getRandomFromJson("../src/mappingFiles/summoners.json");
+            
         }
 
         static std::string getRandomKeystoneFromJson() {
-            // Open and parse the JSON file
-            std::ifstream file("../src/mappingFiles/keystones.json");
-            if (!file) {
-                throw std::runtime_error("Failed to open the file: ../src/mappingFiles/keystones.json");
-            }
 
-            json items;
-            file >> items;
+            return getRandomFromJson("../src/mappingFiles/keystones.json");
 
-            // Collect all the keys into a vector
-            std::vector<std::string> keys;
-            for (auto it = items.begin(); it != items.end(); ++it) {
-                keys.push_back(it.key());
-            }
-
-            // Generate a random index
-            std::random_device rd;  // Seed
-            std::mt19937 gen(rd()); // Random number generator
-            std::uniform_int_distribution<> distrib(0, keys.size() - 1);
-
-            int randomIndex = distrib(gen);
-
-            // Return the random key
-            return keys[randomIndex];
         }
 
         static std::string getRandomSecondaryRuneFromJson() {
-            // Open and parse the JSON file
-            std::ifstream file("../src/mappingFiles/secondaryRunes.json");
-            if (!file) {
-                throw std::runtime_error("Failed to open the file: ../src/mappingFiles/secondaryRunes.json");
-            }
 
-            json items;
-            file >> items;
+            return getRandomFromJson("../src/mappingFiles/secondaryRunes.json");
 
-            // Collect all the keys into a vector
-            std::vector<std::string> keys;
-            for (auto it = items.begin(); it != items.end(); ++it) {
-                keys.push_back(it.key());
-            }
-
-            // Generate a random index
-            std::random_device rd;  // Seed
-            std::mt19937 gen(rd()); // Random number generator
-            std::uniform_int_distribution<> distrib(0, keys.size() - 1);
-
-            int randomIndex = distrib(gen);
-
-            // Return the random key
-            return keys[randomIndex];
         }
 
     
@@ -138,5 +54,30 @@ class matchBuilder {
             return ""; // Return an empty string if the input is too short
         }
 
+        static std::string getRandomFromJson(const std::string& filename) {
+            // Open and parse the JSON file
+            std::ifstream file(filename);
+            if (!file) {
+                throw std::runtime_error("Failed to open the file: " + filename);
+            }
+
+            json items = json::parse(file);
+            
+            // Collect all the keys into a vector
+            std::vector<std::string> keys;
+            for (auto it = items.begin(); it != items.end(); ++it) {
+                keys.push_back(it.key());
+            }
+
+            // Generate a random index
+            std::random_device rd;  // Seed
+            std::mt19937 gen(rd()); // Random number generator
+            std::uniform_int_distribution<> distrib(0, keys.size() - 1);
+
+            int randomIndex = distrib(gen);
+
+            // Return the random key
+            return keys[randomIndex];
+        }
 
 };

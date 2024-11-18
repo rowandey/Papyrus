@@ -14,7 +14,7 @@ int main() {
 
     // Declares the myMatch variable of type match which is our class
     // Defines the matches public data variable with the JSON object we created
-    
+
     /*
     match myMatch;
     myMatch.data = data;
