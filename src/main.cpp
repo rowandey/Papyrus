@@ -1,6 +1,9 @@
 #include <iostream>
 #include "../include/match.hpp"
+#include "../include/matchBuilder.hpp"
 #include "../include/json.hpp"
+#include "../include/apiClient.hpp"
+
 using json = nlohmann::json;
 
 int main() {
@@ -10,21 +13,41 @@ int main() {
     json data = json::parse(f);
 
     // Declares the myMatch variable of type match which is our class
-    match myMatch;
     // Defines the matches public data variable with the JSON object we created
+    
+    /*
+    match myMatch;
     myMatch.data = data;
-
-    // Calls the getRunes Instance Member function of the class
     myMatch.getRunes();
+    myMatch.getChampNames();
+    myMatch.getSummonerName();
+    myMatch.getItems();
+    myMatch.getSummoners();
+    */
 
-    //myMatch.getChampNames();
-    //myMatch.getSummonerName();
-    //myMatch.getItems();
-    //myMatch.getSummoners();
+    std::cout << "Random Item Code: " << matchBuilder::getRandomItemFromJson() << std::endl;
+    std::cout << "Random Item Code: " << matchBuilder::getRandomItemFromJson() << std::endl;
+    std::cout << "Random Item Code: " << matchBuilder::getRandomItemFromJson() << std::endl;
+    std::cout << "Random Item Code: " << matchBuilder::getRandomItemFromJson() << std::endl;
+    std::cout << "Random Item Code: " << matchBuilder::getRandomItemFromJson() << std::endl;
 
+    std::cout << "Random Summoner Code: " << matchBuilder::getRandomSummonerFromJson() << std::endl;
+    std::cout << "Random Summoner Code: " << matchBuilder::getRandomSummonerFromJson() << std::endl;
+    std::cout << "Random Summoner Code: " << matchBuilder::getRandomSummonerFromJson() << std::endl;
+    std::cout << "Random Summoner Code: " << matchBuilder::getRandomSummonerFromJson() << std::endl;
+    std::cout << "Random Summoner Code: " << matchBuilder::getRandomSummonerFromJson() << std::endl;
 
+    std::cout << "Random Keystone Code: " << matchBuilder::getRandomKeystoneFromJson() << std::endl;
+    std::cout << "Random Keystone Code: " << matchBuilder::getRandomKeystoneFromJson() << std::endl;
+    std::cout << "Random Keystone Code: " << matchBuilder::getRandomKeystoneFromJson() << std::endl;
+    std::cout << "Random Keystone Code: " << matchBuilder::getRandomKeystoneFromJson() << std::endl;
+    std::cout << "Random Keystone Code: " << matchBuilder::getRandomKeystoneFromJson() << std::endl;
 
-    std::cout << "Random String: " << myRandom::generateRandomString(10) << std::endl;
+    std::cout << "Random Secondary Runes Code: " << matchBuilder::getRandomSecondaryRuneFromJson() << std::endl;
+    std::cout << "Random Secondary Runes Code: " << matchBuilder::getRandomSecondaryRuneFromJson() << std::endl;
+    std::cout << "Random Secondary Runes Code: " << matchBuilder::getRandomSecondaryRuneFromJson() << std::endl;
+    std::cout << "Random Secondary Runes Code: " << matchBuilder::getRandomSecondaryRuneFromJson() << std::endl;
+    std::cout << "Random Secondary Runes Code: " << matchBuilder::getRandomSecondaryRuneFromJson() << std::endl;
 
     return 0;
 }

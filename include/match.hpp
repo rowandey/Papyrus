@@ -4,7 +4,6 @@
 #include <random>
 
 #include "json.hpp"
-#include "myRandom.hpp"
 using json = nlohmann::json;
 /*
     Takes in a string and removes the first and last characters
@@ -80,8 +79,8 @@ class match {
             for(json i : data["info"]["participants"]){
                 std::cout << dropFirstAndLast(i["championName"]) << std::endl;
                 std::cout << std::endl;
-                std::cout << runeCodeToName(i["perks"]["styles"][0]["selections"][0]["perk"]) << std::endl;
-                std::cout << runeCodeToName(i["perks"]["styles"][1]["style"]) << std::endl;
+                std::cout << keystoneCodeToName(i["perks"]["styles"][0]["selections"][0]["perk"]) << std::endl;
+                std::cout << secondaryRuneCodeToName(i["perks"]["styles"][1]["style"]) << std::endl;
                 std::cout << std::endl;
                 std::cout << "----------" << std::endl;
             }
@@ -124,8 +123,14 @@ class match {
             return items[std::to_string(summonerCode)];
         } 
 
-        std::string runeCodeToName(const int runeCode) {
-            std::ifstream f("./mappingFiles/runes.json");
+        std::string keystoneCodeToName(const int runeCode) {
+            std::ifstream f("./mappingFiles/keystones.json");
+            json items = json::parse(f);
+            return items[std::to_string(runeCode)];
+        }
+
+        std::string secondaryRuneCodeToName(const int runeCode) {
+            std::ifstream f("./mappingFiles/secondaryRunes.json");
             json items = json::parse(f);
             return items[std::to_string(runeCode)];
         }
