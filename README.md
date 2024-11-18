@@ -3,7 +3,11 @@
     <img src="https://static.wikia.nocookie.net/sans-nagito/images/1/12/Papyrus.png/revision/latest?cb=20200609055655" alt="AutoGen Logo" width="100">
 </div>
 
+
+<div align="center">
 # Papy
+</div>
+
 
 Papy is an open-source framework that builds League of Legends match JSON files that mimic the JSON files produced from the Riot Games `/lol/match/v5/matches/{matchId}` API endpoint. This endpoint when queried with a specified `matchId` as input gives you a massive JSON file(roughly 3500 lines) containing all of the data related to a match.
 
