@@ -5,8 +5,6 @@
 
 using json = nlohmann::json;
 
-
-
 /*
 Usage of the class:
 
@@ -24,8 +22,6 @@ Usage of the class:
     
     client.sendRequest();
 */
-
-
 
 class ApiClient {
 public:
