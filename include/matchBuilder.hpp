@@ -14,8 +14,53 @@ using json = nlohmann::json;
 class matchBuilder {
     // Public data and publically accessible functions
     public:
-        // JSON object that will be passed in for processing
-        json data;
+        const std::string templatePath = "../src/mappingFiles/match-template.json";
+
+        json randomMatch() {
+            std::ifstream file(templatePath);
+            json matchTemplate = json::parse(file);
+
+            matchTemplate["info"]["gameCreation"] = "???";
+            matchTemplate["info"]["gameDuration"] = "???";
+            matchTemplate["info"]["gameEndTimestamp"] = "???";
+            matchTemplate["info"]["gameId"] = "???";
+            matchTemplate["info"]["gameName"] = "???";
+            matchTemplate["info"]["gameStartTimestamp"] = "???";
+            
+
+            for(json participant : matchTemplate["info"]["participants"]){
+                participant["assists"];
+                participant["deaths"];
+                participant["kills"];
+
+                participant["goldEarned"];
+                participant["totalDamageDealtToChampions"];
+                participant["champExperience"];
+                participant["champLevel"];
+                participant["championId"];
+                participant["championName"];
+
+                participant["item0"] = getRandomItemFromJson();
+                participant["item1"] = getRandomItemFromJson();
+                participant["item2"] = getRandomItemFromJson();
+                participant["item3"] = getRandomItemFromJson();
+                participant["item4"] = getRandomItemFromJson();
+                participant["item5"] = getRandomItemFromJson();
+                participant["item6"] = getRandomItemFromJson();
+
+                participant["summoner1Id"] = getRandomSummonerFromJson();
+                participant["summoner2Id"] = getRandomSummonerFromJson();
+
+                participant["perks"]["styles"][0]["selections"][0]["perk"] = getRandomKeystoneFromJson();
+                participant["perks"]["styles"][1]["style"] = getRandomSecondaryRuneFromJson();
+
+                participant["riotIdGameName"] = myRandom::generateRandomString(8);
+                participant["riotIdTagline"] = std::string("#") + myRandom::generateRandomString(3);
+                participant["summonerName"] = myRandom::generateRandomString(8);
+
+            }
+
+        }
 
         static std::string getRandomItemFromJson() {
 
@@ -60,9 +105,9 @@ class matchBuilder {
             if (!file) {
                 throw std::runtime_error("Failed to open the file: " + filename);
             }
-
-            json items = json::parse(file);
             
+            json items = json::parse(file);
+
             // Collect all the keys into a vector
             std::vector<std::string> keys;
             for (auto it = items.begin(); it != items.end(); ++it) {
