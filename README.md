@@ -63,6 +63,10 @@ chmod a+x main.out
 
 # Run the executable
 ./main.out
+
+===== OR =====
+# With my macro
+comp main.cpp
 ```
 
 ---
@@ -96,17 +100,13 @@ project_name/
 |-- README.md
 ```
 
-Fields that will be randomized:
-
-
 Todo:
-- API Client needs to be solidified
-	- MTrack might need a new API endpoint 
-	- Determine how to hit the API
 - Randomize Unix Start times and dates
 	- 1730593150712
 	- Game Duration
 
+- Have ONE user in the games have the same name, one of the names is static
+	- Makes looking through the generated games easier for verification and testing
 
 ### Name Meaning
 
