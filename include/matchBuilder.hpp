@@ -22,12 +22,12 @@ class matchBuilder {
             json matchTemplate = json::parse(file);
             
             // TODO: Need to have a proper set of random fields generated for the following
-            matchTemplate["info"]["gameCreation"] = "???";
-            matchTemplate["info"]["gameDuration"] = "???";
-            matchTemplate["info"]["gameEndTimestamp"] = "???";
-            matchTemplate["info"]["gameId"] = "???";
-            matchTemplate["info"]["gameName"] = "???";
-            matchTemplate["info"]["gameStartTimestamp"] = "???";
+            // matchTemplate["info"]["gameCreation"] = "???";
+            // matchTemplate["info"]["gameDuration"] = "???";
+            // matchTemplate["info"]["gameEndTimestamp"] = "???";
+            // matchTemplate["info"]["gameId"] = "???";
+            // matchTemplate["info"]["gameName"] = "???";
+            // matchTemplate["info"]["gameStartTimestamp"] = "???";
 
             /*
             There is a problem that will occur here if you are not careful. If you do not pass the json
@@ -79,7 +79,7 @@ class matchBuilder {
                 
                 // Random Summoner Name and Riot Account data baby!
                 participant["riotIdGameName"] = myRandom::generateRandomString(8);
-                participant["riotIdTagline"] = std::string("#") + myRandom::generateRandomString(3);
+                participant["riotIdTagline"] = myRandom::generateRandomString(3);
                 participant["summonerName"] = myRandom::generateRandomString(8);
 
             }
@@ -113,15 +113,15 @@ class matchBuilder {
             return ""; // Return an empty string if the input is too short
         }
 
-        // Based off the champions.json file it will get a random champion name and return it
         std::string getRandomChamp() {
             std::ifstream champFile("../src/mappingFiles/champions.json");
             json championsJson = json::parse(champFile);
 
-            // Stores the names in a vector so that we can search for a random name in a bit
+            // Stores the 'id' field values in a vector
             std::vector<std::string> champs;
-            for (auto it = championsJson.begin(); it != championsJson.end(); ++it) {
-                champs.push_back(it.key());
+            for (auto& champion : championsJson["data"].items()) {
+                // Collect the 'id' value for each champion
+                champs.push_back(champion.value()["id"]);
             }
 
             // Generate a random index
@@ -131,9 +131,8 @@ class matchBuilder {
 
             int randomIndex = distrib(gen);
 
-            // Return the random key
-            return dropFirstAndLast(champs[randomIndex]);
-
+            // Return the randomly selected champion id
+            return champs[randomIndex];
         }
 
         // Gets a random key from a JSON file thats passed in. This is flexible 
