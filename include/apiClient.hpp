@@ -56,7 +56,7 @@ public:
         // Handle the response
         if (res) {
             if (res->status == 200) { // HTTP 200 OK
-                std::cout << "Response: " << res->body << std::endl;
+                std::cout << "Response 200" << std::endl;
             } else {
                 std::cerr << "Server returned error: " << res->status << std::endl;
             }
