@@ -100,6 +100,12 @@ project_name/
 |-- README.md
 ```
 
+- This post fixed a problem I was having with mysqld
+	- https://askubuntu.com/questions/615129/systemd-mysql-wont-stop
+
+- Problem with my dev VM running docker-compose not killing containers properly
+
+
 #### Test User
 Game Name + Tag: bsawatestuser#test
 
