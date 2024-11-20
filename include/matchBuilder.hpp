@@ -29,6 +29,9 @@ class matchBuilder {
             // matchTemplate["info"]["gameName"] = "???";
             // matchTemplate["info"]["gameStartTimestamp"] = "???";
 
+            // NA1_5145792127
+            matchTemplate["metadata"]["matchId"] = "TEST1_" + myRandom::generateRandomNumberString(10);
+
             /*
             There is a problem that will occur here if you are not careful. If you do not pass the json
             object to the loop by reference, you will be altering a COPY of the matchTemplate and it will
@@ -36,8 +39,25 @@ class matchBuilder {
 
              The original file of match-template.json is unaffected by any changes.
             */
-            for(json& participant : matchTemplate["info"]["participants"]){
-                
+
+            // Randomly determine win/loss for the different teams
+            bool firstSetWin = myRandom::getRandomBool();
+            bool secondSetWin = !firstSetWin;
+            int participantIndex = 0;
+            for (json& participant : matchTemplate["info"]["participants"]) {
+                if (participantIndex < 5) {
+                    participant["win"] = firstSetWin;
+                } else {
+                    participant["win"] = secondSetWin;
+                }
+                participantIndex++;
+            }
+
+
+
+            bool isFirstIteration = true;
+
+            for (json& participant : matchTemplate["info"]["participants"]) {
                 // 0-25 is a reasonable amount of kills and assists that 
                 // can reasonably happen in League of Legends
                 participant["assists"] = myRandom::generateRandomInt(0, 25);
@@ -46,21 +66,16 @@ class matchBuilder {
 
                 // 20k~ gold is around full build
                 participant["goldEarned"] = myRandom::generateRandomInt(1, 20000);
-                // Only time there is more than 90k damage in an average game length wise is if
-                // there is karthus in the game or something 
                 participant["totalDamageDealtToChampions"] = myRandom::generateRandomInt(1, 90000);
                 participant["totalMinionsKilled"] = myRandom::generateRandomInt(1, 200);
                 participant["totalAllyJungleMinionsKilled"] = myRandom::generateRandomInt(1, 100);
                 participant["totalEnemyJungleMinionsKilled"] = myRandom::generateRandomInt(1, 50);
-                
+
                 participant["champExperience"] = myRandom::generateRandomInt(1, 12576);
-                // Level 18 is the cap
                 participant["champLevel"] = myRandom::generateRandomInt(1, 18);
                 participant["championId"] = myRandom::generateRandomInt(1, 200);
-                // Pulls a random champion name from the champions.json file
                 participant["championName"] = getRandomChamp();
 
-                // Random items baby!
                 participant["item0"] = getRandomItemFromJson();
                 participant["item1"] = getRandomItemFromJson();
                 participant["item2"] = getRandomItemFromJson();
@@ -68,20 +83,24 @@ class matchBuilder {
                 participant["item4"] = getRandomItemFromJson();
                 participant["item5"] = getRandomItemFromJson();
                 participant["item6"] = getRandomItemFromJson();
-                
-                // Random Summoner Spells baby!
+
                 participant["summoner1Id"] = getRandomSummonerFromJson();
                 participant["summoner2Id"] = getRandomSummonerFromJson();
-                
-                // Random Keystone and secondary school baby!
+
                 participant["perks"]["styles"][0]["selections"][0]["perk"] = getRandomKeystoneFromJson();
                 participant["perks"]["styles"][1]["style"] = getRandomSecondaryRuneFromJson();
-                
-                // Random Summoner Name and Riot Account data baby!
-                participant["riotIdGameName"] = myRandom::generateRandomString(8);
-                participant["riotIdTagline"] = myRandom::generateRandomString(3);
-                participant["summonerName"] = myRandom::generateRandomString(8);
 
+                // Random Summoner Name and Riot Account data
+                if (isFirstIteration) {
+                    participant["riotIdGameName"] = "bsawatestuser";
+                    participant["riotIdTagline"] = "test";
+                    participant["summonerName"] = "bsawatestuser";
+                    isFirstIteration = false; // Ensure only the first iteration uses predefined strings
+                } else {
+                    participant["riotIdGameName"] = myRandom::generateRandomString(8);
+                    participant["riotIdTagline"] = myRandom::generateRandomString(3);
+                    participant["summonerName"] = myRandom::generateRandomString(8);
+                }
             }
 
             return matchTemplate;

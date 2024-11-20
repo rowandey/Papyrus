@@ -100,6 +100,9 @@ project_name/
 |-- README.md
 ```
 
+#### Test User
+Game Name + Tag: bsawatestuser#test
+
 Todo:
 - Randomize Unix Start times and dates
 	- 1730593150712
