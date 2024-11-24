@@ -22,12 +22,12 @@ class matchBuilder {
             json matchTemplate = json::parse(file);
             
             // TODO: Need to have a proper set of random fields generated for the following
-            // matchTemplate["info"]["gameCreation"] = "???";
-            // matchTemplate["info"]["gameDuration"] = "???";
-            // matchTemplate["info"]["gameEndTimestamp"] = "???";
+            matchTemplate["info"]["gameCreation"] = 9466848;
+            matchTemplate["info"]["gameDuration"] = myRandom::generateRandomInt(900, 2700);
+            matchTemplate["info"]["gameEndTimestamp"] = 9466848;
             // matchTemplate["info"]["gameId"] = "???";
             // matchTemplate["info"]["gameName"] = "???";
-            // matchTemplate["info"]["gameStartTimestamp"] = "???";
+            matchTemplate["info"]["gameStartTimestamp"] = 9466848;
 
             // NA1_5145792127
             matchTemplate["metadata"]["matchId"] = "TEST1_" + myRandom::generateRandomNumberString(10);

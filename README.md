@@ -110,19 +110,8 @@ project_name/
 Game Name + Tag: bsawatestuser#test
 
 ### Todo:
-- Randomize Unix epoch Game Duration
-
-- Display request success/failure count
-	- Log response status codes, response times, and errors in verbose
-	- Log failtures and successes in the same line
-	- Mock up: Payloads sent: 25 | Successes: 24 | Failures: 1
 
 - Work on enabling a simplified system of configuring payload
-
-```
-For example:
-comp main.cpp --threads 12 --target "http://10.0.0.11" --endpoint "/addMatch" --count 100 --verbose
-```
 
 
 ### Name Meaning

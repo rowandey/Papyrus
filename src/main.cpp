@@ -2,241 +2,149 @@
 #include "../include/matchBuilder.hpp"
 #include "../include/json.hpp"
 #include "../include/apiClient.hpp"
+#include "../include/commandLine.hpp"
 #include <csignal>
 #include <chrono>
 #include <thread>
 #include <vector>
 #include <mutex>
 #include <atomic>
-#include <cmath>
 
 using json = nlohmann::json;
 
 std::atomic<int> totalPayloadsSent(0);
+std::atomic<int> totalPayloadsSuccessful(0);
 bool isProgramActive = true;
 std::mutex consoleMutex;  // Mutex for synchronizing console output
 
 // Signal handler to gracefully stop the loop
 void signalHandler(int signal) {
+    std::lock_guard<std::mutex> guard(consoleMutex);
     std::cout << "\nStopping program..." << std::endl;
     isProgramActive = false;
 }
 
-bool isValidInt(double num) {
-    return std::floor(num) == num && num >= INT_MIN && num <= INT_MAX;
+// Function to send a request and optionally log verbose output
+void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch) {
+    client.setPayload(randMatch.randomMatch().dump(4));
+    std::string response = client.sendRequest();
+
+    std::lock_guard<std::mutex> guard(consoleMutex);
+    if (verbose) {
+        std::cout << response << std::endl;
+    } else {
+        totalPayloadsSent++;
+        if (response == "Response 200") {
+            totalPayloadsSuccessful++;
+        }
+        std::cout << "\rPayloads sent: " << totalPayloadsSent
+                  << " | Successful: " << totalPayloadsSuccessful
+                  << " | Failed: " << (totalPayloadsSent - totalPayloadsSuccessful)
+                  << std::flush;
+    }
 }
 
-// Function that runs the logic in a single thread
-void runWorkerThread(std::string targetURL, std::string endpoint, bool verbose, int payloadCount = 0, int rateLimit = 0) {
-    // Declares the randMatch class so that we can build random games
+// Worker function
+void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike) {
     matchBuilder randMatch;
-
-    // Defines the target server and API endpoint that we are going to blast
     ApiClient client(targetURL);
     client.setEndpoint(endpoint);
 
-    if (payloadCount == 0){
-        if (verbose == true) {
-            // Main loop that sends new requests
-            while (isProgramActive) {
-                // Builds and sends the payload containing the newly built random match
-                client.setPayload(randMatch.randomMatch().dump(4));
-                
-                // Use the mutex to synchronize access to std::cout
-                {
-                    std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
-                    std::cout << client.sendRequest() << std::endl;
-                }
+    while (isProgramActive) {
+        sendRequest(client, verbose, randMatch);
 
-                std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
-            }
-        }
-        else {
-            // Main loop that sends new requests
-            while (isProgramActive) {
-                // Builds and sends the payload containing the newly built random match
-                client.setPayload(randMatch.randomMatch().dump(4));
-                client.sendRequest();
+        if (payloadCount > 0 && --payloadCount == 0) break;
 
-                // Use the mutex to synchronize access to std::cout
-                {
-                    std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
-                    totalPayloadsSent++;
-                    std::cout << "\rPayloads sent: " << totalPayloadsSent << std::flush;
-                }
+        std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
 
-                std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
-            }
-        }
-    } else {
-        if (verbose == true) {
-            // Main loop that sends new requests
-            while (isProgramActive) {
-                // Builds and sends the payload containing the newly built random match
-                client.setPayload(randMatch.randomMatch().dump(4));
-                client.sendRequest();
-                
-                // Use the mutex to synchronize access to std::cout
-                {
-                    std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
-                    std::cout << client.sendRequest() << std::endl;
-                }
-
-                payloadCount--;
-                if (payloadCount == 0) {
-                    break;
-                }
-
-                std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
-            }
-        }
-        else {
-            // Main loop that sends new requests
-            while (isProgramActive) {
-                // Builds and sends the payload containing the newly built random match
-                client.setPayload(randMatch.randomMatch().dump(4));
-                client.sendRequest();
-
-                // Use the mutex to synchronize access to std::cout
-                {
-                    std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
-                    totalPayloadsSent++;
-                    std::cout << "\rPayloads sent: " << totalPayloadsSent << std::flush;
-                }
-
-                payloadCount--;
-                if (payloadCount == 0) {
-                    break;
-                }
-
-                std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
-            }
+        if (ramp > 0) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(ramp));
+            ramp = std::max(ramp / 2, 1);
+        } else if (spike > 0) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(myRandom::generateRandomInt(0, spike)));
         }
     }
-    
-
-    
 }
 
-
-// TODO: Add flag that lets you choose how many payloads you want to send
-int main(int argc, char* argv[]) {
-    // Number of threads to run
-    int numThreads = 1; // Default number of threads
-    int payloadCount = 0;
-    std::vector<std::thread> threads;
-    std::string target = "";
-    std::string endpoint = "";
-    bool verbose = false;
-    int rateLimit = 0; // IN MILLISECONDS
-
-    if (argc > 1) {
-        for (int i = 1; i < argc; ++i) {
-            if (std::string(argv[i]) == "--help" || std::string(argv[i]) == "-h") {
-                std::cout << "Usage: ./{program-name} -{flag} {value}\n";
-                return 0;
-            } else if (std::string(argv[i]) == "--threads" || std::string(argv[i]) == "-th") {
-                if (i + 1 < argc) { // Ensure there's a next argument
-                    try {
-                        numThreads = std::stoi(argv[++i]); // Parse the next argument
-                    } catch (const std::invalid_argument&) {
-                        std::cerr << "Error: Not a valid number for threads. Must be a positive integer.\n";
-                        return 1;
-                    } catch (const std::out_of_range&) {
-                        std::cerr << "Error: Number out of range for threads.\n";
-                        return 1;
-                    }
-                } else {
-                    std::cerr << "Error: Missing value for --threads or -t.\n";
-                    return 1;
-                }
-            } else if (std::string(argv[i]) == "--target" || std::string(argv[i]) == "-ta") {
-                if (i + 1 < argc) { // Ensure there's a next argument
-                    target = argv[++i]; // Set the target string
-                    // Validate the target string if necessary
-                    if (target.empty()) {
-                        std::cerr << "Error: Target value cannot be empty.\n";
-                        return 1;
-                    }
-                    // Additional string validation (if needed)
-                } else {
-                    std::cerr << "Error: Missing value for --target or -ta.\n";
-                    return 1;
-                }
-            } else if (std::string(argv[i]) == "--count" || std::string(argv[i]) == "-c") {
-                if (i + 1 < argc) { // Ensure there's a next argument
-                    payloadCount = std::stoi(argv[++i]); // Set the target string
-                    // Validate the target string if necessary
-                    if (isValidInt(payloadCount) != 1) {
-                        std::cerr << "Error: count value cannot be empty.\n";
-                        return 1;
-                    }
-                    // Additional string validation (if needed)
-                } else {
-                    std::cerr << "Error: Missing value for --count or -c.\n";
-                    return 1;
-                }
-            } else if (std::string(argv[i]) == "--rate" || std::string(argv[i]) == "-r") {
-                if (i + 1 < argc) { // Ensure there's a next argument
-                    rateLimit = std::stoi(argv[++i]); // Set the target string
-                    // Validate the target string if necessary
-                    if (isValidInt(rateLimit) != 1) {
-                        std::cerr << "Error: rate value cannot be empty.\n";
-                        return 1;
-                    }
-                    // Additional string validation (if needed)
-                } else {
-                    std::cerr << "Error: Missing value for --rate or -r.\n";
-                    return 1;
-                }
-            } else if (std::string(argv[i]) == "--endpoint" || std::string(argv[i]) == "-e") {
-                if (i + 1 < argc) { // Ensure there's a next argument
-                    endpoint = argv[++i]; // Set the target string
-                    // Validate the target string if necessary
-                    if (endpoint.empty()) {
-                        std::cerr << "Error: endpoint value cannot be empty.\n";
-                        return 1;
-                    }
-                    // Additional string validation (if needed)
-                } else {
-                    std::cerr << "Error: Missing value for --endpoint or -e.\n";
-                    return 1;
-                }
-            } else if (std::string(argv[i]) == "--verbose" || std::string(argv[i]) == "-v") {
+// Helper function for parsing command-line arguments
+void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, 
+                    std::string& target, std::string& endpoint, bool& verbose) {
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        try {
+            if (arg == "--help" || arg == "-h") {
+                cliHelper::displayHelp();
+                exit(0);
+            } else if (arg == "--threads" || arg == "-th") {
+                numThreads = cliHelper::parseIntArg(argv[++i], "threads");
+            } else if (arg == "--target" || arg == "-ta") {
+                target = argv[++i];
+                if (target.empty()) throw std::runtime_error("Error: Target value cannot be empty.");
+            } else if (arg == "--count" || arg == "-c") {
+                payloadCount = cliHelper::parseIntArg(argv[++i], "count");
+            } else if (arg == "--rate" || arg == "-r") {
+                rateLimit = cliHelper::parseIntArg(argv[++i], "rate");
+            } else if (arg == "--ramp" || arg == "-ra") {
+                ramp = cliHelper::parseIntArg(argv[++i], "ramp");
+            } else if (arg == "--spike" || arg == "-s") {
+                spike = cliHelper::parseIntArg(argv[++i], "spike");
+            } else if (arg == "--endpoint" || arg == "-e") {
+                endpoint = argv[++i];
+                if (endpoint.empty()) throw std::runtime_error("Error: Endpoint value cannot be empty.");
+            } else if (arg == "--verbose" || arg == "-v") {
                 verbose = true;
+            } else {
+                throw std::runtime_error("Error: Unknown option '" + arg + "'. Use --help for usage.");
             }
+        } catch (const std::exception& e) {
+            std::cerr << e.what() << '\n';
+            exit(1);
         }
     }
 
-    std::cout << "==========================================" << std::endl;
-    std::cout << " ____   _    ______   ______  _   _ ____  \n";
-    std::cout << "|  _ \\ / \\  |  _ \\ \\ / /  _ \\| | | / ___| \n";
-    std::cout << "| |_) / _ \\ | |_) \\ V /| |_) | | | \\___ \\ \n";
-    std::cout << "|  __/ ___ \\|  __/ | | |  _ <| |_| |___) |\n";
-    std::cout << "|_| /_/   \\_\\_|    |_| |_| \\_\\\\___/|____/ \n";
-    std::cout << "==========================================" << std::endl;
-    std::cout << "Threads in use: " << numThreads << std::endl;
-    std::cout << "Target: " << target << std::endl;
-    std::cout << "Endpoint: " << endpoint << std::endl;
-    std::cout << "==========================================" << std::endl;
+    if (target.empty()) throw std::runtime_error("Error: Target URL is required.");
+    if (endpoint.empty()) throw std::runtime_error("Error: API endpoint is required.");
+}
 
-    // Attach the signal handler to interrupt signals
-    std::signal(SIGINT, signalHandler);
-    std::cout << "Program is running. Press Ctrl+C to stop." << std::endl;
+int main(int argc, char* argv[]) {
+    int numThreads = 1, payloadCount = 0, rateLimit = 0, ramp = 0, spike = 0;
+    bool verbose = false;
+    std::string target, endpoint;
 
-    
-    // Launch multiple threads
+    try {
+        parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose);
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << '\n';
+        return 1;
+    }
+
+    // Display program info
+    std::cout << R"(
+==========================================
+ ____   _    ______   ______  _   _ ____  
+|  _ \ / \  |  _ \ \ / /  _ \| | | / ___| 
+| |_) / _ \ | |_) \ V /| |_) | | | \___ \ 
+|  __/ ___ \|  __/ | | |  _ <| |_| |___) |
+|_| /_/   \_\_|    |_| |_| \_\\___/|____/ 
+==========================================
+)";
+    std::cout << "Threads: " << numThreads << "\nTarget: " << target << "\nEndpoint: " << endpoint
+              << "\nRate Limit: " << rateLimit << " ms\n==========================================\n";
+
+    signal(SIGINT, signalHandler);
+    std::cout << "Program is running. Press Ctrl+C to stop.\n";
+
+    // Launch threads
+    std::vector<std::thread> threads;
     for (int i = 0; i < numThreads; ++i) {
-        threads.emplace_back(std::thread(runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit));
+        threads.emplace_back(runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike);
     }
 
-    // Wait for all threads to finish
+    // Wait for threads to finish
     for (auto& thread : threads) {
-        if (thread.joinable()) {
-            thread.join();
-        }
+        if (thread.joinable()) thread.join();
     }
 
-    std::cout << "\nProgram has stopped." << std::endl;
+    std::cout << "\nProgram has stopped.\n";
     return 0;
 }
