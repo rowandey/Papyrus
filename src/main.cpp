@@ -8,6 +8,7 @@
 #include <vector>
 #include <mutex>
 #include <atomic>
+#include <cmath>
 
 using json = nlohmann::json;
 
@@ -17,59 +18,117 @@ std::mutex consoleMutex;  // Mutex for synchronizing console output
 
 // Signal handler to gracefully stop the loop
 void signalHandler(int signal) {
-    std::cout << "Stopping program..." << std::endl;
+    std::cout << "\nStopping program..." << std::endl;
     isProgramActive = false;
 }
 
+bool isValidInt(double num) {
+    return std::floor(num) == num && num >= INT_MIN && num <= INT_MAX;
+}
+
 // Function that runs the logic in a single thread
-void runWorkerThread(std::string targetURL, std::string endpoint, bool verbose) {
+void runWorkerThread(std::string targetURL, std::string endpoint, bool verbose, int payloadCount = 0, int rateLimit = 0) {
     // Declares the randMatch class so that we can build random games
     matchBuilder randMatch;
 
     // Defines the target server and API endpoint that we are going to blast
     ApiClient client(targetURL);
     client.setEndpoint(endpoint);
-    
-    if (verbose == true) {
-        // Main loop that sends new requests
-        while (isProgramActive) {
-            // Builds and sends the payload containing the newly built random match
-            client.setPayload(randMatch.randomMatch().dump(4));
-            client.sendRequest();
-            
-            // Use the mutex to synchronize access to std::cout
-            {
-                std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
-                std::cout << targetURL << endpoint << "\tResponse: 200" << std::endl;
-            }
-        }
-    }
-    else {
-        // Main loop that sends new requests
-        while (isProgramActive) {
-            // Builds and sends the payload containing the newly built random match
-            client.setPayload(randMatch.randomMatch().dump(4));
-            client.sendRequest();
 
-            // Use the mutex to synchronize access to std::cout
-            {
-                std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
-                totalPayloadsSent++;
-                std::cout << "\rPayloads sent: " << totalPayloadsSent << std::flush;
+    if (payloadCount == 0){
+        if (verbose == true) {
+            // Main loop that sends new requests
+            while (isProgramActive) {
+                // Builds and sends the payload containing the newly built random match
+                client.setPayload(randMatch.randomMatch().dump(4));
+                
+                // Use the mutex to synchronize access to std::cout
+                {
+                    std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
+                    std::cout << client.sendRequest() << std::endl;
+                }
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
+            }
+        }
+        else {
+            // Main loop that sends new requests
+            while (isProgramActive) {
+                // Builds and sends the payload containing the newly built random match
+                client.setPayload(randMatch.randomMatch().dump(4));
+                client.sendRequest();
+
+                // Use the mutex to synchronize access to std::cout
+                {
+                    std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
+                    totalPayloadsSent++;
+                    std::cout << "\rPayloads sent: " << totalPayloadsSent << std::flush;
+                }
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
+            }
+        }
+    } else {
+        if (verbose == true) {
+            // Main loop that sends new requests
+            while (isProgramActive) {
+                // Builds and sends the payload containing the newly built random match
+                client.setPayload(randMatch.randomMatch().dump(4));
+                client.sendRequest();
+                
+                // Use the mutex to synchronize access to std::cout
+                {
+                    std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
+                    std::cout << client.sendRequest() << std::endl;
+                }
+
+                payloadCount--;
+                if (payloadCount == 0) {
+                    break;
+                }
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
+            }
+        }
+        else {
+            // Main loop that sends new requests
+            while (isProgramActive) {
+                // Builds and sends the payload containing the newly built random match
+                client.setPayload(randMatch.randomMatch().dump(4));
+                client.sendRequest();
+
+                // Use the mutex to synchronize access to std::cout
+                {
+                    std::lock_guard<std::mutex> guard(consoleMutex);  // Lock the mutex
+                    totalPayloadsSent++;
+                    std::cout << "\rPayloads sent: " << totalPayloadsSent << std::flush;
+                }
+
+                payloadCount--;
+                if (payloadCount == 0) {
+                    break;
+                }
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(rateLimit));
             }
         }
     }
+    
 
     
 }
 
+
+// TODO: Add flag that lets you choose how many payloads you want to send
 int main(int argc, char* argv[]) {
     // Number of threads to run
     int numThreads = 1; // Default number of threads
+    int payloadCount = 0;
     std::vector<std::thread> threads;
     std::string target = "";
     std::string endpoint = "";
     bool verbose = false;
+    int rateLimit = 0; // IN MILLISECONDS
 
     if (argc > 1) {
         for (int i = 1; i < argc; ++i) {
@@ -104,11 +163,37 @@ int main(int argc, char* argv[]) {
                     std::cerr << "Error: Missing value for --target or -ta.\n";
                     return 1;
                 }
+            } else if (std::string(argv[i]) == "--count" || std::string(argv[i]) == "-c") {
+                if (i + 1 < argc) { // Ensure there's a next argument
+                    payloadCount = std::stoi(argv[++i]); // Set the target string
+                    // Validate the target string if necessary
+                    if (isValidInt(payloadCount) != 1) {
+                        std::cerr << "Error: count value cannot be empty.\n";
+                        return 1;
+                    }
+                    // Additional string validation (if needed)
+                } else {
+                    std::cerr << "Error: Missing value for --count or -c.\n";
+                    return 1;
+                }
+            } else if (std::string(argv[i]) == "--rate" || std::string(argv[i]) == "-r") {
+                if (i + 1 < argc) { // Ensure there's a next argument
+                    rateLimit = std::stoi(argv[++i]); // Set the target string
+                    // Validate the target string if necessary
+                    if (isValidInt(rateLimit) != 1) {
+                        std::cerr << "Error: rate value cannot be empty.\n";
+                        return 1;
+                    }
+                    // Additional string validation (if needed)
+                } else {
+                    std::cerr << "Error: Missing value for --rate or -r.\n";
+                    return 1;
+                }
             } else if (std::string(argv[i]) == "--endpoint" || std::string(argv[i]) == "-e") {
                 if (i + 1 < argc) { // Ensure there's a next argument
                     endpoint = argv[++i]; // Set the target string
                     // Validate the target string if necessary
-                    if (target.empty()) {
+                    if (endpoint.empty()) {
                         std::cerr << "Error: endpoint value cannot be empty.\n";
                         return 1;
                     }
@@ -142,7 +227,7 @@ int main(int argc, char* argv[]) {
     
     // Launch multiple threads
     for (int i = 0; i < numThreads; ++i) {
-        threads.emplace_back(std::thread(runWorkerThread, target, endpoint, verbose));
+        threads.emplace_back(std::thread(runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit));
     }
 
     // Wait for all threads to finish
@@ -152,6 +237,6 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    std::cout << "Program has stopped." << std::endl;
+    std::cout << "\nProgram has stopped." << std::endl;
     return 0;
 }

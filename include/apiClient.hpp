@@ -39,15 +39,13 @@ public:
     }
 
     // Send a POST request
-    void sendRequest() {
+    std::string sendRequest() {
         if (endpoint.empty()) {
-            std::cerr << "Error: Endpoint is not set." << std::endl;
-            return;
+            return "Error: Endpoint is not set.";
         }
 
         if (payload.empty()) {
-            std::cerr << "Error: Payload is not set." << std::endl;
-            return;
+            return "Error: Payload is not set.";
         }
 
         // Send the POST request
@@ -56,10 +54,12 @@ public:
         // Handle the response
         if (res) {
             if (res->status != 200) {
-                std::cerr << "Server returned error: " << res->status << std::endl;
+                return "Server returned error: " + res->status;
+            } else if (res->status == 200) {
+                return "Response 200";
             }
         } else {
-            std::cerr << "Request failed: " << res.error() << std::endl;
+            return errorToString(res.error());
         }
     }
 
@@ -67,4 +67,31 @@ private:
     httplib::Client client; // HTTP client
     std::string endpoint;  // API endpoint
     json payload;          // JSON payload
+
+    std::string errorToString(httplib::Error err) {
+        switch (err) {
+            case httplib::Error::Success:
+                return "Success";
+            case httplib::Error::Connection:
+                return "Connection error";
+            case httplib::Error::BindIPAddress:
+                return "Bind IP address error";
+            case httplib::Error::Read:
+                return "Read error";
+            case httplib::Error::Write:
+                return "Write error";
+            case httplib::Error::ExceedRedirectCount:
+                return "Exceeded redirect count";
+            case httplib::Error::Canceled:
+                return "Request canceled";
+            case httplib::Error::SSLConnection:
+                return "SSL connection error";
+            case httplib::Error::SSLLoadingCerts:
+                return "SSL loading certificates error";
+            case httplib::Error::SSLServerVerification:
+                return "SSL server verification error";
+            default:
+                return "Unknown error";
+        }
+    }
 };
