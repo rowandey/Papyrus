@@ -3,6 +3,7 @@
 #include "../include/json.hpp"
 #include "../include/apiClient.hpp"
 #include "../include/commandLine.hpp"
+#include "../include/payloadBuilder.hpp"
 #include <csignal>
 #include <chrono>
 #include <thread>
@@ -25,8 +26,15 @@ void signalHandler(int signal) {
 }
 
 // Function to send a request and optionally log verbose output
-void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch) {
-    client.setPayload(randMatch.randomMatch().dump(4));
+void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch, std::string payload) {
+    
+    if (payload.length() < 1) {
+        matchBuilder randMatch;
+        client.setPayload(randMatch.randomMatch().dump(4));
+    } else {
+        client.setPayload(payload);
+    }
+    
     std::string response = client.sendRequest();
 
     std::lock_guard<std::mutex> guard(consoleMutex);
@@ -45,13 +53,13 @@ void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch) {
 }
 
 // Worker function
-void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike) {
+void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload) {
     matchBuilder randMatch;
     ApiClient client(targetURL);
     client.setEndpoint(endpoint);
 
     while (isProgramActive) {
-        sendRequest(client, verbose, randMatch);
+        sendRequest(client, verbose, randMatch, payload);
 
         if (payloadCount > 0 && --payloadCount == 0) break;
 
@@ -67,8 +75,7 @@ void runWorkerThread(const std::string& targetURL, const std::string& endpoint, 
 }
 
 // Helper function for parsing command-line arguments
-void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, 
-                    std::string& target, std::string& endpoint, bool& verbose) {
+void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, std::string& target, std::string& endpoint, bool& verbose, std::string& payload) {
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
         try {
@@ -91,6 +98,9 @@ void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, 
             } else if (arg == "--endpoint" || arg == "-e") {
                 endpoint = argv[++i];
                 if (endpoint.empty()) throw std::runtime_error("Error: Endpoint value cannot be empty.");
+            } else if (arg == "--payload" || arg == "-p") {
+                payload = argv[++i];
+                if (payload.empty()) throw std::runtime_error("Error: Payload value cannot be empty.");
             } else if (arg == "--verbose" || arg == "-v") {
                 verbose = true;
             } else {
@@ -109,10 +119,11 @@ void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, 
 int main(int argc, char* argv[]) {
     int numThreads = 1, payloadCount = 0, rateLimit = 0, ramp = 0, spike = 0;
     bool verbose = false;
+    std::string payload;
     std::string target, endpoint;
 
     try {
-        parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose);
+        parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose, payload);
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
         return 1;
@@ -130,14 +141,14 @@ int main(int argc, char* argv[]) {
 )";
     std::cout << "Threads: " << numThreads << "\nTarget: " << target << "\nEndpoint: " << endpoint
               << "\nRate Limit: " << rateLimit << " ms\n==========================================\n";
-
+    
     signal(SIGINT, signalHandler);
     std::cout << "Program is running. Press Ctrl+C to stop.\n";
 
     // Launch threads
     std::vector<std::thread> threads;
     for (int i = 0; i < numThreads; ++i) {
-        threads.emplace_back(runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike);
+        threads.emplace_back(runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike, payload);
     }
 
     // Wait for threads to finish

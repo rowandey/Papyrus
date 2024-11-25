@@ -3883,13 +3883,11 @@ inline EncodingType encoding_type(const Request &req, const Response &res) {
   (void)(s);
 
 #ifdef CPPHTTPLIB_BROTLI_SUPPORT
-  // TODO: 'Accept-Encoding' has br, not br;q=0
   ret = s.find("br") != std::string::npos;
   if (ret) { return EncodingType::Brotli; }
 #endif
 
 #ifdef CPPHTTPLIB_ZLIB_SUPPORT
-  // TODO: 'Accept-Encoding' has gzip, not gzip;q=0
   ret = s.find("gzip") != std::string::npos;
   if (ret) { return EncodingType::Gzip; }
 #endif
@@ -5297,7 +5295,7 @@ inline bool expect_content(const Request &req) {
       req.method == "PRI" || req.method == "DELETE") {
     return true;
   }
-  // TODO: check if Content-Length is set
+  
   return false;
 }
 
@@ -7056,7 +7054,7 @@ Server::process_request(Stream &strm, const std::string &remote_addr,
   res.headers = default_headers_;
 
 #ifdef _WIN32
-  // TODO: Increase FD_SETSIZE statically (libzmq), dynamically (MySQL).
+  
 #else
 #ifndef CPPHTTPLIB_USE_POLL
   // Socket file descriptor exceeded FD_SETSIZE...
@@ -7460,7 +7458,7 @@ inline bool ClientImpl::send_(Request &req, Response &res, Error &error) {
       if (!create_and_connect_socket(socket_, error)) { return false; }
 
 #ifdef CPPHTTPLIB_OPENSSL_SUPPORT
-      // TODO: refactoring
+      
       if (is_ssl()) {
         auto &scli = static_cast<SSLClient &>(*this);
         if (!proxy_host_.empty() && proxy_port_ != -1) {
@@ -7560,8 +7558,7 @@ inline bool ClientImpl::handle_request(Stream &strm, Request &req,
 
   if (res.get_header_value("Connection") == "close" ||
       (res.version == "HTTP/1.0" && res.reason != "Connection established")) {
-    // TODO this requires a not-entirely-obvious chain of calls to be correct
-    // for this to be safe.
+    
 
     // This is safe to call because handle_request is only called by send_
     // which locks the request mutex during the process. It would be a bug
@@ -7674,7 +7671,6 @@ inline bool ClientImpl::write_content_with_provider(Stream &strm,
   auto is_shutting_down = []() { return false; };
 
   if (req.is_chunked_content_provider_) {
-    // TODO: Brotli support
     std::unique_ptr<detail::compressor> compressor;
 #ifdef CPPHTTPLIB_ZLIB_SUPPORT
     if (compress_) {
@@ -7838,7 +7834,6 @@ inline std::unique_ptr<Response> ClientImpl::send_with_content_provider(
 
 #ifdef CPPHTTPLIB_ZLIB_SUPPORT
   if (compress_ && !content_provider_without_length) {
-    // TODO: Brotli support
     detail::gzip_compressor compressor;
 
     if (content_provider) {

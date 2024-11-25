@@ -112,6 +112,11 @@ Game Name + Tag: bsawatestuser#test
 ### Todo:
 
 - Work on enabling a simplified system of configuring payload
+	- Create a sample payload for use to another API
+	- Payload option is configured to:
+		- Take in a filepath
+		- Read in the file contents
+		- Return the contents as JSON
 
 
 ### Name Meaning

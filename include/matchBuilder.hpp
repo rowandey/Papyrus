@@ -21,7 +21,6 @@ class matchBuilder {
             std::ifstream file(templatePath);
             json matchTemplate = json::parse(file);
             
-            // TODO: Need to have a proper set of random fields generated for the following
             matchTemplate["info"]["gameCreation"] = 9466848;
             matchTemplate["info"]["gameDuration"] = myRandom::generateRandomInt(900, 2700);
             matchTemplate["info"]["gameEndTimestamp"] = 9466848;
