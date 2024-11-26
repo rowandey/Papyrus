@@ -16,16 +16,17 @@ class cliHelper{
         }
     }
 
+    // TODO: Add the new flags created like --spike --ramp and all the others
     // Function to display help message
     static void displayHelp() {
         std::cout << "Usage: ./program [options] {value}\n"
                 << "Options:\n"
                 << "  -h, --help              Show this help message\n"
                 << "  -th, --threads [num]    Number of threads to run (default: 1)\n"
-                << "  -ta, --target [url]     Target URL\n"
+                << "  -ta, --target [url]     Target URL ex. \"http://mtrack/com\"\n"
                 << "  -c, --count [num]       Number of payloads to send\n"
-                << "  -r, --rate [ms]         Rate limit in milliseconds\n"
-                << "  -e, --endpoint [path]   API endpoint\n"
+                << "  -r, --rate [ms]         Rate limit in milliseconds between sent payloads\n"
+                << "  -e, --endpoint [path]   API endpoint ex. \"/addMatch\"\n"
                 << "  -v, --verbose           Enable verbose output\n";
     }
 
