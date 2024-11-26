@@ -16,6 +16,7 @@ class cliHelper{
         }
     }
 
+    // TODO: Add the new flags created like --spike --ramp and all the others
     // Function to display help message
     static void displayHelp() {
         std::cout << "Usage: ./program [options] {value}\n"
