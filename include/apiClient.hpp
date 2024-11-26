@@ -38,6 +38,12 @@ public:
         this->payload = payload;
     }
 
+    // TODO: Make a class method that sends a GET request too
+
+    // TODO: Make a class method that sends a DELETE request too
+
+    // TODO: Make a class method that sends a PUT request too
+
     // Send a POST request
     std::string sendRequest() {
         if (endpoint.empty()) {

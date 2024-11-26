@@ -118,6 +118,8 @@ Game Name + Tag: bsawatestuser#test
 		- Read in the file contents
 		- Return the contents as JSON
 
+- Ask big K for his opinion on it
+
 
 ### Name Meaning
 
