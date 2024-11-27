@@ -123,7 +123,9 @@ Game Name + Tag: bsawatestuser#test
 
 - payload Builder that builds randomized payloads for SEA webhook
 
-- Ask big K for opinion
+- Auth
+- Action Params
+	- /api/v1/endpoint/webhook?action={whatever}
 
 ### Name Meaning
 

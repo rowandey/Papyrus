@@ -83,7 +83,7 @@ public:
             if (res->status != 200) {
                 return "Server returned error: " + res->status;
             } else if (res->status == 200) {
-                return "Response 200";
+                return "200";
             }
         } else {
             return errorToString(res.error());
