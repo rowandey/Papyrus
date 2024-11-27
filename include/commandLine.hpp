@@ -21,13 +21,16 @@ class cliHelper{
     static void displayHelp() {
         std::cout << "Usage: ./program [options] {value}\n"
                 << "Options:\n"
-                << "  -h, --help              Show this help message\n"
-                << "  -th, --threads [num]    Number of threads to run (default: 1)\n"
-                << "  -ta, --target [url]     Target URL ex. \"http://mtrack/com\"\n"
-                << "  -c, --count [num]       Number of payloads to send\n"
-                << "  -r, --rate [ms]         Rate limit in milliseconds between sent payloads\n"
-                << "  -e, --endpoint [path]   API endpoint ex. \"/addMatch\"\n"
-                << "  -v, --verbose           Enable verbose output\n";
+                << "  -h, --help                Show this help message\n"
+                << "  -th, --threads [num]      Number of threads to run (default: 1)\n"
+                << "  -ta, --target [url]       Target URL ex. \"http://mtrack/com\"\n"
+                << "  -c, --count [num]         Number of payloads to send\n"
+                << "  -r, --rate [ms]           Rate limit in milliseconds between sent payloads\n"
+                << "  -e, --endpoint [path]     API endpoint ex. \"/addMatch\"\n"
+                << "  -v, --verbose             Enable verbose output\n"
+                << "  -s, --spike [ms]          Each thread will send data in random spikes \n"
+                << "  -ra, --ramp [ms]           Each thread will send data gradually faster\n"
+                << "  -p, --payload [filepath]  Option to specify file path to .JSON payload \n";
     }
 
     // Helper function to check if a number is a valid integer or not and returns
