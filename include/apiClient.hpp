@@ -20,7 +20,7 @@ Usage of the class:
     
     client.setPayload(payload);
     
-    client.sendRequest();
+    client.sendPOSTRequest();
 */
 
 class ApiClient {
@@ -38,14 +38,35 @@ public:
         this->payload = payload;
     }
 
-    // TODO: Make a class method that sends a GET request too
+    std::string sendGETRequest() {
+        const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
+        auto res = client.Get(requestEndpoint.c_str());
+
+        // Check if the response is valid before accessing any member
+        if (res) {
+            // Response is valid, now we can safely access res->status
+            int mystat = res->status;
+            
+            if (mystat == 200) {
+                return "200"; // Successful response
+            } else {
+                return "Server returned error: " + std::to_string(mystat);
+            }
+        } else {
+            // If response is invalid, handle the error case
+            return "Error: " + errorToString(res.error());
+        }
+    }
+
+
+
 
     // TODO: Make a class method that sends a DELETE request too
 
     // TODO: Make a class method that sends a PUT request too
 
     // Send a POST request
-    std::string sendRequest() {
+    std::string sendPOSTRequest() {
         if (endpoint.empty()) {
             return "Error: Endpoint is not set.";
         }
@@ -71,6 +92,7 @@ public:
 
 private:
     httplib::Client client; // HTTP client
+    std::string serverAddress;   // Server address
     std::string endpoint;  // API endpoint
     json payload;          // JSON payload
 
