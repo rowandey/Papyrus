@@ -118,9 +118,6 @@ Game Name + Tag: bsawatestuser#test
 		- Read in the file contents
 		- Return the contents as JSON
 
-- Add a section to the following line that tracks payloads sent in the last second
-	- Payloads sent: 36 | Successful: 36 | Failed: 0
-
 - Payload Builder that builds randomized payloads for SEA webhook
 
 - Auth
