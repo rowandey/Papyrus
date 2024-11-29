@@ -121,22 +121,12 @@ Game Name + Tag: bsawatestuser#test
 - Add a section to the following line that tracks payloads sent in the last second
 	- Payloads sent: 36 | Successful: 36 | Failed: 0
 
-- payload Builder that builds randomized payloads for SEA webhook
+- Payload Builder that builds randomized payloads for SEA webhook
 
 - Auth
-- Action Params
-	- /api/v1/endpoint/webhook?action={whatever}
+
+- Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
 
 ### Name Meaning
 
 This section is completely for fun. I named the project based off the latin word papyrus for paper. I figured that paper is what contains much of humanities knowledge and it is also where people go to obtain new knowledge from others. So the link between that and a project that generates a ton of information was not a far leap for me in my mind.
-
-
-
-▀███▀▀▀██▄      ██     ▀███▀▀▀██▄▀███▀   ▀██▀███▀▀▀██▄ ▀███▀   ▀███▀▄█▀▀▀█▄█
-  ██   ▀██▄    ▄██▄      ██   ▀██▄ ███   ▄█   ██   ▀██▄ ██       █ ▄██    ▀█
-  ██   ▄██    ▄█▀██▄     ██   ▄██   ███ ▄█    ██   ▄██  ██       █ ▀███▄    
-  ███████    ▄█  ▀██     ███████     ████     ███████   ██       █   ▀█████▄
-  ██         ████████    ██           ██      ██  ██▄   ██       █ ▄     ▀██
-  ██        █▀      ██   ██           ██      ██   ▀██▄ ██▄     ▄█ ██     ██
-▄████▄    ▄███▄   ▄████▄████▄       ▄████▄  ▄████▄ ▄███▄ ▀██████▀▀ █▀█████▀ 

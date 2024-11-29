@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/matchBuilder.hpp"
+#include "../include/clock.hpp"
 #include "../include/json.hpp"
 #include "../include/apiClient.hpp"
 #include "../include/commandLine.hpp"
@@ -15,6 +16,9 @@ using json = nlohmann::json;
 
 std::atomic<int> totalPayloadsSent(0);
 std::atomic<int> totalPayloadsSuccessful(0);
+std::atomic<int> pastSecondPackets(0);
+std::atomic<int> pastSecondHighest(0);
+
 bool isProgramActive = true;
 std::mutex consoleMutex;  // Mutex for synchronizing console output
 
@@ -26,9 +30,9 @@ void signalHandler(int signal) {
 }
 
 // Function to send a request and optionally log verbose output
-void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch, std::string payload, std::string requestType) {
+void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch, std::string payload, std::string requestType, MillisecondClock& clock) {
     std::string response;
-
+    
     if (payload.length() < 1) {
         matchBuilder randMatch;
         client.setPayload(randMatch.randomMatch().dump(4));
@@ -42,31 +46,45 @@ void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch, std::
     } else {
         response = client.sendPOSTRequest();
     }
-
+    
     std::lock_guard<std::mutex> guard(consoleMutex);
+    if (clock.perSecondCheck() >= 1000) {
+        clock.resetClock();
+        
+        if (pastSecondHighest < pastSecondPackets) {
+            pastSecondHighest.store(pastSecondPackets.load(), std::memory_order_relaxed);
+        }
+        pastSecondPackets = 0;
+    }
     if (verbose) {
         std::cout << "Response: " << response << std::endl;
     } else {
         totalPayloadsSent++;
+        pastSecondPackets++;
         if (response == "200") {
             totalPayloadsSuccessful++;
         }
-        std::cout << "\rPayloads sent: " << totalPayloadsSent
+        std::cout << "\r" << std::string(100, ' ') << "\r";
+        std::cout << "\rTotal Sent: " << totalPayloadsSent
                   << " | Successful: " << totalPayloadsSuccessful
                   << " | Failed: " << (totalPayloadsSent - totalPayloadsSuccessful)
+                  << " | Packets/s: " << pastSecondHighest
+                  << " | Elapsed Time: " << clock.elapsedMilliseconds()
                   << std::flush;
     }
 }
 
 // Worker function
-void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string requestType) {
-    
+void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string requestType, std::string parameter) {
+    MillisecondClock clock;
     matchBuilder randMatch;
     ApiClient client(targetURL);
     client.setEndpoint(endpoint);
+    client.setParameter(parameter);
 
+    clock.start();
     while (isProgramActive) {
-        sendRequest(client, verbose, randMatch, payload, requestType);
+        sendRequest(client, verbose, randMatch, payload, requestType, clock);
 
         if (payloadCount > 0 && --payloadCount == 0) break;
 
@@ -82,7 +100,7 @@ void runWorkerThread(const std::string& targetURL, const std::string& endpoint, 
 }
 
 // Helper function for parsing command-line arguments
-void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, std::string& target, std::string& endpoint, bool& verbose, std::string& payload, std::string& requestType) {
+void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, std::string& target, std::string& endpoint, bool& verbose, std::string& payload, std::string& requestType, std::string& parameter) {
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
         try {
@@ -107,7 +125,8 @@ void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, 
                 spike = cliHelper::parseIntArg(argv[++i], "spike");
             } else if (arg == "--endpoint" || arg == "-e") {
                 endpoint = argv[++i];
-                // if (endpoint.empty()) throw std::runtime_error("Error: Endpoint value cannot be empty.");
+            } else if (arg == "--parameter" || arg == "-pa") {
+                parameter = argv[++i];
             } else if (arg == "--payload" || arg == "-p") {
                 payload = argv[++i];
                 if (payload.empty()) throw std::runtime_error("Error: Payload value cannot be empty.");
@@ -123,16 +142,15 @@ void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, 
     }
 
     if (target.empty()) throw std::runtime_error("Error: Target URL is required.");
-    // if (endpoint.empty()) throw std::runtime_error("Error: API endpoint is required.");
 }
 
 int main(int argc, char* argv[]) {
     int numThreads = 1, payloadCount = 0, rateLimit = 0, ramp = 0, spike = 0;
     bool verbose = false;
-    std::string target, endpoint, payload, requestType;
+    std::string target, endpoint, payload, requestType, parameter;
 
     try {
-        parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose, payload, requestType);
+        parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose, payload, requestType, parameter);
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
         return 1;
@@ -157,7 +175,7 @@ int main(int argc, char* argv[]) {
     // Launch threads
     std::vector<std::thread> threads;
     for (int i = 0; i < numThreads; ++i) {
-        threads.emplace_back(runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike, payload, requestType);
+        threads.emplace_back(runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike, payload, requestType, parameter);
     }
 
     // Wait for threads to finish

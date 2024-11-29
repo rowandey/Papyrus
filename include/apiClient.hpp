@@ -5,24 +5,6 @@
 
 using json = nlohmann::json;
 
-/*
-Usage of the class:
-
-    ApiClient client("https://example.com");
-    
-    client.setEndpoint("/api/users");
-    
-    json payload = {
-        {"name", "Jane Doe"},
-        {"email", "jane.doe@example.com"},
-        {"age", 28}
-    };
-    
-    client.setPayload(payload);
-    
-    client.sendPOSTRequest();
-*/
-
 class ApiClient {
 public:
     // Constructor to initialize the server address
@@ -33,6 +15,11 @@ public:
         this->endpoint = endpoint;
     }
 
+    // Set the API parameter
+    void setParameter (const std::string& parameter) {
+        this->parameter = parameter;
+    }
+
     // Set the JSON payload
     void setPayload(const json& payload) {
         this->payload = payload;
@@ -40,7 +27,10 @@ public:
 
     std::string sendGETRequest() {
         const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
-        auto res = client.Get(requestEndpoint.c_str());
+        const std::string requestParameter = parameter.empty() ? "" : parameter;
+        std::string requestCombined = requestEndpoint + requestParameter;
+
+        auto res = client.Get(requestCombined.c_str());
 
         // Check if the response is valid before accessing any member
         if (res) {
@@ -67,17 +57,20 @@ public:
 
     // Send a POST request
     std::string sendPOSTRequest() {
+        const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
+        const std::string requestParameter = parameter.empty() ? "" : parameter;
+        std::string requestCombined = requestEndpoint + requestParameter;
+
         if (endpoint.empty()) {
             return "Error: Endpoint is not set.";
         }
-
         if (payload.empty()) {
             return "Error: Payload is not set.";
         }
-
+        
         // Send the POST request
-        auto res = client.Post(endpoint.c_str(), payload.dump(), "application/json");
-
+        auto res = client.Post(requestCombined.c_str(), payload.dump(), "application/json");
+        
         // Handle the response
         if (res) {
             if (res->status != 200) {
@@ -94,6 +87,7 @@ private:
     httplib::Client client; // HTTP client
     std::string serverAddress;   // Server address
     std::string endpoint;  // API endpoint
+    std::string parameter;  // API params
     json payload;          // JSON payload
 
     std::string errorToString(httplib::Error err) {
