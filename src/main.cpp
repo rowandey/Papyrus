@@ -6,7 +6,6 @@ int main(int argc, char* argv[]) {
     int numThreads = 1, payloadCount = 0, rateLimit = 0, ramp = 0, spike = 0;
     bool verbose = false;
     std::string target, endpoint, payload, requestType, parameter;
-    threadWorks myThreads;
 
     try {
         cliHelper::parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose, payload, requestType, parameter);
