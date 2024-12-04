@@ -1,23 +1,6 @@
-#include "../include/commandLine.hpp"
-#include "../include/threadWorks.hpp"
-#include <csignal>
-#include <chrono>
-#include <thread>
-#include <vector>
-#include <mutex>
-#include <atomic>
-#include <iostream>
+#include "common.hpp"
 
 using json = nlohmann::json;
-
-// Static member initialization
-std::atomic<bool> threadWorks::isProgramActive(true);
-std::mutex threadWorks::consoleMutex;
-std::atomic<int> threadWorks::totalPayloadsSent(0);
-std::atomic<int> threadWorks::totalPayloadsSuccessful(0);
-std::atomic<int> threadWorks::pastSecondPackets(0);
-std::atomic<int> threadWorks::pastSecondHighest(0);
-
 
 int main(int argc, char* argv[]) {
     int numThreads = 1, payloadCount = 0, rateLimit = 0, ramp = 0, spike = 0;
