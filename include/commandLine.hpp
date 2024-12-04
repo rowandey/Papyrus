@@ -1,7 +1,10 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <chrono>
 #include <thread>
+#include <cmath>
+#include <climits>
 
 class cliHelper{
     public:
@@ -14,6 +17,63 @@ class cliHelper{
         } catch (const std::out_of_range&) {
             throw std::runtime_error("Error: Number out of range for " + flagName + ".");
         }
+    }
+
+    static void printBanner () {
+        // Display program info
+        std::cout << R"(==========================================
+ ____   _    ______   ______  _   _ ____  
+|  _ \ / \  |  _ \ \ / /  _ \| | | / ___| 
+| |_) / _ \ | |_) \ V /| |_) | | | \___ \ 
+|  __/ ___ \|  __/ | | |  _ <| |_| |___) |
+|_| /_/   \_\_|    |_| |_| \_\\___/|____/ 
+==========================================
+)";
+    }
+
+    // Helper function for parsing command-line arguments
+    static void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, std::string& target, std::string& endpoint, bool& verbose, std::string& payload, std::string& requestType, std::string& parameter) {
+        for (int i = 1; i < argc; ++i) {
+            std::string arg = argv[i];
+            try {
+                if (arg == "--help" || arg == "-h") {
+                    cliHelper::displayHelp();
+                    exit(0);
+                } else if (arg == "--threads" || arg == "-th") {
+                    numThreads = cliHelper::parseIntArg(argv[++i], "threads");
+                } else if (arg == "--target" || arg == "-ta") {
+                    target = argv[++i];
+                    if (target.empty()) throw std::runtime_error("Error: Target value cannot be empty.");
+                } else if (arg == "--type" || arg == "-t") {
+                    requestType = argv[++i];
+                    if (target.empty()) throw std::runtime_error("Error: Target value cannot be empty.");
+                } else if (arg == "--count" || arg == "-c") {
+                    payloadCount = cliHelper::parseIntArg(argv[++i], "count");
+                } else if (arg == "--rate" || arg == "-r") {
+                    rateLimit = cliHelper::parseIntArg(argv[++i], "rate");
+                } else if (arg == "--ramp" || arg == "-ra") {
+                    ramp = cliHelper::parseIntArg(argv[++i], "ramp");
+                } else if (arg == "--spike" || arg == "-s") {
+                    spike = cliHelper::parseIntArg(argv[++i], "spike");
+                } else if (arg == "--endpoint" || arg == "-e") {
+                    endpoint = argv[++i];
+                } else if (arg == "--parameter" || arg == "-pa") {
+                    parameter = argv[++i];
+                } else if (arg == "--payload" || arg == "-p") {
+                    payload = argv[++i];
+                    if (payload.empty()) throw std::runtime_error("Error: Payload value cannot be empty.");
+                } else if (arg == "--verbose" || arg == "-v") {
+                    verbose = true;
+                } else {
+                    throw std::runtime_error("Error: Unknown option '" + arg + "'. Use --help for usage.");
+                }
+            } catch (const std::exception& e) {
+                std::cerr << e.what() << '\n';
+                exit(1);
+            }
+        }
+
+        if (target.empty()) throw std::runtime_error("Error: Target URL is required.");
     }
 
     // TODO: Add the new flags created like --spike --ramp and all the others
