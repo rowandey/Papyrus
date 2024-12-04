@@ -4,8 +4,15 @@ using json = nlohmann::json;
 
 json matchBuilder::randomMatch() {
     // Imports the match template file that is going to get copied, transformed, and returned
+    std::string templatePath = "mappingFiles/match-template.json";
     std::ifstream file(templatePath);
-    json matchTemplate = json::parse(file);
+    json matchTemplate;
+    try {
+        matchTemplate = json::parse(file);
+    } catch (const nlohmann::json::parse_error& e) {
+        std::cerr << "JSON Parse Error: " << templatePath << e.what() << std::endl;
+        // Handle the error or return early
+    }
 
     matchTemplate["info"]["gameCreation"] = 9466848;
     matchTemplate["info"]["gameDuration"] = myRandom::generateRandomInt(900, 2700);
@@ -108,8 +115,9 @@ std::string matchBuilder::dropFirstAndLast(const std::string& str) {
 // Randomly selects a champion from the champions.json file
 std::string matchBuilder::getRandomChamp() {
     std::ifstream champFile("mappingFiles/champions.json");
-    json championsJson = json::parse(champFile);
 
+    json championsJson = json::parse(champFile);
+    
     // Collect all champion ids
     std::vector<std::string> champs;
     for (auto& champion : championsJson["data"].items()) {

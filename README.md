@@ -128,6 +128,15 @@ Game Name + Tag: bsawatestuser#test
 
 - Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
 
+
+### Recent Changes:
+- Rebuilt the header structure for the application
+- Investigated Coroutines
+- Implemented test makefile
+	- Build works but only if you run the papy exe from within the bin directory right next to the mappign files.
+
+I WANT TO EMBED THE JSON MAPPING FILES INTO THE EXECUTABLE SO THE THING IS ALMIGHTY PORTABLE
+
 ### Name Meaning
 
 This section is completely for fun. I named the project based off the latin word papyrus for paper. I figured that paper is what contains much of humanities knowledge and it is also where people go to obtain new knowledge from others. So the link between that and a project that generates a ton of information was not a far leap for me in my mind.

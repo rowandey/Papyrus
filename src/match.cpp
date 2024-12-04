@@ -89,28 +89,32 @@ std::string match::dropFirstAndLast(const std::string& str) {
 
 // Converts item codes to item names using a mapping file
 std::string match::itemCodeToName(const int itemCode) {
-    std::ifstream f("./mappingFiles/items.json");
+    std::ifstream f("mappingFiles/items.json");
     json items = json::parse(f);
+    
     return items[std::to_string(itemCode)];
 }
 
 // Converts summoner spell codes to names using a mapping file
 std::string match::summonerCodeToName(const int summonerCode) {
-    std::ifstream f("./mappingFiles/summoners.json");
-    json items = json::parse(f);
-    return items[std::to_string(summonerCode)];
+    std::ifstream f("mappingFiles/summoners.json");
+    json summoners = json::parse(f);
+
+    return summoners[std::to_string(summonerCode)];
 }
 
 // Converts keystone rune codes to names using a mapping file
 std::string match::keystoneCodeToName(const int runeCode) {
-    std::ifstream f("./mappingFiles/keystones.json");
-    json items = json::parse(f);
-    return items[std::to_string(runeCode)];
+    std::ifstream f("mappingFiles/keystones.json");
+    json keystones = json::parse(f);
+
+    return keystones[std::to_string(runeCode)];
 }
 
 // Converts secondary rune codes to names using a mapping file
 std::string match::secondaryRuneCodeToName(const int runeCode) {
-    std::ifstream f("./mappingFiles/secondaryRunes.json");
-    json items = json::parse(f);
-    return items[std::to_string(runeCode)];
+    std::ifstream f("mappingFiles/secondaryRunes.json");
+    json secondaryRunes = json::parse(f);
+
+    return secondaryRunes[std::to_string(runeCode)];
 }

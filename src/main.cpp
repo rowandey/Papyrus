@@ -12,6 +12,7 @@ int main(int argc, char* argv[]) {
         cliHelper::parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose, payload, requestType, parameter);
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
+        std::abort();
         return 1;
     }
 

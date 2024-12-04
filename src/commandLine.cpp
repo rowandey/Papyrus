@@ -7,8 +7,10 @@ int cliHelper::parseIntArg(const char* arg, const std::string& flagName) {
         return std::stoi(arg);
     } catch (const std::invalid_argument&) {
         throw std::runtime_error("Error: Invalid number for " + flagName + ". Must be a positive integer.");
+        std::abort();
     } catch (const std::out_of_range&) {
         throw std::runtime_error("Error: Number out of range for " + flagName + ".");
+        std::abort();
     }
 }
 
@@ -70,6 +72,7 @@ void cliHelper::parseArguments(int argc, char* argv[], int& numThreads, int& pay
             }
         } catch (const std::exception& e) {
             std::cerr << e.what() << '\n';
+            std::abort();
             exit(1);
         }
     }
