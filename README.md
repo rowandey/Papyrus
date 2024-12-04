@@ -110,6 +110,17 @@ Command to run build and execution with a test
 sudo g++ main.cpp apiClient.cpp clock.cpp commandLine.cpp match.cpp matchBuilder.cpp myRandom.cpp payloadBuilder.cpp threadWorks.cpp -std=c++23 && ./a.out --threads 1 --target "http://10.0.0.7" --type GET
 ```
 
+Alternatively the following now works as well
+
+```cpp
+make rebuild
+or
+make build
+
+cd bin
+./papy --threads 4 --target "http://10.0.0.7" --type GET --verbose
+```
+
 #### Test User
 Game Name + Tag: bsawatestuser#test
 
