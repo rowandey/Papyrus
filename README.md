@@ -141,6 +141,17 @@ Game Name + Tag: bsawatestuser#test
 
 - Embed JSON mapping files into the executable
 
+- Consolidate cpp files and headers. Dont need this many source files. Makes build process easier and more simple.
+	- Lot of overhead making build slow
+	- Unnecessary?
+		- Determine if this many files are needed
+
+- Optimize compilation time
+	- `make -j$(nproc)  # Automatically uses all available cores`
+		- Parallel compilation 0_0
+		- Review existing includes
+		- Pre compile headers
+
 ### Recent Changes:
 - Rebuilt the header structure for the application
 - Investigated Coroutines
