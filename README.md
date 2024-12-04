@@ -105,6 +105,10 @@ project_name/
 
 - Problem with my dev VM running docker-compose not killing containers properly
 
+Command to run build and execution with a test
+```
+sudo g++ main.cpp apiClient.cpp clock.cpp commandLine.cpp match.cpp matchBuilder.cpp myRandom.cpp payloadBuilder.cpp threadWorks.cpp -std=c++23 && ./a.out --threads 1 --target "http://10.0.0.7" --type GET
+```
 
 #### Test User
 Game Name + Tag: bsawatestuser#test
