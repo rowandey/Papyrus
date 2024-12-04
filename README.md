@@ -112,7 +112,7 @@ sudo g++ main.cpp apiClient.cpp clock.cpp commandLine.cpp match.cpp matchBuilder
 
 Alternatively the following now works as well
 
-```cpp
+```
 make rebuild
 or
 make build
