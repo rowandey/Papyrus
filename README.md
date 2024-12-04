@@ -139,6 +139,7 @@ Game Name + Tag: bsawatestuser#test
 
 - Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
 
+- Embed JSON mapping files into the executable
 
 ### Recent Changes:
 - Rebuilt the header structure for the application
