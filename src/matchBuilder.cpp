@@ -3,6 +3,9 @@
 using json = nlohmann::json;
 
 json matchBuilder::randomMatch() {
+    // TODO: Test if JSON string literals in mapping.hpp work if they are passed to the JSON parser 
+    //  rather than using filesteam targetting a json file
+     
     // Imports the match template file that is going to get copied, transformed, and returned
     std::string templatePath = "mappingFiles/match-template.json";
     std::ifstream file(templatePath);
