@@ -105,6 +105,21 @@ project_name/
 
 - Problem with my dev VM running docker-compose not killing containers properly
 
+Command to run build and execution with a test
+```
+sudo g++ main.cpp apiClient.cpp clock.cpp commandLine.cpp match.cpp matchBuilder.cpp myRandom.cpp payloadBuilder.cpp threadWorks.cpp -std=c++23 && ./a.out --threads 1 --target "http://10.0.0.7" --type GET
+```
+
+Alternatively the following now works as well
+
+```
+make rebuild
+or
+make build
+
+cd bin
+./papy --threads 4 --target "http://10.0.0.7" --type GET --verbose
+```
 
 #### Test User
 Game Name + Tag: bsawatestuser#test
@@ -123,6 +138,27 @@ Game Name + Tag: bsawatestuser#test
 - Auth
 
 - Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
+
+- Embed JSON mapping files into the executable
+
+- Consolidate cpp files and headers. Dont need this many source files. Makes build process easier and more simple.
+	- Lot of overhead making build slow
+	- Unnecessary?
+		- Determine if this many files are needed
+
+- Optimize compilation time
+	- `make -j$(nproc)  # Automatically uses all available cores`
+		- Parallel compilation 0_0
+		- Review existing includes
+		- Pre compile headers
+
+### Recent Changes:
+- Rebuilt the header structure for the application
+- Investigated Coroutines
+- Implemented test makefile
+	- Build works but only if you run the papy exe from within the bin directory right next to the mappign files.
+
+I WANT TO EMBED THE JSON MAPPING FILES INTO THE EXECUTABLE SO THE THING IS ALMIGHTY PORTABLE
 
 ### Name Meaning
 
