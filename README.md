@@ -149,8 +149,10 @@ Game Name + Tag: bsawatestuser#test
 - Optimize compilation time
 	- `make -j$(nproc)  # Automatically uses all available cores`
 		- Parallel compilation 0_0
-		- Review existing includes
-		- Pre compile headers
+	- utilities.hpp
+		- clock
+		- commandLine
+		- myRandom
 
 ### Recent Changes:
 - Rebuilt the header structure for the application
