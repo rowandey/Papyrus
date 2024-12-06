@@ -8,9 +8,8 @@
 #include <thread>
 #include <vector>
 #include "matchBuilder.hpp"
-#include "clock.hpp"
+#include "utilities.hpp"
 #include "apiClient.hpp"
-#include "commandLine.hpp"
 #include "payloadBuilder.hpp"
 #include <csignal>
 

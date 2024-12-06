@@ -5,15 +5,12 @@ using json = nlohmann::json;
 json matchBuilder::randomMatch() {
     // TODO: Test if JSON string literals in mapping.hpp work if they are passed to the JSON parser 
     //  rather than using filesteam targetting a json file
-     
-    // Imports the match template file that is going to get copied, transformed, and returned
-    std::string templatePath = "mappingFiles/match-template.json";
-    std::ifstream file(templatePath);
+    
     json matchTemplate;
     try {
-        matchTemplate = json::parse(file);
+        matchTemplate = json::parse(matchTemplateJson);
     } catch (const nlohmann::json::parse_error& e) {
-        std::cerr << "JSON Parse Error: " << templatePath << e.what() << std::endl;
+        std::cerr << "JSON Parse Error: " << e.what() << std::endl;
         // Handle the error or return early
     }
 
@@ -89,22 +86,22 @@ json matchBuilder::randomMatch() {
 
 // Static function to get a random item from the items.json file
 std::string matchBuilder::getRandomItemFromJson() {
-    return getRandomFromJson("mappingFiles/items.json");
+    return getRandomFromJson(itemsJson);
 }
 
 // Static function to get a random summoner spell from the summoners.json file
 std::string matchBuilder::getRandomSummonerFromJson() {
-    return getRandomFromJson("mappingFiles/summoners.json");
+    return getRandomFromJson(summonersJson);
 }
 
 // Static function to get a random keystone from the keystones.json file
 std::string matchBuilder::getRandomKeystoneFromJson() {
-    return getRandomFromJson("mappingFiles/keystones.json");
+    return getRandomFromJson(keystonesJson);
 }
 
 // Static function to get a random secondary rune from the secondaryRunes.json file
 std::string matchBuilder::getRandomSecondaryRuneFromJson() {
-    return getRandomFromJson("mappingFiles/secondaryRunes.json");
+    return getRandomFromJson(secondaryRunesJson);
 }
 
 // Internal function to remove the first and last characters of a string
@@ -117,13 +114,11 @@ std::string matchBuilder::dropFirstAndLast(const std::string& str) {
 
 // Randomly selects a champion from the champions.json file
 std::string matchBuilder::getRandomChamp() {
-    std::ifstream champFile("mappingFiles/champions.json");
-
-    json championsJson = json::parse(champFile);
+    json parsedChamps = json::parse(championsJson);
     
     // Collect all champion ids
     std::vector<std::string> champs;
-    for (auto& champion : championsJson["data"].items()) {
+    for (auto& champion : parsedChamps["data"].items()) {
         champs.push_back(champion.value()["id"]);
     }
 
@@ -138,13 +133,9 @@ std::string matchBuilder::getRandomChamp() {
 }
 
 // Static helper function to get a random key from a given JSON file
-std::string matchBuilder::getRandomFromJson(const std::string& filename) {
-    std::ifstream file(filename);
-    if (!file) {
-        throw std::runtime_error("Failed to open the file: " + filename);
-    }
+std::string matchBuilder::getRandomFromJson(const std::string& jsonString) {
 
-    json items = json::parse(file);
+    json items = json::parse(jsonString);
 
     // Collect all keys
     std::vector<std::string> keys;

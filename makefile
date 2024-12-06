@@ -6,7 +6,6 @@ CXXFLAGS = -std=c++23
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
-MAPPING_DIR = $(SRC_DIR)/mappingFiles
 
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
@@ -24,11 +23,6 @@ $(TARGET): $(OBJ_FILES) | copy-mapping-files
 # Rule to compile .cpp to .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Copy the mappingFiles directory to the bin directory
-copy-mapping-files:
-	@echo "Copying mappingFiles directory..."
-	cp -r $(MAPPING_DIR) $(BIN_DIR)/
 
 # Clean up object files and executable
 clean:

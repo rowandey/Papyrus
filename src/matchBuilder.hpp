@@ -4,15 +4,13 @@
 #include <string>
 #include <random>
 #include "json.hpp"
-#include "myRandom.hpp"
+#include "utilities.hpp"
+#include "mapping.hpp"
 
 using json = nlohmann::json;
 
 class matchBuilder {
 public:
-    // Path to the match template JSON file
-    const std::string templatePath = "mappingFiles/match-template.json";
-
     // Function to generate a random match based on the template
     json randomMatch();
 
