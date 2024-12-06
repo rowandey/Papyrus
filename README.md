@@ -152,6 +152,24 @@ Game Name + Tag: bsawatestuser#test
 	- Flags for specific custom payload contexts
 		- League
 		- Ocean
+	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch"`
+		- **Behavior:**  
+			- GET Request
+			- No payload
+	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --requestType POST --payload "{FilePath}"`
+		- **Behavior:** 
+			- POST Request
+			- Specified filepath to JSON
+				- Contents of file are streamed in, parsed, and used
+	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --requestType POST --payload lol`
+		- **Behavior:** 
+			- POST Request
+			- Randomized Generated Match using `matchBuilder`
+	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --requestType POST --payload ocean`
+		- **Behavior:** 
+			- POST Request
+			- Randomized Generated Match using `oceanBuilder`
+
 
 ### Recent Changes:
 - Rebuilt the header structure for the application
