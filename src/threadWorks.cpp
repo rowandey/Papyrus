@@ -22,7 +22,11 @@ void threadWorks::sendRequest(ApiClient& client, bool verbose, matchBuilder& ran
         matchBuilder randMatch;
         client.setPayload(randMatch.randomMatch().dump(4));
     } else {
-        client.setPayload(payload);
+        // std::ifstream f(payload);
+        // json jsonPayload = json::parse(f);
+        //std::cout << "Not using: " << payload << " at the moment." << std::endl; 
+        oceanBuilder myOcean;
+        client.setPayload(myOcean.randomOcean().dump(4));
     }
 
     if (requestType == "GET" || requestType == "get") {

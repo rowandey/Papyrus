@@ -121,6 +121,8 @@ cd bin
 ./papy --threads 4 --target "http://10.0.0.7" --type GET --verbose
 ```
 
+> **Note:** Buiding with `make rebuild -j$(nproc)` works but is a little inconsistent and sometimes requires two attempts. Time savings of multi-threaded building of the binary is not really worth it and the usual `make rebuild` is fast enough build time wise and more consistent.
+
 #### Test User
 Game Name + Tag: bsawatestuser#test
 
@@ -142,6 +144,14 @@ Game Name + Tag: bsawatestuser#test
 - Optimize compilation time
 	- `make -j$(nproc)  # Automatically uses all available cores`
 		- Parallel compilation 0_0
+
+- Is payloadBuilder doing anything? Remove it if not. Was just testing out stuff
+
+- Add a proper way of swapping between operating modes
+	- Get requests primary
+	- Flags for specific custom payload contexts
+		- League
+		- Ocean
 
 ### Recent Changes:
 - Rebuilt the header structure for the application
