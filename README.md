@@ -139,28 +139,19 @@ Game Name + Tag: bsawatestuser#test
 
 - Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
 
-- Embed JSON mapping files into the executable
-
-- Consolidate cpp files and headers. Dont need this many source files. Makes build process easier and more simple.
-	- Lot of overhead making build slow
-	- Unnecessary?
-		- Determine if this many files are needed
-
 - Optimize compilation time
 	- `make -j$(nproc)  # Automatically uses all available cores`
 		- Parallel compilation 0_0
-	- utilities.hpp
-		- clock
-		- commandLine
-		- myRandom
 
 ### Recent Changes:
 - Rebuilt the header structure for the application
 - Investigated Coroutines
 - Implemented test makefile
 	- Build works but only if you run the papy exe from within the bin directory right next to the mappign files.
+- Payload can be run from anywhere, Mappings are embedded into the built executable
 
 I WANT TO EMBED THE JSON MAPPING FILES INTO THE EXECUTABLE SO THE THING IS ALMIGHTY PORTABLE
+
 
 ### Name Meaning
 
