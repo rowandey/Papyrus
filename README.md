@@ -141,34 +141,9 @@ Game Name + Tag: bsawatestuser#test
 
 - Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
 
-- Optimize compilation time
-	- `make -j$(nproc)  # Automatically uses all available cores`
-		- Parallel compilation 0_0
-
 - Is payloadBuilder doing anything? Remove it if not. Was just testing out stuff
 
-- Add a proper way of swapping between operating modes
-	- Get requests primary
-	- Flags for specific custom payload contexts
-		- League
-		- Ocean
-	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch"`
-		- **Behavior:**  
-			- GET Request
-			- No payload
-	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --requestType POST --payload "{FilePath}"`
-		- **Behavior:** 
-			- POST Request
-			- Specified filepath to JSON
-				- Contents of file are streamed in, parsed, and used
-	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --requestType POST --payload lol`
-		- **Behavior:** 
-			- POST Request
-			- Randomized Generated Match using `matchBuilder`
-	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --requestType POST --payload ocean`
-		- **Behavior:** 
-			- POST Request
-			- Randomized Generated Match using `oceanBuilder`
+
 
 
 ### Recent Changes:
@@ -178,8 +153,30 @@ Game Name + Tag: bsawatestuser#test
 	- Build works but only if you run the papy exe from within the bin directory right next to the mappign files.
 - Payload can be run from anywhere, Mappings are embedded into the built executable
 
-I WANT TO EMBED THE JSON MAPPING FILES INTO THE EXECUTABLE SO THE THING IS ALMIGHTY PORTABLE
+- I WANT TO EMBED THE JSON MAPPING FILES INTO THE EXECUTABLE SO THE THING IS ALMIGHTY PORTABLE
 
+- Added a proper way of swapping between operating modes
+	- Get requests primary
+	- Flags for specific custom payload contexts
+		- League
+		- Ocean
+	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch"`
+		- **Behavior:**  
+			- GET Request
+			- No payload
+	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --payload "{FilePath}"`
+		- **Behavior:** 
+			- POST Request
+			- Specified filepath to JSON
+				- Contents of file are streamed in, parsed, and used
+	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --payload lol`
+		- **Behavior:** 
+			- POST Request
+			- Randomized Generated Match using `matchBuilder`
+	- `./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --payload ocean`
+		- **Behavior:** 
+			- POST Request
+			- Randomized Generated Match using `oceanBuilder`
 
 ### Name Meaning
 

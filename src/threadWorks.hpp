@@ -7,10 +7,11 @@
 #include <chrono>
 #include <thread>
 #include <vector>
+#include <cctype>
+#include <csignal>
 #include "matchBuilder.hpp"
 #include "utilities.hpp"
 #include "apiClient.hpp"
-#include <csignal>
 #include "oceanBuilder.hpp"
 
 class threadWorks {
@@ -26,8 +27,8 @@ public:
     static void signalHandler(int signal);
 
     // Function to send requests and optionally log verbose output
-    static void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch, std::string payload, std::string requestType, MillisecondClock& clock);
+    static void sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch, std::string payload, MillisecondClock& clock);
 
     // Worker thread function that sends requests based on the provided parameters
-    static void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string requestType, std::string parameter);
+    static void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string parameter);
 };

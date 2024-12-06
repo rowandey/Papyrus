@@ -69,7 +69,7 @@ void cliHelper::printBanner () {
 }
 
 // Helper function for parsing command-line arguments
-void cliHelper::parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, std::string& target, std::string& endpoint, bool& verbose, std::string& payload, std::string& requestType, std::string& parameter) {
+void cliHelper::parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, std::string& target, std::string& endpoint, bool& verbose, std::string& payload, std::string& parameter) {
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
         try {
@@ -80,9 +80,6 @@ void cliHelper::parseArguments(int argc, char* argv[], int& numThreads, int& pay
                 numThreads = cliHelper::parseIntArg(argv[++i], "threads");
             } else if (arg == "--target" || arg == "-ta") {
                 target = argv[++i];
-                if (target.empty()) throw std::runtime_error("Error: Target value cannot be empty.");
-            } else if (arg == "--type" || arg == "-t") {
-                requestType = argv[++i];
                 if (target.empty()) throw std::runtime_error("Error: Target value cannot be empty.");
             } else if (arg == "--count" || arg == "-c") {
                 payloadCount = cliHelper::parseIntArg(argv[++i], "count");

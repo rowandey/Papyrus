@@ -18,7 +18,7 @@ public:
     // Helper function for parsing command-line arguments
     static void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, 
                                 int& ramp, int& spike, std::string& target, std::string& endpoint, 
-                                bool& verbose, std::string& payload, std::string& requestType, 
+                                bool& verbose, std::string& payload, 
                                 std::string& parameter);
 
     // Function to display help message
