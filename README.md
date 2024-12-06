@@ -128,21 +128,9 @@ Game Name + Tag: bsawatestuser#test
 
 ### Todo:
 
-- Work on enabling a simplified system of configuring payload
-	- Create a sample payload for use to another API
-	- Payload option is configured to:
-		- Take in a filepath
-		- Read in the file contents
-		- Return the contents as JSON
-
-- Payload Builder that builds randomized payloads for SEA webhook
-
 - Auth
 
 - Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
-
-- Is payloadBuilder doing anything? Remove it if not. Was just testing out stuff
-
 
 
 
@@ -177,6 +165,16 @@ Game Name + Tag: bsawatestuser#test
 		- **Behavior:** 
 			- POST Request
 			- Randomized Generated Match using `oceanBuilder`
+
+- Is payloadBuilder doing anything? Remove it if not. Was just testing out stuff
+	- Its been archived
+
+- Work on enabling a simplified system of configuring payload
+	- Create a sample payload for use to another API
+	- Payload option is configured to:
+		- Take in a filepath
+		- Read in the file contents
+		- Return the contents as JSON
 
 ### Name Meaning
 
