@@ -5,10 +5,10 @@ using json = nlohmann::json;
 int main(int argc, char* argv[]) {
     int numThreads = 1, payloadCount = 0, rateLimit = 0, ramp = 0, spike = 0;
     bool verbose = false;
-    std::string target, endpoint, payload, requestType, parameter;
+    std::string target, endpoint, payload, parameter;
 
     try {
-        cliHelper::parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose, payload, requestType, parameter);
+        cliHelper::parseArguments(argc, argv, numThreads, payloadCount, rateLimit, ramp, spike, target, endpoint, verbose, payload, parameter);
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
         std::abort();
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     // Launch threads
     std::vector<std::thread> threads;
     for (int i = 0; i < numThreads; ++i) {
-        threads.emplace_back(&threadWorks::runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike, payload, requestType, parameter);
+        threads.emplace_back(&threadWorks::runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike, payload, parameter);
     }
 
     // Wait for threads to finish

@@ -15,25 +15,31 @@ void threadWorks::signalHandler(int signal) {
     isProgramActive = false;
 }
 
-void threadWorks::sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch, std::string payload, std::string requestType, MillisecondClock& clock) {
+void threadWorks::sendRequest(ApiClient& client, bool verbose, matchBuilder& randMatch, std::string payload, MillisecondClock& clock) {
+    std::transform(payload.begin(), payload.end(), payload.begin(), ::tolower);
     std::string response;
 
+    // If the payload is empty it will send a normal get request
+    // If the payload is lol it will send a randomized match
+    // If the payload is ocean it will send a randomized ocean payload
+    // If its any non empty value that isnt these 2 it will follow the file path
     if (payload.empty()) {
+        response = client.sendGETRequest();
+    } else if (payload == "lol") {
         matchBuilder randMatch;
         client.setPayload(randMatch.randomMatch().dump(4));
-    } else {
-        // std::ifstream f(payload);
-        // json jsonPayload = json::parse(f);
-        //std::cout << "Not using: " << payload << " at the moment." << std::endl; 
+        response = client.sendPOSTRequest();
+    } else if (payload == "ocean") {
         oceanBuilder myOcean;
         client.setPayload(myOcean.randomOcean().dump(4));
-    }
-
-    if (requestType == "GET" || requestType == "get") {
-        response = client.sendGETRequest();
+        response = client.sendPOSTRequest();
     } else {
+        std::ifstream f(payload);
+        json jsonPayload = json::parse(f); 
+        client.setPayload(jsonPayload);
         response = client.sendPOSTRequest();
     }
+    
 
     std::lock_guard<std::mutex> guard(consoleMutex);
     if (clock.perSecondCheck() >= 1000) {
@@ -71,7 +77,7 @@ void threadWorks::sendRequest(ApiClient& client, bool verbose, matchBuilder& ran
 
 
 // Static worker function
-void threadWorks::runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string requestType, std::string parameter) {
+void threadWorks::runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string parameter) {
     MillisecondClock clock;
     matchBuilder randMatch;
     ApiClient client(targetURL);
@@ -80,7 +86,7 @@ void threadWorks::runWorkerThread(const std::string& targetURL, const std::strin
 
     clock.start();
     while (isProgramActive) {
-        sendRequest(client, verbose, randMatch, payload, requestType, clock);
+        sendRequest(client, verbose, randMatch, payload, clock);
 
         if (payloadCount > 0 && --payloadCount == 0) break;
 

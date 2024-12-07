@@ -1,49 +1,58 @@
-#include "apiClient.hpp"
+#include "ApiClient.hpp"
 
 using json = nlohmann::json;
 
 // Constructor to initialize the server address
-ApiClient::ApiClient(const std::string& serverAddress) : client(serverAddress) {}
+ApiClient::ApiClient(const std::string& serverAddress) {
+    // Determine whether to use HTTP or HTTPS client
+    if (serverAddress.find("https://") == 0) {
+        sslClient = std::make_unique<httplib::SSLClient>(serverAddress.substr(8)); // Strip "https://"
+    } else if (serverAddress.find("http://") == 0) {
+        client = std::make_unique<httplib::Client>(serverAddress.substr(7)); // Strip "http://"
+    } else {
+        throw std::invalid_argument("Invalid server address. Must start with http:// or https://");
+    }
+}
 
-// Set the API endpoint
 void ApiClient::setEndpoint(const std::string& endpoint) {
     this->endpoint = endpoint;
 }
 
-// Set the API parameter
 void ApiClient::setParameter(const std::string& parameter) {
     this->parameter = parameter;
 }
 
-// Set the JSON payload
 void ApiClient::setPayload(const json& payload) {
     this->payload = payload;
 }
 
-// Send a GET request
 std::string ApiClient::sendGETRequest() {
     const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
     const std::string requestParameter = parameter.empty() ? "" : parameter;
     std::string requestCombined = requestEndpoint + requestParameter;
 
-    auto res = client.Get(requestCombined.c_str());
-
-    // Check if the response is valid before accessing any member
-    if (res) {
-        int mystat = res->status;
-
-        if (mystat == 200) {
-            return "200"; // Successful response
-        } else {
-            return "Server returned error: " + std::to_string(mystat);
-        }
+    httplib::Result res;
+    
+    if (sslClient) {
+        res = sslClient->Get(requestCombined.c_str());
+    } else if (client) {
+        res = client->Get(requestCombined.c_str());
     } else {
-        // If response is invalid, handle the error case
-        return "Error: " + errorToString(res.error());
+        std::cout << "Neither client nor sslClient is initialized." << std::endl;
     }
+    // auto res = client->Get(requestCombined.c_str());
+
+    if (res) {
+        if (res->status == 200) {
+            return "200";
+            // return res->body; // Return the response body
+        } else {
+            return "Server returned error: " + std::to_string(res->status);
+        }
+    }
+    return "Error: " + errorToString(res.error());
 }
 
-// Send a POST request
 std::string ApiClient::sendPOSTRequest() {
     const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
     const std::string requestParameter = parameter.empty() ? "" : parameter;
@@ -56,22 +65,26 @@ std::string ApiClient::sendPOSTRequest() {
         return "Error: Payload is not set.";
     }
 
-    // Send the POST request
-    auto res = client.Post(requestCombined.c_str(), payload.dump(), "application/json");
-
-    // Handle the response
-    if (res) {
-        if (res->status != 200) {
-            return "Server returned error: " + std::to_string(res->status);
-        } else if (res->status == 200) {
-            return "200"; // Success
-        }
-    } 
-    return errorToString(res.error());
+    httplib::Result res;
     
+    if (sslClient) {
+        res = sslClient->Post(requestCombined.c_str(), payload.dump(), "application/json");
+    } else if (client) {
+        res = client->Post(requestCombined.c_str(), payload.dump(), "application/json");
+    } else {
+        std::cout << "Neither client nor sslClient is initialized." << std::endl;
+    }
+
+    if (res) {
+        if (res->status == 200) {
+            return res->body; // Return the response body
+        } else {
+            return "Server returned error: " + std::to_string(res->status);
+        }
+    }
+    return "Error: " + errorToString(res.error());
 }
 
-// Convert error enum to string
 std::string ApiClient::errorToString(httplib::Error err) {
     switch (err) {
         case httplib::Error::Success:

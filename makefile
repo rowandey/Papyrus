@@ -1,11 +1,13 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++23
+CXXFLAGS = -std=c++23 -I$(OPENSSL_DIR)/include  # Include OpenSSL headers
+LDFLAGS = -L$(OPENSSL_DIR)/lib -lssl -lcrypto  # Link OpenSSL libraries
 
 # Directories
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
+OPENSSL_DIR = openssl
 
 # Source files and object files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
@@ -23,7 +25,7 @@ directories:
 
 # Link object files to create the executable
 $(TARGET): $(OBJ_FILES)
-	$(CXX) $(OBJ_FILES) -o $@
+	$(CXX) $(OBJ_FILES) -o $@ $(LDFLAGS)  # Link OpenSSL libraries
 
 # Rule to compile .cpp to .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | directories
