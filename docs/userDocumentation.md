@@ -93,10 +93,10 @@ The following is an example of me testing the database of a locally deployed web
 ![Example Papy POST](documentationImages/PapyLOL.gif "Example Papy POST")
 
 #### M-Track PostgreSQL Databse Before Papy
-![M-Track databse before Papy](documentationImages/prePAPY.png "M-Track databse before Papy")
+![M-Track databse before Papy](documentationImages/prePapy.png "M-Track databse before Papy")
 
 #### M-Track PostgreSQL Databse After Papy
-![M-Track databse after Papy](documentationImages/postPAPY.png "M-Track databse after Papy")
+![M-Track databse after Papy](documentationImages/postPapy.png "M-Track databse after Papy")
 ---
 
 ## User Interface Guide
