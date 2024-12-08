@@ -14,8 +14,12 @@
 ![Example Papy GET](documentationImages/PapyGET.gif "Example Papy GET")
 
 ## Introduction
-- **Overview**: Describe the software and its purpose.
-- **Key Features**: Highlight the main capabilities of the software.
+- **Overview**: Papy is a command line tool API load testing tool that is meant to be light weight, fast, and flexible.
+- **Key Features**: Some of the key features include:
+  - Customizable payloads
+  - Pseudo randomized payloads
+  - Traffic controls
+  - Customized targetting (server address and endpoint)
 - **Target Audience**: Define who will benefit most from using this tool.
 
 ---
