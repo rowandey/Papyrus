@@ -126,36 +126,79 @@ The following is an example of me testing the database of a locally deployed web
 ---
 
 ## User Interface 
-Since this was designed to be simple as well as a Command Line Interface tool the UI follows this paradigm.
+Since this was designed to be simple as well as a Command Line Interface tool the UI follows this paradigm. You can see the UI information of Papy with any exeuction of the Papy command like:
+```bash
+./papy [Flag] {Value} [Flag] {Value} [Flag] {Value} ...
+```
 ![Papy User Interface](documentationImages/papyUI.png "Papy User Interface")
 
 ---
 
-## Features and Functionality
-- **Core Features**: Explain primary capabilities with examples.
-- **How-To Guides**:
-  - Task 1: [Guide for Task 1]
-  - Task 2: [Guide for Task 2]
-- Include screenshots or diagrams where applicable.
+## Notable Command Line Arguments
+
+### --threads [num]
+This parameter lets you specify the amount of CPU threads you want to use for the programs execution. The more you add the more concurrent requests will be sent. If you try to assign more threads that you have physically then the speed will not necessarily increase due to the CPU having to switch between the active tasks anyways so there is no real point to assigning more threads that you physically have on your CPU. Faster threads however do assist in the speed of requests per thread.
+
+### --target [url]
+Assigns the url of the target. Should be in the format `http://www.mtrack.com`. Specifically the `http://` or `https://` portion of the address must be included. This is because this is how Papy determines which protocols to use to send the requests. 
+
+### --endpoint [path]
+Specifies the endpoint of the specific server. This endpoint string gets appended to the target address. So if you want to query the target `https://www.mtrack.com` and the endpoint `/addMatch` you can use the command:
+```bash
+./papy --threads 1 --target "https://www.mtrack.com" --endpoint "/addMatch"
+```
+
+### --parameter [string]
+The `--parameter` flag lets you specify end of URL paramaters. For example, the following Papy command will yield the final url of `https://www.mtrack.com/addMatch?variable=BOB`.
+```bash
+./papy --threads 1 --target "https://www.mtrack.com" --endpoint "/addMatch" --parameter "?variable=BOB"
+```
+
+### --count [num]
+This parameter will let you specify the amount of payloads that each thread will launch. If you have a single thread and specify `--count` to be 10 then Papy will launch 10 requests. If you however have `--threads` set to 4 and you have `--count` set to 10 it will launch 40 requests. The count number is FOR EACH THREAD.  
+
+### --rate [ms]
+`--rate` specifies the delay in milliseconds between payloads being sent out. If you specify `--rate 2000` then there will be a 2 secon delay between each set of packets being sent out. Once again if you have the threadcount set to 4 and a delay of 2000 then 4 packets will be sent out every 2 seconds. The delay is also per thread.
+
+
+### --verbose
+This flag has no parameter. If it is present in the command line arguments it will enable verbose output. It will show you the response of each request being sent out. Without this flag all you will see in terms of the responses of the requests is the main statistics line for Papy.
+```
+Total Sent: 36 | Successful: 36 | Failed: 0 | Packets/s: 1 | Elapsed Time: 70099
+```
+
+### --spike [ms]
+This flag lets you specify a "spike" time. What happens is that whatever delay in ms you set for this flag will be used to calculate when the payloads will be sent out. Each request will be sent out at a random delay between zero and the number that you set. This makes the traffic much more chaotic and similar to real world situations.
+
+### --ramp [ms]
+This flag lets you specify test a ramping simulation. The traffic will have a delay of the one you set for the `--ramp` flag and then get halved each time a payload is sent. It will ramp faster and faster until it runs at the max speed capable of your hardware.
+
+### --payload [num]
+This is where a good amount of the meat of the functionality is. Depending on the payload that you set you will have behavior vary drastically. At the moment there are 4 main operating modes:
+- No payload
+- `lol`
+- `ocean`
+- `{filepath}`
+  - ex. `./home/jsonFiles/bob.json`
+
+If no payload is set then Papy will send GET requests to the specified address and endpoint.
+
+If `lol` is set then it will generate a custom pseudo-random payload based off the specifications in a custom class. 
+
+If `ocean` is set then it will generate a custom pseudo-random payload based off the specifications in a custom class.
+
+If a file path is specified then Papy will look for a JSON file and parse it. That parsed JSON will then be used as a body for the payload.
+
 
 ---
 
-## FAQs and Troubleshooting
-- **Frequently Asked Questions**:
-  - *Question 1*: Answer.
-  - *Question 2*: Answer.
-- **Troubleshooting**:
-  - Problem: Steps to resolve.
-- **Support**: Contact information for further assistance.
+## Ask The Dev
+For questions or requests you can contact me on LinkedIn or my email.
+All contact information is listed on my profile.
 
 ---
 
-## Best Practices
-- Tips for using the software effectively.
-- Recommended workflows or configurations.
-
----
-
-## Glossary
-- **Term 1**: Definition.
-- **Term 2**: Definition.
+## Disclaimer
+- PLEASE DO NOT USE THIS FOR MALICIOUS PURPOSES
+- GET PERMISSION FROM THE OWNER OF RESOURCES YOU WILL USE THIS TOOL AGAINST
+- I TAKE NO RESPONSIBILITY FOR THE ACTIONS OF USERS OF THIS APPLICATION
