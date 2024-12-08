@@ -127,7 +127,7 @@ The following is an example of me testing the database of a locally deployed web
 
 ## User Interface 
 Since this was designed to be simple as well as a Command Line Interface tool the UI follows this paradigm.
-![Papy User Interface](documentationImages/postUI.png "Papy User Interface")
+![Papy User Interface](documentationImages/papyUI.png "Papy User Interface")
 
 ---
 
