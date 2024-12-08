@@ -3,11 +3,10 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
-3. [User Interface Guide](#user-interface-guide)
-4. [Features and Functionality](#features-and-functionality)
-5. [FAQs and Troubleshooting](#faqs-and-troubleshooting)
-6. [Best Practices](#best-practices)
-7. [Glossary](#glossary)
+3. [User Interface](#user-interface)
+4. [Notable Command Line Arguments](#notable-command-line-arguments)
+6. [Ask The Dev](#asl-the-dev)
+7. [Disclaimer](#disclaimer)
 
 ---
 
