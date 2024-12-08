@@ -13,7 +13,7 @@
 
 ![Example Papy GET](documentationImages/PapyGET.gif "Example Papy GET")
 
-## Introduction
+## **Introduction**
 
 ### Overview 
 Papy is an open-source command line tool API load testing tool that is meant to be light weight, fast, and flexible.
