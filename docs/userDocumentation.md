@@ -121,12 +121,13 @@ The following is an example of me testing the database of a locally deployed web
 
 #### M-Track PostgreSQL Databse After Papy
 ![M-Track databse after Papy](documentationImages/postPapy.png "M-Track databse after Papy")
+
+
 ---
 
-## User Interface Guide
-- **UI Elements**: Description of key components in the user interface.
-- **Navigation**: Tips for moving through the application efficiently.
-- **Common Workflows**: Examples of typical tasks performed in the software.
+## User Interface 
+Since this was designed to be simple as well as a Command Line Interface tool the UI follows this paradigm.
+![Papy User Interface](documentationImages/postUI.png "Papy User Interface")
 
 ---
 
