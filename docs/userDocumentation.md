@@ -11,6 +11,8 @@
 
 ---
 
+![Example Papy GET](documentationImages/PapyGET.gif "Example Papy GET")
+
 ## Introduction
 - **Overview**: Describe the software and its purpose.
 - **Key Features**: Highlight the main capabilities of the software.
