@@ -21,6 +21,7 @@ Some of the key features include:
 - Customizable payloads
 - Pseudo randomized payloads
 - Verbose or compact response reporting
+- HTTP and HTTPS traffic capabilities
 - Traffic controls
   - Spike traffic
   - Ramp traffic
@@ -76,12 +77,26 @@ Papy will be in the `bin` directory. Run the Papy help command to get a sense of
 ```
 ![Papy help](documentationImages/papyHelp.png "Papy help")
 
-
-![Example Papy GET](documentationImages/PapyGET.gif "Example Papy GET")
-
 ### First Steps
-Provide a basic walkthrough of initial tasks.
+Lets launch some requests! The following are examples of possible use cases and the commands that would go along with them. Papy is highly configurable though so there are many more possible configurations depending on what you are trying to achieve.
 
+If you want to launch a bunch of GET requests to a specific site:
+```bash
+./papy --threads 4 --target "https://www.google.com"
+```
+![Papy GET](documentationImages/PapyGET.gif "Papy GET")
+
+The following is an example of me testing the database of a locally deployed web application I created called [M-Track](https://github.com/noahpop77/M-Track). This execution run will use the randomized payload generation for League of Legends. The lol payload will trigger a class in the tool to generate a randomized League of Legends match file and send that to the API endpoint of [M-Track](https://github.com/noahpop77/M-Track).
+```bash
+./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --payload lol
+```
+![Example Papy POST](documentationImages/PapyLOL.gif "Example Papy POST")
+
+#### M-Track PostgreSQL Databse Before Papy
+![M-Track databse before Papy](documentationImages/prePAPY.png "M-Track databse before Papy")
+
+#### M-Track PostgreSQL Databse After Papy
+![M-Track databse after Papy](documentationImages/postPAPY.png "M-Track databse after Papy")
 ---
 
 ## User Interface Guide
