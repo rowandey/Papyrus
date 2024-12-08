@@ -84,7 +84,7 @@ If you want to launch a bunch of GET requests to a specific site:
 ```bash
 ./papy --threads 4 --target "https://www.google.com"
 ```
-![Papy GET](documentationImages/PapyGET.gif "Papy GET")
+![Papy GET](documentationImages/papyGET.gif "Papy GET")
 
 If you want to send a static payload from a JSON file then simply specify the file path to your JSON file. The following command looks to the directory structure `../archive/mappingFiles/testPayload.json` for example to send `testPayload.json` as the body of the POST requests. This command also displays the functionality of the `--rate` flag which rate limits the requests by adding a delay of X milliseconds between each request.
 ```bash
@@ -107,14 +107,14 @@ The contents of `testPayload.json` are as follows:
 }
 
 ```
-![Papy Payload](documentationImages/PapyPayload.gif "Papy Payload")
+![Papy Payload](documentationImages/papyPayload.gif "Papy Payload")
 > **Note:** The bottom terminal is a locally deployed web application that prints the body of its received POST requests for demonstration purposes. As you can see the payload that is being sent is the same payload that is being received by the Python web server.
 
 The following is an example of me testing the database of a locally deployed web application I created called [M-Track](https://github.com/noahpop77/M-Track). This execution run will use the randomized payload generation for League of Legends. The lol payload will trigger a class in the tool to generate a randomized League of Legends match file and send that to the API endpoint of [M-Track](https://github.com/noahpop77/M-Track).
 ```bash
 ./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --payload lol
 ```
-![Example Papy POST](documentationImages/PapyLOL.gif "Example Papy POST")
+![Example Papy POST](documentationImages/papyLOL.gif "Example Papy POST")
 
 #### M-Track PostgreSQL Databse Before Papy
 ![M-Track databse before Papy](documentationImages/prePapy.png "M-Track databse before Papy")
