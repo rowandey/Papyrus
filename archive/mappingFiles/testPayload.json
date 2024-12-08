@@ -1,13 +1,13 @@
 {
     "overrides": {
         "business_unit" : {
-            "name" : "{PLACEHOLDER}"
+            "name" : "BOB"
         },
         "application" : {
-            "name" : "{PLACEHOLDER}"
+            "name" : "BOB"
         },
         "project" : {
-            "name" : "{PLACEHOLDER}"
+            "name" : "BOB"
         }
     }
 }

@@ -86,6 +86,13 @@ If you want to launch a bunch of GET requests to a specific site:
 ```
 ![Papy GET](documentationImages/PapyGET.gif "Papy GET")
 
+If you want to send a static payload from a JSON file then simply specify the file path to your JSON file. The following command looks to the directory structure `../archive/mappingFiles/testPayload.json` for example to send `testPayload.json` as the body of the POST requests. This command also displays the functionality of the `--rate` flag which rate limits the requests by adding a delay of X milliseconds between each request.
+```bash
+./papy --threads 1 --target "http://10.0.0.7" --endpoint "/printJson" --payload "../archive/mappingFiles/testPayload.json" --rate 2000
+```
+![Papy Payload](documentationImages/PapyPayload.gif "Papy Payload")
+> **Note:** The bottom terminal is a locally deployed web application that prints the body of its received POST requests for demonstration purposes. 
+
 The following is an example of me testing the database of a locally deployed web application I created called [M-Track](https://github.com/noahpop77/M-Track). This execution run will use the randomized payload generation for League of Legends. The lol payload will trigger a class in the tool to generate a randomized League of Legends match file and send that to the API endpoint of [M-Track](https://github.com/noahpop77/M-Track).
 ```bash
 ./papy --threads 4 --target "http://10.0.0.7" --endpoint "/addMatch" --payload lol
