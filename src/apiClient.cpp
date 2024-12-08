@@ -77,7 +77,7 @@ std::string ApiClient::sendPOSTRequest() {
 
     if (res) {
         if (res->status == 200) {
-            return res->body; // Return the response body
+            return "200"; // Return the response body
         } else {
             return "Server returned error: " + std::to_string(res->status);
         }
