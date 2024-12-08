@@ -5,7 +5,7 @@
 2. [Getting Started](#getting-started)
 3. [User Interface](#user-interface)
 4. [Notable Command Line Arguments](#notable-command-line-arguments)
-6. [Ask The Dev](#asl-the-dev)
+6. [Ask The Dev](#ask-the-dev)
 7. [Disclaimer](#disclaimer)
 
 ---
