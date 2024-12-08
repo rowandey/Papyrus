@@ -13,9 +13,8 @@
 
 ![Example Papy GET](documentationImages/PapyGET.gif "Example Papy GET")
 
-## **Introduction**
+## Introduction
 
-### Overview 
 Papy is an open-source command line tool API load testing tool that is meant to be light weight, fast, and flexible.
 
 ### Key Features
@@ -39,9 +38,33 @@ If you are a user familiar with a CLI then you can use this tool! It was intenti
 ---
 
 ## Getting Started
-- **Installation**: Step-by-step instructions for installing or accessing the software.
-- **Initial Setup**: Guide for configuring the software for first-time use.
-- **First Steps**: Provide a basic walkthrough of initial tasks.
+
+### Installation
+The following is a step-by-step set of instructions for installing or accessing Papy.
+
+First things first is to clone the repo
+```
+git clone https://github.com/noahpop77/Papy.git
+```
+
+Then you need to navigate to the cloned Papy directory
+```
+cd Papy
+```
+
+You will need functional build system. In the case of Papy I used makefile to build the project. The command to build Papy is the following once you are in the project root directory.
+```
+make build
+```
+![Make version](documentationImages/makeVersion.png "Make version")
+
+Once the build is executed you should see something similar to the following:
+![Make build](documentationImages/makeBuild.png "Make build")
+
+### Initial Setup
+Guide for configuring the software for first-time use.
+### First Steps
+Provide a basic walkthrough of initial tasks.
 
 ---
 
