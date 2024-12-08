@@ -14,13 +14,27 @@
 ![Example Papy GET](documentationImages/PapyGET.gif "Example Papy GET")
 
 ## Introduction
-- **Overview**: Papy is a command line tool API load testing tool that is meant to be light weight, fast, and flexible.
-- **Key Features**: Some of the key features include:
-  - Customizable payloads
-  - Pseudo randomized payloads
-  - Traffic controls
-  - Customized targetting (server address and endpoint)
-- **Target Audience**: Define who will benefit most from using this tool.
+
+#### Overview 
+Papy is an open-source command line tool API load testing tool that is meant to be light weight, fast, and flexible.
+
+#### Key Features
+Some of the key features include:
+- Customized targetting (server address and endpoint)
+- Customizable payloads
+- Pseudo randomized payloads
+- Verbose or compact response reporting
+- Traffic controls
+  - Spike traffic
+  - Ramp traffic
+  - Rate limited traffic
+
+
+#### Target Audience
+If you are a user familiar with a CLI then you can use this tool! It was intentionally developed to be: 
+- Simple to use
+- Easy to integrate with other tooling
+- Light weight
 
 ---
 
