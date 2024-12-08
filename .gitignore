@@ -3,3 +3,5 @@
 bin/mappingFiles
 bin/papy
 obj/*.o
+references
+excalidraw
