@@ -132,6 +132,12 @@ Game Name + Tag: bsawatestuser#test
 
 - Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
 
+- Write comprehensive documentation
+	- User documentation
+	- Developer documentation
+	- Gather gifs and pictures for documentation
+	- Write documents in markdown in the docs directory
+
 - SSL GET is working, SSL POST needs testing
 	- Best way to test it is most likely getting the PostgreSQL version of M-Track with the updated testing endpoints up on live and running it there.
 
