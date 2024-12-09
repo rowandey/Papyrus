@@ -28,9 +28,9 @@
 #include "comp.h"
 #include "bio.h"
 # ifndef OPENSSL_NO_DEPRECATED_1_1_0
-#  include <openssl/x509.h>
-#  include <openssl/crypto.h>
-#  include <openssl/buffer.h>
+#include "x509.h"
+#include "crypto.h"
+#include "buffer.h"
 # endif
 #include "lhash.h"
 #include "pem.h"

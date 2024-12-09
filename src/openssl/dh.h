@@ -80,13 +80,13 @@ int EVP_PKEY_CTX_get0_dh_kdf_ukm(EVP_PKEY_CTX *ctx, unsigned char **ukm);
 # define EVP_PKEY_DH_KDF_X9_42                           2
 
 # ifndef OPENSSL_NO_DH
-#  include <openssl/e_os2.h>
-#  include <openssl/bio.h>
-#  include <openssl/asn1.h>
+#include "e_os2.h"
+#include "bio.h"
+#include "asn1.h"
 #  ifndef OPENSSL_NO_DEPRECATED_1_1_0
 #   include <openssl/bn.h>
 #  endif
-#  include <openssl/dherr.h>
+#include "dherr.h"
 
 #  ifndef OPENSSL_DH_MAX_MODULUS_BITS
 #   define OPENSSL_DH_MAX_MODULUS_BITS        10000

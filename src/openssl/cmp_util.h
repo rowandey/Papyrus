@@ -16,8 +16,8 @@
 #include "opensslconf.h"
 # ifndef OPENSSL_NO_CMP
 
-#  include <openssl/macros.h>
-#  include <openssl/trace.h>
+#include "macros.h"
+#include "trace.h"
 
 #  ifdef __cplusplus
 extern "C" {

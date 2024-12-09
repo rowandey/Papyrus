@@ -33,9 +33,9 @@
 #include "ec.h"
 
 # ifndef OPENSSL_NO_DEPRECATED_1_1_0
-#  include <openssl/rsa.h>
-#  include <openssl/dsa.h>
-#  include <openssl/dh.h>
+#include "rsa.h"
+#include "dsa.h"
+#include "dh.h"
 # endif
 
 #include "sha.h"
@@ -552,7 +552,7 @@ int X509_NAME_digest(const X509_NAME *data, const EVP_MD *type,
 X509 *X509_load_http(const char *url, BIO *bio, BIO *rbio, int timeout);
 X509_CRL *X509_CRL_load_http(const char *url, BIO *bio, BIO *rbio, int timeout);
 # ifndef OPENSSL_NO_DEPRECATED_3_0
-#  include <openssl/ocsp.h> /* OCSP_REQ_CTX_nbio_d2i */
+#include "ocsp.h" /* OCSP_REQ_CTX_nbio_d2i */
 #  define X509_http_nbio(rctx, pcert) \
       OCSP_REQ_CTX_nbio_d2i(rctx, pcert, ASN1_ITEM_rptr(X509))
 #  define X509_CRL_http_nbio(rctx, pcrl) \

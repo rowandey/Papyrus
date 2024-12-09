@@ -24,7 +24,7 @@
 #include "opensslconf.h"
 
 # ifndef OPENSSL_NO_DEPRECATED_1_1_0
-#  include <openssl/crypto.h>
+#include "crypto.h"
 # endif
 #include "safestack.h"
 #include "pem.h"

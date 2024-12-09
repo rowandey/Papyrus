@@ -89,18 +89,18 @@ typedef enum {
 const char *OSSL_EC_curve_nid2name(int nid);
 
 # ifndef OPENSSL_NO_EC
-#  include <openssl/asn1.h>
-#  include <openssl/symhacks.h>
+#include "asn1.h"
+#include "symhacks.h"
 #  ifndef OPENSSL_NO_DEPRECATED_1_1_0
 #   include <openssl/bn.h>
 #  endif
-#  include <openssl/ecerr.h>
+#include "ecerr.h"
 
 #  ifndef OPENSSL_ECC_MAX_FIELD_BITS
 #   define OPENSSL_ECC_MAX_FIELD_BITS 661
 #  endif
 
-#  include <openssl/params.h>
+#include "params.h"
 #  ifndef OPENSSL_NO_DEPRECATED_3_0
 typedef struct ec_method_st EC_METHOD;
 #  endif

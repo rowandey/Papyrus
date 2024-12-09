@@ -39,7 +39,7 @@
 #include "core.h"
 
 # ifdef CHARSET_EBCDIC
-#  include <openssl/ebcdic.h>
+#include "ebcdic.h"
 # endif
 
 /*
@@ -49,7 +49,7 @@
 #include "symhacks.h"
 
 # ifndef OPENSSL_NO_DEPRECATED_1_1_0
-#  include <openssl/opensslv.h>
+#include "opensslv.h"
 # endif
 
 #ifdef  __cplusplus

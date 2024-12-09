@@ -86,7 +86,7 @@ struct conf_method_st;
 typedef struct conf_method_st CONF_METHOD;
 
 # ifndef OPENSSL_NO_DEPRECATED_3_0
-#  include <openssl/conftypes.h>
+#include "conftypes.h"
 # endif
 
 /* Module definitions */

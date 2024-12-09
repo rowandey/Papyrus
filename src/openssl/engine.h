@@ -30,10 +30,10 @@
 #   include <openssl/ui.h>
 #   include <openssl/err.h>
 #  endif
-#  include <openssl/types.h>
-#  include <openssl/symhacks.h>
-#  include <openssl/x509.h>
-#  include <openssl/engineerr.h>
+#include "types.h"
+#include "symhacks.h"
+#include "x509.h"
+#include "engineerr.h"
 #  ifdef  __cplusplus
 extern "C" {
 #  endif

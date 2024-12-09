@@ -23,7 +23,7 @@
 #include "crypto.h"
 #include "types.h"
 # ifndef OPENSSL_NO_DEPRECATED_1_1_0
-#  include <openssl/bn.h>
+#include "bn.h"
 # endif
 #include "rsaerr.h"
 #include "safestack.h"

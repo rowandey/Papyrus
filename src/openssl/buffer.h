@@ -18,7 +18,7 @@
 
 #include "types.h"
 # ifndef OPENSSL_CRYPTO_H
-#  include <openssl/crypto.h>
+#include "crypto.h"
 # endif
 #include "buffererr.h"
 
