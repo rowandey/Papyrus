@@ -277,10 +277,24 @@ project_name/
 |-- README.md
 ```
 
-- This post fixed a problem I was having with mysqld
-	- https://askubuntu.com/questions/615129/systemd-mysql-wont-stop
+The following is a set of helper functions or terminal settings I use for my personal setup and are by no means required for Papy. They are just useful.
+```bash
+# This will export the following zshrc PS1 terminal settings and get my
+#   terminal looking like how I preffer
+# Looks like:
+#
+# bsawa@Z-Drive src
+# ->  
+export PS1="%{$(tput setaf 36)%}%n%{$(tput setaf 36)%}@%{$(tput setaf 36)%}%m %{$(tput setaf 36)%}%1~
+%{$(tput sgr0)%}-> "
 
-- Problem with my dev VM running docker-compose not killing containers properly
+# This function is meant to be added to the end of your ~/.bashrc file
+# so that you can more easily compile your project
+function comp {
+    local filename="${1%.*}.out"
+    sudo g++ -w "$1" -o "$filename" && "./$filename" "${@:2}"
+}
+```
 
 Command to run build and execution with a test
 ```
@@ -306,8 +320,6 @@ Game Name + Tag: bsawatestuser#test
 ### Todo:
 
 - Auth
-
-- Imma keep it a buck FRFR, openSSL & HTTPS is giving me a bit of C
 
 - Write comprehensive documentation
 	- User documentation
