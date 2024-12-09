@@ -13,14 +13,21 @@
 
 Papy is an open-source framework that lets us rapidly generate a large quantity of semi-random and static JSON data that will be used to test API endpoints that consume those JSON bodies and process the data in their backend. 
 
-This lets us:
-- Load test back end business logic
-- Load test attached databses
-- Health check services
-- Bulk create data in network connected services
+Why is that other projects dont:
+- Have a simple build process
+- Don't have a light weight footprint
+- Don't have an easily portable and self contained codebase
+- Cant send HTTPS AND HTTP traffic
+- Cant send GET AND POST requests
+- Can not simply perform all of the following tasks in one application:
+	- Health check services
+	- Bulk create and send data to network connected services
+	- Load test back-end business logic and attached databases
 
+Well with Papy we can do ALL OF THAT!!!
 
-# Software User Guide
+Lets get into how we do this...
+
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -219,6 +226,12 @@ All contact information is listed on my profile.
 
 ---
 
+### Name Meaning
+
+This section is completely for fun. I named the project based off the latin word papyrus for paper. I figured that paper is what contains much of humanities knowledge and it is also where people go to obtain new knowledge from others. So the link between that and a project that generates a ton of information was not a far leap for me in my mind.
+
+---
+
 ## Disclaimer
 - PLEASE DO NOT USE THIS FOR MALICIOUS PURPOSES
 - GET PERMISSION FROM THE OWNER OF RESOURCES YOU WILL USE THIS TOOL AGAINST
@@ -334,6 +347,3 @@ Game Name + Tag: bsawatestuser#test
 		- Read in the file contents
 		- Return the contents as JSON
 
-### Name Meaning
-
-This section is completely for fun. I named the project based off the latin word papyrus for paper. I figured that paper is what contains much of humanities knowledge and it is also where people go to obtain new knowledge from others. So the link between that and a project that generates a ton of information was not a far leap for me in my mind.
