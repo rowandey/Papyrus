@@ -1,13 +1,9 @@
-# Developer Documentation Template
+# Developer Documentation
 
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [High Level Architecture](#high-level-architecture)
 3. [Project File Structure](#project-file-structure)
-
----
-
-# Developer Documentation
 
 ## Introduction
 
