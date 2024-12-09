@@ -42,6 +42,41 @@ Regarding the build process, since the project is relatively simple I did not ne
 
 
 ## Project File Structure
+The project structure is for Papy contains a small set of directories used in the build process and the rest are mainly for organization. The rough structure goes as follows:
+
+```
+Papy/
+|-- src/
+|   |-- main.cpp
+|   |-- apiClient.cpp
+|   |-- matchBuilder.cpp
+|   |-- oceanBuilder.cpp
+|   |-- threadWorks.cpp
+|   |-- utilities.cpp
+|   |-- apiClient.hpp
+|   |-- matchBuilder.hpp
+|   |-- oceanBuilder.hpp
+|   |-- threadWorks.hpp
+|   |-- utilities.hpp
+|   |-- json.hpp
+|   |-- httplib.h
+|   |-- common.hpp
+|   |-- mapping.hpp
+|   |-- openssl/
+|   |   |-- ALL OPENSSL FILES...
+|-- build/
+|-- doc/
+|   |-- documentationImages
+|   |   |-- ALL DOCUMENTATION ASSETS...
+|   |-- excalidraw
+|   |   |-- ALL EXCALIDRAW DIAGRAMS...
+|   |-- developerDocumentation.md
+|   |-- userDocumentation.md
+|-- obj/
+|-- makefile
+|-- README.md
+|-- .gitignore
+```
 
 ### archive
 The `archive` directory is basically a graveyard of files I might need to revive in the short term but at the moment are not in use.
