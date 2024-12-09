@@ -221,7 +221,8 @@ If a file path is specified then Papy will look for a JSON file and parse it. Th
 ---
 
 ## Ask The Dev
-For questions or requests you can contact me on LinkedIn or my email.
+For questions you can contact me on LinkedIn or my email. If you have any recommendations maybe even make a PR. Im open to any feedback!
+
 All contact information is listed on my profile.
 
 ---
