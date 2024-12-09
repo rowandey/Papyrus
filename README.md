@@ -361,6 +361,7 @@ Game Name + Tag: bsawatestuser#test
 		- Return the contents as JSON
 
 
+Little present if you read all the way to the end:
 
 <div align="center">
     <img src="https://static.wikia.nocookie.net/sans-nagito/images/1/12/Papyrus.png/revision/latest?cb=20200609055655" alt="AutoGen Logo" width="100">
