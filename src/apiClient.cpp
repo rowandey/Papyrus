@@ -1,9 +1,9 @@
-#include "ApiClient.hpp"
+#include "apiClient.hpp"
 
 using json = nlohmann::json;
 
 // Constructor to initialize the server address
-ApiClient::ApiClient(const std::string& serverAddress) {
+apiClient::apiClient(const std::string& serverAddress) {
     // Determine whether to use HTTP or HTTPS client
     if (serverAddress.find("https://") == 0) {
         sslClient = std::make_unique<httplib::SSLClient>(serverAddress.substr(8)); // Strip "https://"
@@ -14,19 +14,19 @@ ApiClient::ApiClient(const std::string& serverAddress) {
     }
 }
 
-void ApiClient::setEndpoint(const std::string& endpoint) {
+void apiClient::setEndpoint(const std::string& endpoint) {
     this->endpoint = endpoint;
 }
 
-void ApiClient::setParameter(const std::string& parameter) {
+void apiClient::setParameter(const std::string& parameter) {
     this->parameter = parameter;
 }
 
-void ApiClient::setPayload(const json& payload) {
+void apiClient::setPayload(const json& payload) {
     this->payload = payload;
 }
 
-std::string ApiClient::sendGETRequest() {
+std::string apiClient::sendGETRequest() {
     const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
     const std::string requestParameter = parameter.empty() ? "" : parameter;
     std::string requestCombined = requestEndpoint + requestParameter;
@@ -53,7 +53,7 @@ std::string ApiClient::sendGETRequest() {
     return "Error: " + errorToString(res.error());
 }
 
-std::string ApiClient::sendPOSTRequest() {
+std::string apiClient::sendPOSTRequest() {
     const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
     const std::string requestParameter = parameter.empty() ? "" : parameter;
     std::string requestCombined = requestEndpoint + requestParameter;
@@ -85,7 +85,7 @@ std::string ApiClient::sendPOSTRequest() {
     return "Error: " + errorToString(res.error());
 }
 
-std::string ApiClient::errorToString(httplib::Error err) {
+std::string apiClient::errorToString(httplib::Error err) {
     switch (err) {
         case httplib::Error::Success:
             return "Success";

@@ -10,9 +10,9 @@
 
 using json = nlohmann::json;
 
-class ApiClient {
+class apiClient {
 public:
-    explicit ApiClient(const std::string& serverAddress);
+    explicit apiClient(const std::string& serverAddress);
 
     void setEndpoint(const std::string& endpoint);
     void setParameter(const std::string& parameter);
