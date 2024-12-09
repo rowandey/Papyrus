@@ -213,6 +213,10 @@ If `ocean` is set then it will generate a custom pseudo-random payload based off
 
 If a file path is specified then Papy will look for a JSON file and parse it. That parsed JSON will then be used as a body for the payload.
 
+--
+
+## Documentation
+The [User Documentation](docs/userDocumentation.md) and [Developer Documentation](docs/developerDocumentation.md) can provide further information on different aspects of Papy.
 
 ---
 
