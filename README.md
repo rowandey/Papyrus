@@ -301,13 +301,13 @@ function comp {
 ```
 
 Command to run build and execution with a test
-```
+```bash
 sudo g++ main.cpp apiClient.cpp clock.cpp commandLine.cpp match.cpp matchBuilder.cpp myRandom.cpp payloadBuilder.cpp threadWorks.cpp -std=c++23 && ./a.out --threads 1 --target "http://10.0.0.7" --type GET
 ```
 
 Alternatively the following now works as well
 
-```
+```bash
 make rebuild
 or
 make build
@@ -325,11 +325,7 @@ Game Name + Tag: bsawatestuser#test
 
 - Auth
 
-- Write comprehensive documentation
-	- User documentation
-	- Developer documentation
-	- Gather gifs and pictures for documentation
-	- Write documents in markdown in the docs directory
+- Investigate C++ coroutines for faster concurrency
 
 - SSL GET is working, SSL POST needs testing
 	- Best way to test it is most likely getting the PostgreSQL version of M-Track with the updated testing endpoints up on live and running it there.
@@ -375,6 +371,12 @@ Game Name + Tag: bsawatestuser#test
 		- Take in a filepath
 		- Read in the file contents
 		- Return the contents as JSON
+
+- Wrote comprehensive documentation
+	- User documentation
+	- Developer documentation
+	- Gathered gifs and pictures for documentation
+	- Write documents in markdown in the docs directory
 
 
 Little present if you read all the way to the end:
