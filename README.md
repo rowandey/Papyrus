@@ -238,6 +238,22 @@ This section is completely for fun. I named the project based off the latin word
 - I TAKE NO RESPONSIBILITY FOR THE ACTIONS OF USERS OF THIS APPLICATION
 
 ---
+
+## Contributing 🤝
+
+If you would like to contribute to this project it is quite easy (I may be biased since it is my project). Follow the [Getting Started](#getting-started) section and that will get you up and running. 
+
+Regarding actually contributing code, please fork the repository and open a pull request to the `main` branch. I will review it as soon as I can.
+
+My Practices:
+- Naming Variables:
+	- I use camel case for all variable and class names. 
+- Structure:
+	- Each logical fucntion is seperated into its own `.cpp` file with an accompanying `.hpp`.
+	- All sub `.hpp` files are connected to `common.hpp` and that is `#included` into the `main.cpp` file.
+
+---
+
 ### Personal Notes
 
 The directory structure that will be used as a reference will be:
