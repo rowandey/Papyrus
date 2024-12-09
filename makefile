@@ -1,13 +1,13 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++23 -I$(OPENSSL_DIR)/include  # Include OpenSSL headers
-LDFLAGS = -L$(OPENSSL_DIR)/lib -lssl -lcrypto  # Link OpenSSL libraries
+CXXFLAGS = -std=c++23 -I$(OPENSSL_DIR)  # Include local OpenSSL headers
+LDFLAGS = -L$(OPENSSL_DIR) -lssl -lcrypto  # Link local OpenSSL libraries
 
 # Directories
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
-OPENSSL_DIR = openssl
+OPENSSL_DIR = $(SRC_DIR)/openssl/include  # Local OpenSSL directory
 
 # Source files and object files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
