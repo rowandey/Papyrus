@@ -8,8 +8,8 @@ Papy is an open-source framework that lets us rapidly generate a large quantity 
 
 ![Example Papy POST](docs/documentationImages/papyLOL.gif "Example Papy POST")
 
-Why is that other projects dont:
-- Have a simple build process
+Why is it that other projects:
+- Don't have a simple build process
 - Don't have a light weight footprint
 - Don't have an easily portable and self contained codebase
 - Cant send HTTPS AND HTTP traffic
