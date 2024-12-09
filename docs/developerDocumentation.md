@@ -7,14 +7,6 @@
 
 ---
 
-## Title
-Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
-
-### Sub-Title
-Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
-
----
-
 # Developer Documentation
 
 ## Introduction
@@ -42,7 +34,7 @@ Regarding the build process, since the project is relatively simple I did not ne
 
 
 ## Project File Structure
-The project structure is for Papy contains a small set of directories used in the build process and the rest are mainly for organization. The rough structure goes as follows:
+The core project structure for Papy contains a small set of directories used in the build process and the rest are mainly for organization. The rough structure goes as follows:
 
 ```
 Papy/
@@ -83,6 +75,9 @@ The `archive` directory is basically a graveyard of files I might need to revive
 
 ### bin
 Built executables and binaries will be put here
+
+### build
+Build directory used in the build process as defined by the main `makefile` for Papy.
 
 ### obj
 Build objects will be created here and used in the build process and subsequently cleaned up once they are of no use.
