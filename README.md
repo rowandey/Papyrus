@@ -1,15 +1,10 @@
 
 <div align="center">
-    <img src="https://static.wikia.nocookie.net/sans-nagito/images/1/12/Papyrus.png/revision/latest?cb=20200609055655" alt="AutoGen Logo" width="100">
-</div>
-
-
-<div align="center">
 
 # Papy (Papyrus)
 
 </div>
-
+![Example Papy POST](docs/documentationImages/papyLOL.gif "Example Papy POST")
 
 Papy is an open-source framework that lets us rapidly generate a large quantity of semi-random and static JSON data that will be used to test API endpoints that consume those JSON bodies and process the data in their backend. 
 
@@ -28,7 +23,7 @@ Well with Papy we can do ALL OF THAT!!!
 
 Lets get into how we do this...
 
-![Example Papy POST](docs/documentationImages/papyLOL.gif "Example Papy POST")
+
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -365,3 +360,8 @@ Game Name + Tag: bsawatestuser#test
 		- Read in the file contents
 		- Return the contents as JSON
 
+
+
+<div align="center">
+    <img src="https://static.wikia.nocookie.net/sans-nagito/images/1/12/Papyrus.png/revision/latest?cb=20200609055655" alt="AutoGen Logo" width="100">
+</div>
