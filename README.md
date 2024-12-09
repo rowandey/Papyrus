@@ -4,6 +4,7 @@
 # Papy (Papyrus)
 
 </div>
+
 ![Example Papy POST](docs/documentationImages/papyLOL.gif "Example Papy POST")
 
 Papy is an open-source framework that lets us rapidly generate a large quantity of semi-random and static JSON data that will be used to test API endpoints that consume those JSON bodies and process the data in their backend. 
