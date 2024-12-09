@@ -52,21 +52,21 @@ json matchBuilder::randomMatch() {
         participant["champExperience"] = myRandom::generateRandomInt(1, 12576);
         participant["champLevel"] = myRandom::generateRandomInt(1, 18);
         participant["championId"] = myRandom::generateRandomInt(1, 200);
-        participant["championName"] = getRandomChamp();
+        participant["championName"] = getRandomFromJson(championsJson);
 
-        participant["item0"] = getRandomItemFromJson();
-        participant["item1"] = getRandomItemFromJson();
-        participant["item2"] = getRandomItemFromJson();
-        participant["item3"] = getRandomItemFromJson();
-        participant["item4"] = getRandomItemFromJson();
-        participant["item5"] = getRandomItemFromJson();
-        participant["item6"] = getRandomItemFromJson();
+        participant["item0"] = getRandomFromJson(itemsJson);
+        participant["item1"] = getRandomFromJson(itemsJson);
+        participant["item2"] = getRandomFromJson(itemsJson);
+        participant["item3"] = getRandomFromJson(itemsJson);
+        participant["item4"] = getRandomFromJson(itemsJson);
+        participant["item5"] = getRandomFromJson(itemsJson);
+        participant["item6"] = getRandomFromJson(itemsJson);
 
-        participant["summoner1Id"] = getRandomSummonerFromJson();
-        participant["summoner2Id"] = getRandomSummonerFromJson();
+        participant["summoner1Id"] = getRandomFromJson(summonersJson);
+        participant["summoner2Id"] = getRandomFromJson(summonersJson);
 
-        participant["perks"]["styles"][0]["selections"][0]["perk"] = getRandomKeystoneFromJson();
-        participant["perks"]["styles"][1]["style"] = getRandomSecondaryRuneFromJson();
+        participant["perks"]["styles"][0]["selections"][0]["perk"] = getRandomFromJson(keystonesJson);
+        participant["perks"]["styles"][1]["style"] = getRandomFromJson(secondaryRunesJson);
 
         // Random Summoner Name and Riot Account data
         if (isFirstIteration) {
@@ -84,26 +84,6 @@ json matchBuilder::randomMatch() {
     return matchTemplate;
 }
 
-// Static function to get a random item from the items.json file
-std::string matchBuilder::getRandomItemFromJson() {
-    return getRandomFromJson(itemsJson);
-}
-
-// Static function to get a random summoner spell from the summoners.json file
-std::string matchBuilder::getRandomSummonerFromJson() {
-    return getRandomFromJson(summonersJson);
-}
-
-// Static function to get a random keystone from the keystones.json file
-std::string matchBuilder::getRandomKeystoneFromJson() {
-    return getRandomFromJson(keystonesJson);
-}
-
-// Static function to get a random secondary rune from the secondaryRunes.json file
-std::string matchBuilder::getRandomSecondaryRuneFromJson() {
-    return getRandomFromJson(secondaryRunesJson);
-}
-
 // Internal function to remove the first and last characters of a string
 std::string matchBuilder::dropFirstAndLast(const std::string& str) {
     if (str.length() > 2) {
@@ -112,35 +92,34 @@ std::string matchBuilder::dropFirstAndLast(const std::string& str) {
     return ""; // Return an empty string if the input is too short
 }
 
-// Randomly selects a champion from the champions.json file
-std::string matchBuilder::getRandomChamp() {
-    json parsedChamps = json::parse(championsJson);
-    
-    // Collect all champion ids
-    std::vector<std::string> champs;
-    for (auto& champion : parsedChamps["data"].items()) {
-        champs.push_back(champion.value()["id"]);
-    }
-
-    // Generate a random index
-    std::random_device rd;  
-    std::mt19937 gen(rd()); 
-    std::uniform_int_distribution<> distrib(0, champs.size() - 1);
-
-    int randomIndex = distrib(gen);
-
-    return champs[randomIndex]; // Return a random champion id
-}
-
 // Static helper function to get a random key from a given JSON file
 std::string matchBuilder::getRandomFromJson(const std::string& jsonString) {
 
-    json items = json::parse(jsonString);
+    json items;
+
+    try {
+        items = json::parse(jsonString);
+    } catch (const nlohmann::json::parse_error& e) {
+        std::cerr << "JSON Parse Error in getRandomFromJson: " << e.what() << std::endl;
+        return "";
+    }
+
+    // Ensure the JSON is not empty
+    if (items.empty()) {
+        std::cerr << "Error: items JSON is empty!" << std::endl;
+        return "";
+    }
 
     // Collect all keys
     std::vector<std::string> keys;
     for (auto it = items.begin(); it != items.end(); ++it) {
         keys.push_back(it.key());
+    }
+
+    // Check if the keys vector is empty
+    if (keys.empty()) {
+        std::cerr << "Error: No keys available in JSON object." << std::endl;
+        return "";
     }
 
     // Generate a random index

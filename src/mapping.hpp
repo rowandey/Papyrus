@@ -554,686 +554,175 @@ const std::string itemsJson = R"(
 
 const std::string championsJson = R"(
 {
-  "type":"champion",
-  "format":"standAloneComplex",
-  "data":{
-     "Aatrox":{
-        "id":"Aatrox",
-        "key":"266"
-     },
-     "Ahri":{
-        "id":"Ahri",
-        "key":"103"
-     },
-     "Akali":{
-        "id":"Akali",
-        "key":"84"
-     },
-     "Akshan":{
-        "id":"Akshan",
-        "key":"166"
-     },
-     "Alistar":{
-        "id":"Alistar",
-        "key":"12"
-     },
-     "Ambessa":{
-        "id":"Ambessa",
-        "key":"799"
-     },
-     "Amumu":{
-        "id":"Amumu",
-        "key":"32"
-     },
-     "Anivia":{
-        "id":"Anivia",
-        "key":"34"
-     },
-     "Annie":{
-        "id":"Annie",
-        "key":"1"
-     },
-     "Aphelios":{
-        "id":"Aphelios",
-        "key":"523"
-     },
-     "Ashe":{
-        "id":"Ashe",
-        "key":"22"
-     },
-     "AurelionSol":{
-        "id":"AurelionSol",
-        "key":"136"
-     },
-     "Aurora":{
-        "id":"Aurora",
-        "key":"893"
-     },
-     "Azir":{
-        "id":"Azir",
-        "key":"268"
-     },
-     "Bard":{
-        "id":"Bard",
-        "key":"432"
-     },
-     "Belveth":{
-        "id":"Belveth",
-        "key":"200"
-     },
-     "Blitzcrank":{
-        "id":"Blitzcrank",
-        "key":"53"
-     },
-     "Brand":{
-        "id":"Brand",
-        "key":"63"
-     },
-     "Braum":{
-        "id":"Braum",
-        "key":"201"
-     },
-     "Briar":{
-        "id":"Briar",
-        "key":"233"
-     },
-     "Caitlyn":{
-        "id":"Caitlyn",
-        "key":"51"
-     },
-     "Camille":{
-        "id":"Camille",
-        "key":"164"
-     },
-     "Cassiopeia":{
-        "id":"Cassiopeia",
-        "key":"69"
-     },
-     "Chogath":{
-        "id":"Chogath",
-        "key":"31"
-     },
-     "Corki":{
-        "id":"Corki",
-        "key":"42"
-     },
-     "Darius":{
-        "id":"Darius",
-        "key":"122"
-     },
-     "Diana":{
-        "id":"Diana",
-        "key":"131"
-     },
-     "Draven":{
-        "id":"Draven",
-        "key":"119"
-     },
-     "DrMundo":{
-        "id":"DrMundo",
-        "key":"36"
-     },
-     "Ekko":{
-        "id":"Ekko",
-        "key":"245"
-     },
-     "Elise":{
-        "id":"Elise",
-        "key":"60"
-     },
-     "Evelynn":{
-        "id":"Evelynn",
-        "key":"28"
-     },
-     "Ezreal":{
-        "id":"Ezreal",
-        "key":"81"
-     },
-     "Fiddlesticks":{
-        "id":"Fiddlesticks",
-        "key":"9"
-     },
-     "Fiora":{
-        "id":"Fiora",
-        "key":"114"
-     },
-     "Fizz":{
-        "id":"Fizz",
-        "key":"105"
-     },
-     "Galio":{
-        "id":"Galio",
-        "key":"3"
-     },
-     "Gangplank":{
-        "id":"Gangplank",
-        "key":"41"
-     },
-     "Garen":{
-        "id":"Garen",
-        "key":"86"
-     },
-     "Gnar":{
-        "id":"Gnar",
-        "key":"150"
-     },
-     "Gragas":{
-        "id":"Gragas",
-        "key":"79"
-     },
-     "Graves":{
-        "id":"Graves",
-        "key":"104"
-     },
-     "Gwen":{
-        "id":"Gwen",
-        "key":"887"
-     },
-     "Hecarim":{
-        "id":"Hecarim",
-        "key":"120"
-     },
-     "Heimerdinger":{
-        "id":"Heimerdinger",
-        "key":"74"
-     },
-     "Hwei":{
-        "id":"Hwei",
-        "key":"910"
-     },
-     "Illaoi":{
-        "id":"Illaoi",
-        "key":"420"
-     },
-     "Irelia":{
-        "id":"Irelia",
-        "key":"39"
-     },
-     "Ivern":{
-        "id":"Ivern",
-        "key":"427"
-     },
-     "Janna":{
-        "id":"Janna",
-        "key":"40"
-     },
-     "JarvanIV":{
-        "id":"JarvanIV",
-        "key":"59"
-     },
-     "Jax":{
-        "id":"Jax",
-        "key":"24"
-     },
-     "Jayce":{
-        "id":"Jayce",
-        "key":"126"
-     },
-     "Jhin":{
-        "id":"Jhin",
-        "key":"202"
-     },
-     "Jinx":{
-        "id":"Jinx",
-        "key":"222"
-     },
-     "Kaisa":{
-        "id":"Kaisa",
-        "key":"145"
-     },
-     "Kalista":{
-        "id":"Kalista",
-        "key":"429"
-     },
-     "Karma":{
-        "id":"Karma",
-        "key":"43"
-     },
-     "Karthus":{
-        "id":"Karthus",
-        "key":"30"
-     },
-     "Kassadin":{
-        "id":"Kassadin",
-        "key":"38"
-     },
-     "Katarina":{
-        "id":"Katarina",
-        "key":"55"
-     },
-     "Kayle":{
-        "id":"Kayle",
-        "key":"10"
-     },
-     "Kayn":{
-        "id":"Kayn",
-        "key":"141"
-     },
-     "Kennen":{
-        "id":"Kennen",
-        "key":"85"
-     },
-     "Khazix":{
-        "id":"Khazix",
-        "key":"121"
-     },
-     "Kindred":{
-        "id":"Kindred",
-        "key":"203"
-     },
-     "Kled":{
-        "id":"Kled",
-        "key":"240"
-     },
-     "KogMaw":{
-        "id":"KogMaw",
-        "key":"96"
-     },
-     "KSante":{
-        "id":"KSante",
-        "key":"897"
-     },
-     "Leblanc":{
-        "id":"Leblanc",
-        "key":"7"
-     },
-     "LeeSin":{
-        "id":"LeeSin",
-        "key":"64"
-     },
-     "Leona":{
-        "id":"Leona",
-        "key":"89"
-     },
-     "Lillia":{
-        "id":"Lillia",
-        "key":"876"
-     },
-     "Lissandra":{
-        "id":"Lissandra",
-        "key":"127"
-     },
-     "Lucian":{
-        "id":"Lucian",
-        "key":"236"
-     },
-     "Lulu":{
-        "id":"Lulu",
-        "key":"117"
-     },
-     "Lux":{
-        "id":"Lux",
-        "key":"99"
-     },
-     "Malphite":{
-        "id":"Malphite",
-        "key":"54"
-     },
-     "Malzahar":{
-        "id":"Malzahar",
-        "key":"90"
-     },
-     "Maokai":{
-        "id":"Maokai",
-        "key":"57"
-     },
-     "MasterYi":{
-        "id":"MasterYi",
-        "key":"11"
-     },
-     "Milio":{
-        "id":"Milio",
-        "key":"902"
-     },
-     "MissFortune":{
-        "id":"MissFortune",
-        "key":"21"
-     },
-     "MonkeyKing":{
-        "id":"MonkeyKing",
-        "key":"62"
-     },
-     "Mordekaiser":{
-        "id":"Mordekaiser",
-        "key":"82"
-     },
-     "Morgana":{
-        "id":"Morgana",
-        "key":"25"
-     },
-     "Naafiri":{
-        "id":"Naafiri",
-        "key":"950"
-     },
-     "Nami":{
-        "id":"Nami",
-        "key":"267"
-     },
-     "Nasus":{
-        "id":"Nasus",
-        "key":"75"
-     },
-     "Nautilus":{
-        "id":"Nautilus",
-        "key":"111"
-     },
-     "Neeko":{
-        "id":"Neeko",
-        "key":"518"
-     },
-     "Nidalee":{
-        "id":"Nidalee",
-        "key":"76"
-     },
-     "Nilah":{
-        "id":"Nilah",
-        "key":"895"
-     },
-     "Nocturne":{
-        "id":"Nocturne",
-        "key":"56"
-     },
-     "Nunu":{
-        "id":"Nunu",
-        "key":"20"
-     },
-     "Olaf":{
-        "id":"Olaf",
-        "key":"2"
-     },
-     "Orianna":{
-        "id":"Orianna",
-        "key":"61"
-     },
-     "Ornn":{
-        "id":"Ornn",
-        "key":"516"
-     },
-     "Pantheon":{
-        "id":"Pantheon",
-        "key":"80"
-     },
-     "Poppy":{
-        "id":"Poppy",
-        "key":"78"
-     },
-     "Pyke":{
-        "id":"Pyke",
-        "key":"555"
-     },
-     "Qiyana":{
-        "id":"Qiyana",
-        "key":"246"
-     },
-     "Quinn":{
-        "id":"Quinn",
-        "key":"133"
-     },
-     "Rakan":{
-        "id":"Rakan",
-        "key":"497"
-     },
-     "Rammus":{
-        "id":"Rammus",
-        "key":"33"
-     },
-     "RekSai":{
-        "id":"RekSai",
-        "key":"421"
-     },
-     "Rell":{
-        "id":"Rell",
-        "key":"526"
-     },
-     "Renata":{
-        "id":"Renata",
-        "key":"888"
-     },
-     "Renekton":{
-        "id":"Renekton",
-        "key":"58"
-     },
-     "Rengar":{
-        "id":"Rengar",
-        "key":"107"
-     },
-     "Riven":{
-        "id":"Riven",
-        "key":"92"
-     },
-     "Rumble":{
-        "id":"Rumble",
-        "key":"68"
-     },
-     "Ryze":{
-        "id":"Ryze",
-        "key":"13"
-     },
-     "Samira":{
-        "id":"Samira",
-        "key":"360"
-     },
-     "Sejuani":{
-        "id":"Sejuani",
-        "key":"113"
-     },
-     "Senna":{
-        "id":"Senna",
-        "key":"235"
-     },
-     "Seraphine":{
-        "id":"Seraphine",
-        "key":"147"
-     },
-     "Sett":{
-        "id":"Sett",
-        "key":"875"
-     },
-     "Shaco":{
-        "id":"Shaco",
-        "key":"35"
-     },
-     "Shen":{
-        "id":"Shen",
-        "key":"98"
-     },
-     "Shyvana":{
-        "id":"Shyvana",
-        "key":"102"
-     },
-     "Singed":{
-        "id":"Singed",
-        "key":"27"
-     },
-     "Sion":{
-        "id":"Sion",
-        "key":"14"
-     },
-     "Sivir":{
-        "id":"Sivir",
-        "key":"15"
-     },
-     "Skarner":{
-        "id":"Skarner",
-        "key":"72"
-     },
-     "Smolder":{
-        "id":"Smolder",
-        "key":"901"
-     },
-     "Sona":{
-        "id":"Sona",
-        "key":"37"
-     },
-     "Soraka":{
-        "id":"Soraka",
-        "key":"16"
-     },
-     "Swain":{
-        "id":"Swain",
-        "key":"50"
-     },
-     "Sylas":{
-        "id":"Sylas",
-        "key":"517"
-     },
-     "Syndra":{
-        "id":"Syndra",
-        "key":"134"
-     },
-     "TahmKench":{
-        "id":"TahmKench",
-        "key":"223"
-     },
-     "Taliyah":{
-        "id":"Taliyah",
-        "key":"163"
-     },
-     "Talon":{
-        "id":"Talon",
-        "key":"91"
-     },
-     "Taric":{
-        "id":"Taric",
-        "key":"44"
-     },
-     "Teemo":{
-        "id":"Teemo",
-        "key":"17"
-     },
-     "Thresh":{
-        "id":"Thresh",
-        "key":"412"
-     },
-     "Tristana":{
-        "id":"Tristana",
-        "key":"18"
-     },
-     "Trundle":{
-        "id":"Trundle",
-        "key":"48"
-     },
-     "Tryndamere":{
-        "id":"Tryndamere",
-        "key":"23"
-     },
-     "TwistedFate":{
-        "id":"TwistedFate",
-        "key":"4"
-     },
-     "Twitch":{
-        "id":"Twitch",
-        "key":"29"
-     },
-     "Udyr":{
-        "id":"Udyr",
-        "key":"77"
-     },
-     "Urgot":{
-        "id":"Urgot",
-        "key":"6"
-     },
-     "Varus":{
-        "id":"Varus",
-        "key":"110"
-     },
-     "Vayne":{
-        "id":"Vayne",
-        "key":"67"
-     },
-     "Veigar":{
-        "id":"Veigar",
-        "key":"45"
-     },
-     "Velkoz":{
-        "id":"Velkoz",
-        "key":"161"
-     },
-     "Vex":{
-        "id":"Vex",
-        "key":"711"
-     },
-     "Vi":{
-        "id":"Vi",
-        "key":"254"
-     },
-     "Viego":{
-        "id":"Viego",
-        "key":"234"
-     },
-     "Viktor":{
-        "id":"Viktor",
-        "key":"112"
-     },
-     "Vladimir":{
-        "id":"Vladimir",
-        "key":"8"
-     },
-     "Volibear":{
-        "id":"Volibear",
-        "key":"106"
-     },
-     "Warwick":{
-        "id":"Warwick",
-        "key":"19"
-     },
-     "Xayah":{
-        "id":"Xayah",
-        "key":"498"
-     },
-     "Xerath":{
-        "id":"Xerath",
-        "key":"101"
-     },
-     "XinZhao":{
-        "id":"XinZhao",
-        "key":"5"
-     },
-     "Yasuo":{
-        "id":"Yasuo",
-        "key":"157"
-     },
-     "Yone":{
-        "id":"Yone",
-        "key":"777"
-     },
-     "Yorick":{
-        "id":"Yorick",
-        "key":"83"
-     },
-     "Yuumi":{
-        "id":"Yuumi",
-        "key":"350"
-     },
-     "Zac":{
-        "id":"Zac",
-        "key":"154"
-     },
-     "Zed":{
-        "id":"Zed",
-        "key":"238"
-     },
-     "Zeri":{
-        "id":"Zeri",
-        "key":"221"
-     },
-     "Ziggs":{
-        "id":"Ziggs",
-        "key":"115"
-     },
-     "Zilean":{
-        "id":"Zilean",
-        "key":"26"
-     },
-     "Zoe":{
-        "id":"Zoe",
-        "key":"142"
-     },
-     "Zyra":{
-        "id":"Zyra",
-        "key":"143"
-     }
-  }
+   "Aatrox": "266",
+   "Ahri": "103",
+   "Akali": "84",
+   "Akshan": "166",
+   "Alistar": "12",
+   "Ambessa": "799",
+   "Amumu": "32",
+   "Anivia": "34",
+   "Annie": "1",
+   "Aphelios": "523",
+   "Ashe": "22",
+   "AurelionSol": "136",
+   "Aurora": "893",
+   "Azir": "268",
+   "Bard": "432",
+   "Belveth": "200",
+   "Blitzcrank": "53",
+   "Brand": "63",
+   "Braum": "201",
+   "Briar": "233",
+   "Caitlyn": "51",
+   "Camille": "164",
+   "Cassiopeia": "69",
+   "Chogath": "31",
+   "Corki": "42",
+   "Darius": "122",
+   "Diana": "131",
+   "Draven": "119",
+   "DrMundo": "36",
+   "Ekko": "245",
+   "Elise": "60",
+   "Evelynn": "28",
+   "Ezreal": "81",
+   "Fiddlesticks": "9",
+   "Fiora": "114",
+   "Fizz": "105",
+   "Galio": "3",
+   "Gangplank": "41",
+   "Garen": "86",
+   "Gnar": "150",
+   "Gragas": "79",
+   "Graves": "104",
+   "Gwen": "887",
+   "Hecarim": "120",
+   "Heimerdinger": "74",
+   "Hwei": "910",
+   "Illaoi": "420",
+   "Irelia": "39",
+   "Ivern": "427",
+   "Janna": "40",
+   "JarvanIV": "59",
+   "Jax": "24",
+   "Jayce": "126",
+   "Jhin": "202",
+   "Jinx": "222",
+   "Kaisa": "145",
+   "Kalista": "429",
+   "Karma": "43",
+   "Karthus": "30",
+   "Kassadin": "38",
+   "Katarina": "55",
+   "Kayle": "10",
+   "Kayn": "141",
+   "Kennen": "85",
+   "Khazix": "121",
+   "Kindred": "203",
+   "Kled": "240",
+   "KogMaw": "96",
+   "KSante": "897",
+   "Leblanc": "7",
+   "LeeSin": "64",
+   "Leona": "89",
+   "Lillia": "876",
+   "Lissandra": "127",
+   "Lucian": "236",
+   "Lulu": "117",
+   "Lux": "99",
+   "Malphite": "54",
+   "Malzahar": "90",
+   "Maokai": "57",
+   "MasterYi": "11",
+   "Milio": "902",
+   "MissFortune": "21",
+   "MonkeyKing": "62",
+   "Mordekaiser": "82",
+   "Morgana": "25",
+   "Naafiri": "950",
+   "Nami": "267",
+   "Nasus": "75",
+   "Nautilus": "111",
+   "Neeko": "518",
+   "Nidalee": "76",
+   "Nilah": "895",
+   "Nocturne": "56",
+   "Nunu": "20",
+   "Olaf": "2",
+   "Orianna": "61",
+   "Ornn": "516",
+   "Pantheon": "80",
+   "Poppy": "78",
+   "Pyke": "555",
+   "Qiyana": "246",
+   "Quinn": "133",
+   "Rakan": "497",
+   "Rammus": "33",
+   "RekSai": "421",
+   "Rell": "526",
+   "Renata": "888",
+   "Renekton": "58",
+   "Rengar": "107",
+   "Riven": "92",
+   "Rumble": "68",
+   "Ryze": "13",
+   "Samira": "360",
+   "Sejuani": "113",
+   "Senna": "235",
+   "Seraphine": "147",
+   "Sett": "875",
+   "Shaco": "35",
+   "Shen": "98",
+   "Shyvana": "102",
+   "Singed": "27",
+   "Sion": "14",
+   "Sivir": "15",
+   "Skarner": "72",
+   "Smolder": "901",
+   "Sona": "37",
+   "Soraka": "16",
+   "Swain": "50",
+   "Sylas": "517",
+   "Syndra": "134",
+   "TahmKench": "223",
+   "Taliyah": "163",
+   "Talon": "91",
+   "Taric": "44",
+   "Teemo": "17",
+   "Thresh": "412",
+   "Tristana": "18",
+   "Trundle": "48",
+   "Tryndamere": "23",
+   "TwistedFate": "4",
+   "Twitch": "29",
+   "Udyr": "77",
+   "Urgot": "6",
+   "Varus": "110",
+   "Vayne": "67",
+   "Veigar": "45",
+   "Velkoz": "161",
+   "Vex": "711",
+   "Vi": "254",
+   "Viego": "234",
+   "Viktor": "112",
+   "Vladimir": "8",
+   "Volibear": "106",
+   "Warwick": "19",
+   "Xayah": "498",
+   "Xerath": "101",
+   "XinZhao": "5",
+   "Yasuo": "157",
+   "Yone": "777",
+   "Yorick": "83",
+   "Yuumi": "350",
+   "Zac": "154",
+   "Zed": "238",
+   "Zeri": "221",
+   "Ziggs": "115",
+   "Zilean": "26",
+   "Zoe": "142",
+   "Zyra": "143"
 }
 )";
 
