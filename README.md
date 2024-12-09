@@ -28,6 +28,7 @@ Well with Papy we can do ALL OF THAT!!!
 
 Lets get into how we do this...
 
+![Example Papy POST](docs/documentationImages/papyLOL.gif "Example Papy POST")
 
 ## Table of Contents
 1. [Introduction](#introduction)
