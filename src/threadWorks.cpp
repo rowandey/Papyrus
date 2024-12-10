@@ -31,7 +31,7 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
         response = client.sendPOSTRequest();
     } else if (payload == "ocean") {
         oceanBuilder myOcean;
-        client.setPayload(myOcean.randomOcean().dump(4));
+        client.setPayload(myOcean.randomOcean());
         response = client.sendPOSTRequest();
     } else {
         std::ifstream f(payload);

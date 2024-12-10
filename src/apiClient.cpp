@@ -68,16 +68,18 @@ std::string apiClient::sendPOSTRequest() {
     httplib::Result res;
     
     if (sslClient) {
+        sslClient->set_read_timeout(7, 0);
+        sslClient->set_write_timeout(7, 0);
         res = sslClient->Post(requestCombined.c_str(), payload.dump(), "application/json");
     } else if (client) {
         res = client->Post(requestCombined.c_str(), payload.dump(), "application/json");
     } else {
         std::cout << "Neither client nor sslClient is initialized." << std::endl;
     }
-
+    
     if (res) {
         if (res->status == 200) {
-            return "200"; // Return the response body
+            return "200";
         } else {
             return "Server returned error: " + std::to_string(res->status);
         }

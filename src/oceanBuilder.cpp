@@ -13,9 +13,10 @@ json oceanBuilder::randomOcean() {
         std::cerr << "JSON Parse Error: " << e.what() << std::endl;
         // Handle the error or return early
     }
-
-    oceanTemplate["overrides"]["business_unit"]["name"] = getRandomFromJson();
-    oceanTemplate["overrides"]["application"]["name"] = getRandomFromJson();
+    
+    oceanTemplate["overrides"]["business_unit"]["name"] = "Papy Test";
+    // oceanTemplate["overrides"]["business_unit"]["name"] = getRandomFromJson();
+    oceanTemplate["overrides"]["application"]["name"] = myRandom::generateRandomString(7);
     oceanTemplate["overrides"]["project"]["name"] = getRandomFromJson();
 
     return oceanTemplate;
