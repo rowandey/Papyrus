@@ -40,12 +40,10 @@ std::string apiClient::sendGETRequest() {
     } else {
         std::cout << "Neither client nor sslClient is initialized." << std::endl;
     }
-    // auto res = client->Get(requestCombined.c_str());
 
     if (res) {
         if (res->status == 200) {
             return "200";
-            // return res->body; // Return the response body
         } else {
             return "Server returned error: " + std::to_string(res->status);
         }

@@ -24,6 +24,7 @@ long long MillisecondClock::elapsedMilliseconds() {
 }
 
 // Reset the clock to start counting from the current time
+// Used in calculating packets per second
 void MillisecondClock::resetClock() {
     currentStart = std::chrono::high_resolution_clock::now();
 }
@@ -49,7 +50,6 @@ int cliHelper::parseIntArg(const char* arg, const std::string& flagName) {
 }
 
 void cliHelper::printBanner () {
-    // Display program info
     std::cout << "==========================================" << std::endl;
     std::cout << " ____   _    ______   ______  _   _ ____  " << std::endl;
     std::cout << "|  _ \\ / \\  |  _ \\ \\ / /  _ \\| | | / ___| " << std::endl;
@@ -102,7 +102,6 @@ void cliHelper::parseArguments(int argc, char* argv[], int& numThreads, int& pay
     if (target.empty()) throw std::runtime_error("Error: Target URL is required.");
 }
 
-// TODO: Add the new flags created like --spike --ramp and all the others
 // Function to display help message
 void cliHelper::displayHelp() {
     std::cout << "Usage: ./program [options] {value}\n"

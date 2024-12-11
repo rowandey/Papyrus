@@ -5,8 +5,7 @@ std::atomic<bool> threadWorks::isProgramActive(true);
 std::mutex threadWorks::consoleMutex;
 std::atomic<int> threadWorks::totalPayloadsSent(0);
 std::atomic<int> threadWorks::totalPayloadsSuccessful(0);
-std::atomic<int> threadWorks::pastSecondPackets(0);
-std::atomic<float> threadWorks::pastSecondHighest(0);
+std::atomic<float> threadWorks::packetsPerSecond(0);
 
 // Static signal handler function
 void threadWorks::signalHandler(int signal) {
@@ -39,22 +38,23 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
         client.setPayload(jsonPayload);
         response = client.sendPOSTRequest();
     }
-    
-    // Mutex guarded packets per second calculations
-    std::lock_guard<std::mutex> guard(consoleMutex);
-    if (clock.perSecondCheck() >= 1000) {
-        if (pastSecondPackets > pastSecondHighest.load(std::memory_order_relaxed)) {
-            pastSecondHighest.store(pastSecondPackets, std::memory_order_relaxed);
-        }
-        pastSecondPackets = 0;
-        clock.resetClock();
-    }
+
 
     if (verbose) {
         std::cout << "Response: " << response << std::endl;
     } else {
         totalPayloadsSent++;
-        pastSecondPackets++;
+
+        // Mutex guarded packets per second calculations
+        std::lock_guard<std::mutex> guard(consoleMutex);
+        // Prevent division by zero
+        long long elapsedSec = clock.elapsedMilliseconds() / 1000;
+        if (elapsedSec > 0) {
+            packetsPerSecond = totalPayloadsSent / static_cast<float>(elapsedSec);
+        } else {
+            packetsPerSecond = 0; // Default value if elapsed time is too short
+        }
+
         if (response == "200") {
             totalPayloadsSuccessful++;
         }
@@ -63,12 +63,13 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
         std::cout << "\rTotal Sent: " << totalPayloadsSent
                   << " | Successful: " << totalPayloadsSuccessful
                   << " | Failed: " << (totalPayloadsSent - totalPayloadsSuccessful)
-                  << " | Packets/s: " << pastSecondHighest
+                  << " | Packets/s: " << packetsPerSecond
                   << " | Elapsed Time: " << clock.elapsedMilliseconds()
                   << std::flush;  // Ensure everything is written immediately to avoid any delay
     }
 }
 
+// Orchestrates the sending of requests and main loop for program
 void threadWorks::runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string parameter) {
     MillisecondClock clock;
     matchBuilder randMatch;

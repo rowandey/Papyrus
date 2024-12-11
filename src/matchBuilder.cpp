@@ -2,10 +2,7 @@
 
 using json = nlohmann::json;
 
-json matchBuilder::randomMatch() {
-    // TODO: Test if JSON string literals in mapping.hpp work if they are passed to the JSON parser 
-    //  rather than using filesteam targetting a json file
-    
+json matchBuilder::randomMatch() {   
     json matchTemplate;
     try {
         matchTemplate = json::parse(matchTemplateJson);
@@ -86,9 +83,7 @@ json matchBuilder::randomMatch() {
 
 // Internal function to remove the first and last characters of a string
 std::string matchBuilder::dropFirstAndLast(const std::string& str) {
-    if (str.length() > 2) {
-        return str.substr(1, str.length() - 2);
-    }
+    if (str.length() > 2) { return str.substr(1, str.length() - 2); }
     return ""; // Return an empty string if the input is too short
 }
 

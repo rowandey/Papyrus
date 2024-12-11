@@ -3,9 +3,6 @@
 using json = nlohmann::json;
 
 json oceanBuilder::randomOcean() {
-    // TODO: Test if JSON string literals in mapping.hpp work if they are passed to the JSON parser 
-    //  rather than using filesteam targetting a json file
-    
     json oceanTemplate;
     try {
         oceanTemplate = json::parse(oceanPayloadTemplate);
@@ -24,9 +21,7 @@ json oceanBuilder::randomOcean() {
 
 // Internal function to remove the first and last characters of a string
 std::string oceanBuilder::dropFirstAndLast(const std::string& str) {
-    if (str.length() > 2) {
-        return str.substr(1, str.length() - 2);
-    }
+    if (str.length() > 2) { return str.substr(1, str.length() - 2); }
     return ""; // Return an empty string if the input is too short
 }
 
