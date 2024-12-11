@@ -325,8 +325,6 @@ Game Name + Tag: bsawatestuser#test
 
 - Auth
 
-- More accurate counter
-
 - Investigate C++ coroutines for faster concurrency
 
 - SSL GET is working, SSL POST needs testing
