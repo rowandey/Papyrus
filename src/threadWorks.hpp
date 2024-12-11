@@ -20,7 +20,7 @@ public:
     static std::mutex consoleMutex;                      // Used in the signal handler
     static std::atomic<int> totalPayloadsSent;           // Shared across threads
     static std::atomic<int> totalPayloadsSuccessful;     // Shared across threads
-    static std::atomic<float> packetsPerSecond;          // Shared across threads
+    static std::atomic<int> packetsPerSecond;          // Shared across threads
 
     // Signal handler to stop the program
     static void signalHandler(int signal);

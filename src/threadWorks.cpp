@@ -5,7 +5,7 @@ std::atomic<bool> threadWorks::isProgramActive(true);
 std::mutex threadWorks::consoleMutex;
 std::atomic<int> threadWorks::totalPayloadsSent(0);
 std::atomic<int> threadWorks::totalPayloadsSuccessful(0);
-std::atomic<float> threadWorks::packetsPerSecond(0);
+std::atomic<int> threadWorks::packetsPerSecond(0);
 
 // Static signal handler function
 void threadWorks::signalHandler(int signal) {
@@ -39,7 +39,6 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
         response = client.sendPOSTRequest();
     }
 
-
     if (verbose) {
         std::cout << "Response: " << response << std::endl;
     } else {
@@ -47,10 +46,11 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
 
         // Mutex guarded packets per second calculations
         std::lock_guard<std::mutex> guard(consoleMutex);
-        // Prevent division by zero
-        long long elapsedSec = clock.elapsedMilliseconds() / 1000;
+
+        // You can run it for two days before you get an integer overflow LOL
+        int elapsedSec = clock.elapsedMilliseconds() / 1000;
         if (elapsedSec > 0) {
-            packetsPerSecond = totalPayloadsSent / static_cast<float>(elapsedSec);
+            packetsPerSecond = totalPayloadsSent / elapsedSec;
         } else {
             packetsPerSecond = 0; // Default value if elapsed time is too short
         }
@@ -58,6 +58,8 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
         if (response == "200") {
             totalPayloadsSuccessful++;
         }
+
+        std::cout << "\r" << std::string(100 , ' ') << "\r" ;
 
         // Print updated info on the same line
         std::cout << "\rTotal Sent: " << totalPayloadsSent
