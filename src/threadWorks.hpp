@@ -21,7 +21,7 @@ public:
     static std::atomic<int> totalPayloadsSent;           // Shared across threads
     static std::atomic<int> totalPayloadsSuccessful;     // Shared across threads
     static std::atomic<int> pastSecondPackets;           // Shared across threads
-    static std::atomic<int> pastSecondHighest;           // Shared across threads
+    static std::atomic<float> pastSecondHighest;           // Shared across threads
 
     // Signal handler to stop the program
     static void signalHandler(int signal);
