@@ -4356,3 +4356,467 @@ const std::string sportsCars = R"(
   "99": "Ford Escort RS Cosworth"
 }
 )";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const std::string matchTemplateJsonMinified = R"(
+{"metadata":{"matchId":"NA1_5145792127"},"info":{"gameCreation":1730593150712,"gameDuration":1339,"gameEndTimestamp":1730594505293,"gameId":5145792127,"participants":[{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"},{"assists":"<PLACEHOLDER>","champExperience":"<PLACEHOLDER>","champLevel":"<PLACEHOLDER>","championId":"<PLACEHOLDER>","championName":"<PLACEHOLDER>","deaths":"<PLACEHOLDER>","goldEarned":"<PLACEHOLDER>","item0":"<PLACEHOLDER>","item1":"<PLACEHOLDER>","item2":"<PLACEHOLDER>","item3":"<PLACEHOLDER>","item4":"<PLACEHOLDER>","item5":"<PLACEHOLDER>","item6":"<PLACEHOLDER>","kills":"<PLACEHOLDER>","perks":{"styles":[{"selections":[{"perk":"<PLACEHOLDER>"}]},{"style":"<PLACEHOLDER>"}]},"riotIdGameName":"<PLACEHOLDER>","riotIdTagline":"<PLACEHOLDER>","summoner1Id":"<PLACEHOLDER>","totalMinionsKilled":"<PLACEHOLDER>","totalAllyJungleMinionsKilled":"<PLACEHOLDER>","totalEnemyJungleMinionsKilled":"<PLACEHOLDER>","summoner2Id":"<PLACEHOLDER>","summonerName":"<PLACEHOLDER>","totalDamageDealtToChampions":"<PLACEHOLDER>","win":"<PLACEHOLDER>"}]}}
+)";
+
+
+
+const std::string matchTemplateJsonShortened = R"(
+{
+    "metadata": {
+        "matchId": "NA1_5145792127"
+    },
+    "info": {
+        "gameCreation": 1730593150712,
+        "gameDuration": 1339,
+        "gameEndTimestamp": 1730594505293,
+        "gameId": 5145792127,
+        "participants": [
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            },
+            {
+                "assists": "<PLACEHOLDER>",
+                "champExperience": "<PLACEHOLDER>",
+                "champLevel": "<PLACEHOLDER>",
+                "championId": "<PLACEHOLDER>",
+                "championName": "<PLACEHOLDER>",
+                "deaths": "<PLACEHOLDER>",
+                "goldEarned": "<PLACEHOLDER>",
+                "item0": "<PLACEHOLDER>",
+                "item1": "<PLACEHOLDER>",
+                "item2": "<PLACEHOLDER>",
+                "item3": "<PLACEHOLDER>",
+                "item4": "<PLACEHOLDER>",
+                "item5": "<PLACEHOLDER>",
+                "item6": "<PLACEHOLDER>",
+                "kills": "<PLACEHOLDER>",
+                "perks": {
+                    "styles": [
+                        {
+                            "selections": [
+                                {
+                                    "perk": "<PLACEHOLDER>"
+                                }
+                            ],
+                        },
+                        {
+                            "style": "<PLACEHOLDER>"
+                        }
+                    ]
+                },
+                "riotIdGameName": "<PLACEHOLDER>",
+                "riotIdTagline": "<PLACEHOLDER>",
+                "summoner1Id": "<PLACEHOLDER>",
+                "totalMinionsKilled": "<PLACEHOLDER>",
+                "totalAllyJungleMinionsKilled": "<PLACEHOLDER>",
+                "totalEnemyJungleMinionsKilled": "<PLACEHOLDER>",
+                "summoner2Id": "<PLACEHOLDER>",
+                "summonerName": "<PLACEHOLDER>",
+                "totalDamageDealtToChampions": "<PLACEHOLDER>",
+                "win": false
+            }
+        ]
+    }
+}
+)";

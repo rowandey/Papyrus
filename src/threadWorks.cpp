@@ -59,8 +59,8 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
             totalPayloadsSuccessful++;
         }
 
+        // TODO: This line prints a new line on Mac?
         std::cout << "\r" << std::string(100 , ' ') << "\r" ;
-
         // Print updated info on the same line
         std::cout << "\rTotal Sent: " << totalPayloadsSent
                   << " | Successful: " << totalPayloadsSuccessful
