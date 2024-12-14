@@ -4392,7 +4392,19 @@ const std::string sportsCars = R"(
 const std::string matchTemplateJsonMinified = R"(
 {
   "metadata": {
-    "matchId": "NA1_5145792127"
+    "matchId": "NA1_5145792127",
+    "participants": [
+            "KOoUw3saDj7oRcxBRg-TcfhZAljqeKxx-2TiWXCeL2GnAJv96FNrPuyk-wCfqaoaIB-7UDloBYPjKA",
+            "BmvxukXtM3Hibb35XTFiCSXermhSls_NpAU6dEanq8gl3Rkv_PLTfNRVhXoI9Wtz-aPuJJHd-6ZIcw",
+            "zyC8IZTyqys09axqJ_asCHm4ixeibmB0Na1M7oAZsc5gfcxNybKdEG-uXN5CyE0kvMgWxkeuiX8MBA",
+            "HgWwc6_3QYsDbqi4TmEMdhscy7MDTAIr2iBEoh8Nn-HkqHhe1PZDh442GuUNa6ipV8dqgJUNN2KlpQ",
+            "NxMkIOXNd6R9yw5mBYDmtOKtezuncNbk47wzjiJM4ceMT9vl2zcdFJA_mju-vUJzG4lrTvGv8Jvluw",
+            "P3yk6p4CAkgEmj95_z8HcSOE2Gr28GYvhvCKMsnwiBClMpeColdNiqNft1lbf48wLBHVi175fVIGLg",
+            "gy9yJBWgXHveXQrfIAZavHOVN1P43hiRsEvSupkk-5yQ2ama8KE7sxRz80vZ8hFsbzy4UTabeqHBHQ",
+            "guoyUTvltKgL6GeWftdxiO9Deh8tJqKsR-2dqNaEV5gY94bbUZokCI1OgFaTOT80JZLzU4r4MdXF9Q",
+            "8WERYNXBBwjVwzE38uWj4ugodnsaluWcAaHazqVkN04_HJtCrUHrb0AfhSs7FaDDJGJG1vriwQdNOA",
+            "LepPib_UQAs0c13EQVzX5Gpp1FkPkEUSkyDAewvqCogtj5wbv2Sa6oz4xb_vzPoGbtSDCVtizRQcVQ"
+        ]
   },
   "info": {
     "gameCreation": 1730593150712,
