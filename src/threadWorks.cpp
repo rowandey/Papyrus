@@ -60,14 +60,15 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
         }
 
         // TODO: This line prints a new line on Mac?
-        std::cout << "\r" << std::string(100 , ' ') << "\r" ;
+        //std::cout << "\r" << std::string(100 , ' ') << "\r" ;
+        std::cout << "\033[2K\r";
         // Print updated info on the same line
         std::cout << "\rTotal Sent: " << totalPayloadsSent
                   << " | Successful: " << totalPayloadsSuccessful
                   << " | Failed: " << (totalPayloadsSent - totalPayloadsSuccessful)
                   << " | Packets/s: " << packetsPerSecond
                   << " | Elapsed Time: " << clock.elapsedMilliseconds()
-                  << std::flush;  // Ensure everything is written immediately to avoid any delay
+                  << std::flush;
     }
 }
 

@@ -5,7 +5,7 @@ using json = nlohmann::json;
 json matchBuilder::randomMatch() {   
     json matchTemplate;
     try {
-        matchTemplate = json::parse(matchTemplateJson);
+        matchTemplate = json::parse(matchTemplateJsonMinified);
     } catch (const nlohmann::json::parse_error& e) {
         std::cerr << "JSON Parse Error: " << e.what() << std::endl;
         // Handle the error or return early

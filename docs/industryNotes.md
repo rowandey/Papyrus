@@ -1,7 +1,7 @@
 # Notes from SS
 
 - Access to both basic auth and industry recommended auth
-- Auto created port after execution
+- Auto created report after execution
     - Flag enabled
     - Saves to current directroy by default
     - Lets you specify a file path to save to
