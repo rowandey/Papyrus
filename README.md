@@ -325,7 +325,6 @@ Game Name + Tag: bsawatestuser#test
 
 - Spend time cleaning up possible seg fault causing code
 - Create make based github actions to auto compile per commit
-- Prune and optimize matchTemplate in mappings?
 
 
 - Auth
