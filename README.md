@@ -382,6 +382,8 @@ Game Name + Tag: bsawatestuser#test
 	- Gathered gifs and pictures for documentation
 	- Write documents in markdown in the docs directory
 
+- Binary size was reduced from 3.6MB to 2.9MB. This was done by cleaning up includes(some more is still required), and trimming down mapping json objects.
+
 
 Little present if you read all the way to the end:
 
