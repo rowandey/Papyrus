@@ -318,6 +318,8 @@ cd bin
 
 > **Note:** Buiding with `make rebuild -j$(nproc)` works but is a little inconsistent and sometimes requires two attempts. Time savings of multi-threaded building of the binary is not really worth it and the usual `make rebuild` is fast enough build time wise and more consistent.
 
+> **Note:** If you are building this on MacOS you will need to make a single change to the Makefile as it stands. The flag `-std=c++23` in the line `CXXFLAGS = -std=c++23 -I$(OPENSSL_DIR)  # Include local OpenSSL headers` will need to be changed to `-std=c++2b`.
+
 #### Test User
 Game Name + Tag: bsawatestuser#test
 
