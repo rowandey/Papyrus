@@ -116,7 +116,9 @@ void cliHelper::displayHelp() {
             << "  -v, --verbose             Enable verbose output\n"
             << "  -s, --spike [ms]          Each thread will send data in random spikes \n"
             << "  -ra, --ramp [ms]           Each thread will send data gradually faster\n"
-            << "  -p, --payload [filepath]  Option to specify file path to .JSON payload \n";
+            << "  -p, --payload [filepath]  Option to specify file path to .JSON payload \n"
+            << "\nExample: \n"
+            << "./papy --threads 4 --target \"http://127.0.0.1\" --endpoint \"/printJson\" --payload ocean --verbose --rate 2000\n";
 }
 
 // Helper function to check if a number is a valid integer or not and returns
