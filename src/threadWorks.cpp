@@ -34,18 +34,23 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         client.setPayload(myOcean.randomOcean());
         response = client.sendPOSTRequest();
     } else {
+
         std::ifstream f(payload);
         json jsonPayload;
+
+        // Catches payload not found errors essentially. If it can not parse it
+        // then it was mostly not found or malformed.
         try {
             json jsonPayload = json::parse(f); 
         } catch (const nlohmann::json_abi_v3_11_3::detail::parse_error& e) {
             std::lock_guard<std::mutex> lock(errorMutex);
-            std::cerr << "Parsing Error: Payload file not found or formatted correctly" << std::endl;
+            std::cerr << "Parsing Error: Payload file not found or incorrect JSON" << std::endl;
             std::exit(EXIT_FAILURE);
         }
-        
+
         client.setPayload(jsonPayload);
         response = client.sendPOSTRequest();
+
     }
 
     if (verbose) {
