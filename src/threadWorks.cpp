@@ -6,6 +6,7 @@ std::mutex threadWorks::consoleMutex;
 std::atomic<int> threadWorks::totalPayloadsSent(0);
 std::atomic<int> threadWorks::totalPayloadsSuccessful(0);
 std::atomic<int> threadWorks::packetsPerSecond(0);
+std::mutex errorMutex;
 
 // Static signal handler function
 void threadWorks::signalHandler(int signal) {
@@ -34,7 +35,15 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         response = client.sendPOSTRequest();
     } else {
         std::ifstream f(payload);
-        json jsonPayload = json::parse(f); 
+        json jsonPayload;
+        try {
+            json jsonPayload = json::parse(f); 
+        } catch (const nlohmann::json_abi_v3_11_3::detail::parse_error& e) {
+            std::lock_guard<std::mutex> lock(errorMutex);
+            std::cerr << "Parsing Error: Payload file not found or formatted correctly" << std::endl;
+            std::exit(EXIT_FAILURE);
+        }
+        
         client.setPayload(jsonPayload);
         response = client.sendPOSTRequest();
     }
