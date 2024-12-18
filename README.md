@@ -326,6 +326,7 @@ Game Name + Tag: bsawatestuser#test
 ### Todo:
 
 - Spend time cleaning up possible seg fault causing code
+- Write unit tests for core code components
 - Create make based github actions to auto compile per commit
 
 
