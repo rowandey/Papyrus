@@ -14,7 +14,7 @@ void threadWorks::signalHandler(int signal) {
     isProgramActive = false;
 }
 
-void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& randMatch, std::string payload, MillisecondClock& clock) {
+void threadWorks::sendRequest(apiClient& client, bool verbose, std::string payload, MillisecondClock& clock) {
     std::transform(payload.begin(), payload.end(), payload.begin(), ::tolower);
     std::string response;
 
@@ -75,14 +75,13 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, matchBuilder& ran
 // Orchestrates the sending of requests and main loop for program
 void threadWorks::runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string parameter) {
     MillisecondClock clock;
-    matchBuilder randMatch;
     apiClient client(targetURL);
     client.setEndpoint(endpoint);
     client.setParameter(parameter);
 
     clock.start();
     while (isProgramActive) {
-        sendRequest(client, verbose, randMatch, payload, clock);
+        sendRequest(client, verbose, payload, clock);
 
         if (payloadCount > 0 && --payloadCount == 0) break;
 

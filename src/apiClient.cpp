@@ -10,12 +10,19 @@ apiClient::apiClient(const std::string& serverAddress) {
     } else if (serverAddress.find("http://") == 0) {
         client = std::make_unique<httplib::Client>(serverAddress.substr(7)); // Strip "http://"
     } else {
-        throw std::invalid_argument("Invalid server address. Must start with http:// or https://");
+        std::cerr << "Runtime Error: Invalid server address. Target must start with http:// or https://" << std::endl;
+        std::exit(EXIT_FAILURE);
     }
 }
 
 void apiClient::setEndpoint(const std::string& endpoint) {
-    this->endpoint = endpoint;
+    if (endpoint.empty() || endpoint[0] != '/') {
+        std::cerr << "Runtime Error: Invalid endpoint address. Endpoint must start /" << std::endl;
+        std::cerr << "Working example: --endpoint \"/printJson\"" << std::endl;
+        std::exit(EXIT_FAILURE);
+    } else {
+        this->endpoint = endpoint;
+    }
 }
 
 void apiClient::setParameter(const std::string& parameter) {
