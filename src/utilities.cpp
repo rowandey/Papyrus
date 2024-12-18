@@ -49,7 +49,8 @@ int cliHelper::parseIntArg(const char* arg, const std::string& flagName) {
     }
 }
 
-void cliHelper::printBanner () {
+// Runtime banner for program execution
+void cliHelper::printBanner (std::string target, std::string endpoint, int numThreads, int rateLimit) {
     std::cout << "==========================================" << std::endl;
     std::cout << " ____   _    ______   ______  _   _ ____  " << std::endl;
     std::cout << "|  _ \\ / \\  |  _ \\ \\ / /  _ \\| | | / ___| " << std::endl;
@@ -57,6 +58,11 @@ void cliHelper::printBanner () {
     std::cout << "|  __/ ___ \\|  __/ | | |  _ <| |_| |___) |" << std::endl;
     std::cout << "|_| /_/   \\_\\_|    |_| |_| \\_\\\\___/|____/ " << std::endl;
     std::cout << "==========================================" << std::endl;
+    std::cout << "Threads: " << numThreads << std::endl;
+    std::cout << "Target: " << target << std::endl;
+    std::cout << "Endpoint: " << endpoint << std::endl;
+    std::cout << "Rate Limit: " << rateLimit << "ms" << std::endl;
+    std::cout <<  "==========================================" << std::endl;
 }
 
 // Helper function for parsing command-line arguments

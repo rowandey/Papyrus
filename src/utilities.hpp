@@ -37,7 +37,7 @@ public:
     static int parseIntArg(const char* arg, const std::string& flagName);
 
     // Function to display program info (banner)
-    static void printBanner();
+    static void printBanner(std::string target, std::string endpoint, int numThreads, int rateLimit);
 
     // Helper function for parsing command-line arguments
     static void parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, 
