@@ -328,7 +328,7 @@ Game Name + Tag: bsawatestuser#test
 - Spend time cleaning up possible seg fault causing code
 - Write unit tests for core code components
 - Create make based github actions to auto compile per commit
-
+- Investigate only having one participant in template and expanding the template with code at runtime
 
 - Auth
 - Investigate C++ coroutines for faster concurrency

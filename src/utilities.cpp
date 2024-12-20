@@ -146,12 +146,6 @@ int myRandom::generateRandomInt(int min, int max) {
     std::mt19937 gen(rd()); // Mersenne Twister RNG
     std::uniform_int_distribution<> distrib(min, max);
     return distrib(gen);
-
-    /*
-        Used as such:
-            int randomInt = generateRandomInt(1, 100); // Generate a random integer between 1 and 100
-            std::cout << "Random Integer: " << randomInt << std::endl;
-    */
 }
 
 std::string myRandom::generateRandomString(size_t length) {
@@ -165,12 +159,6 @@ std::string myRandom::generateRandomString(size_t length) {
         randomStr += chars[distrib(gen)];
     }
     return randomStr;
-
-    /*
-        Used as such:
-            std::string randomStr = generateRandomString(10); // Generate a 10-character random string
-            std::cout << "Random String: " << randomStr << std::endl;
-    */
 }
 
 std::string myRandom::generateRandomNumberString(size_t length) {
@@ -184,12 +172,6 @@ std::string myRandom::generateRandomNumberString(size_t length) {
         randomStr += chars[distrib(gen)];
     }
     return randomStr;
-
-    /*
-        Used as such:
-            std::string randomStr = generateRandomNumberString(10); // Generate a 10-character random string
-            std::cout << "Random String: " << randomStr << std::endl;
-    */
 }
 
 bool myRandom::getRandomBool() {

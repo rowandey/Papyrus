@@ -2,6 +2,7 @@
 
 using json = nlohmann::json;
 
+// TODO: Inspect if its best practice to hardcode path to matchTemplate
 json matchBuilder::randomMatch() {   
     json matchTemplate;
     try {
@@ -10,6 +11,8 @@ json matchBuilder::randomMatch() {
         std::cerr << "JSON Parse Error: " << e.what() << std::endl;
         // Handle the error or return early
     }
+
+    // TODO: JSON payload can be parsed but structure is not validated
 
     matchTemplate["info"]["gameCreation"] = 9466848;
     matchTemplate["info"]["gameDuration"] = myRandom::generateRandomInt(900, 2700);
@@ -31,8 +34,10 @@ json matchBuilder::randomMatch() {
         participantIndex++;
     }
 
+    // Used in assigning the first user to bsawatestuser#test
     bool isFirstIteration = true;
 
+    // Will loop 10 times, once for each participant in game
     for (json& participant : matchTemplate["info"]["participants"]) {
         // Randomly generate kills, assists, and other stats
         participant["assists"] = myRandom::generateRandomInt(0, 25);
@@ -46,11 +51,13 @@ json matchBuilder::randomMatch() {
         participant["totalAllyJungleMinionsKilled"] = myRandom::generateRandomInt(1, 100);
         participant["totalEnemyJungleMinionsKilled"] = myRandom::generateRandomInt(1, 50);
 
+        // Randomizes Champ related data
         participant["champExperience"] = myRandom::generateRandomInt(1, 12576);
         participant["champLevel"] = myRandom::generateRandomInt(1, 18);
         participant["championId"] = myRandom::generateRandomInt(1, 200);
         participant["championName"] = getRandomFromJson(championsJson);
 
+        // Randomizes items purchased
         participant["item0"] = getRandomFromJson(itemsJson);
         participant["item1"] = getRandomFromJson(itemsJson);
         participant["item2"] = getRandomFromJson(itemsJson);
@@ -59,9 +66,11 @@ json matchBuilder::randomMatch() {
         participant["item5"] = getRandomFromJson(itemsJson);
         participant["item6"] = getRandomFromJson(itemsJson);
 
+        // Randomizes summoner spells
         participant["summoner1Id"] = getRandomFromJson(summonersJson);
         participant["summoner2Id"] = getRandomFromJson(summonersJson);
 
+        // Randomizes keystone rune and secondary school
         participant["perks"]["styles"][0]["selections"][0]["perk"] = getRandomFromJson(keystonesJson);
         participant["perks"]["styles"][1]["style"] = getRandomFromJson(secondaryRunesJson);
 
@@ -121,7 +130,6 @@ std::string matchBuilder::getRandomFromJson(const std::string& jsonString) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
-
     int randomIndex = distrib(gen);
 
     return keys[randomIndex]; // Return a random key from the file

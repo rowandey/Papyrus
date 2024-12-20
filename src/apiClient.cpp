@@ -16,10 +16,12 @@ apiClient::apiClient(const std::string& serverAddress) {
 }
 
 void apiClient::setEndpoint(const std::string& endpoint) {
-    if (endpoint.empty() || endpoint[0] != '/') {
+    if (!endpoint.empty() && endpoint[0] != '/') {
         std::cerr << "Runtime Error: Invalid endpoint address. Endpoint must start /" << std::endl;
         std::cerr << "Working example: --endpoint \"/printJson\"" << std::endl;
         std::exit(EXIT_FAILURE);
+    } else if (endpoint.empty()) {
+        this->endpoint = endpoint;
     } else {
         this->endpoint = endpoint;
     }
@@ -34,9 +36,7 @@ void apiClient::setPayload(const json& payload) {
 }
 
 std::string apiClient::sendGETRequest() {
-    const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
-    const std::string requestParameter = parameter.empty() ? "" : parameter;
-    std::string requestCombined = requestEndpoint + requestParameter;
+    const std::string requestCombined = (endpoint.empty() ? "/" : endpoint) + (parameter.empty() ? "" : parameter);
 
     httplib::Result res;
     
@@ -59,9 +59,7 @@ std::string apiClient::sendGETRequest() {
 }
 
 std::string apiClient::sendPOSTRequest() {
-    const std::string requestEndpoint = endpoint.empty() ? "/" : endpoint;
-    const std::string requestParameter = parameter.empty() ? "" : parameter;
-    std::string requestCombined = requestEndpoint + requestParameter;
+    const std::string requestCombined = (endpoint.empty() ? "/" : endpoint) + (parameter.empty() ? "" : parameter);
 
     if (endpoint.empty()) {
         return "Error: Endpoint is not set.";
