@@ -30,9 +30,9 @@ class TEST_dropFirstAndLast {
         std::cout << "Got: " << testOutput << std::endl;
         
         if (testOutput == "435324632657524746") {
-            std::cout << "==========PASSED==========" << std::endl;
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
         } else {
-            std::cout << "==========FAILED==========" << std::endl;
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
         }
         return 0;
     }
@@ -45,9 +45,9 @@ class TEST_dropFirstAndLast {
         std::cout << "Got: " << testOutput << std::endl;
         
         if (testOutput == "orem Ipsu") {
-            std::cout << "==========PASSED==========" << std::endl;
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
         } else {
-            std::cout << "==========FAILED==========" << std::endl;
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
         }
         return 0;
     }
@@ -60,9 +60,9 @@ class TEST_dropFirstAndLast {
         std::cout << "Got: " << testOutput << std::endl;
         
         if (testOutput == "fsgege^$ethehe6!)w4htw") {
-            std::cout << "==========PASSED==========" << std::endl;
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
         } else {
-            std::cout << "==========FAILED==========" << std::endl;
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
         }
         return 0;
     }
@@ -75,9 +75,9 @@ class TEST_dropFirstAndLast {
         std::cout << "Got: " << testOutput << std::endl;
         
         if (testOutput == "") {
-            std::cout << "==========PASSED==========" << std::endl;
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
         } else {
-            std::cout << "==========FAILED==========" << std::endl;
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
         }
         return 0;
     }
@@ -90,9 +90,9 @@ class TEST_dropFirstAndLast {
         std::cout << "Got: " << testOutput << std::endl;
         
         if (testOutput == "") {
-            std::cout << "==========PASSED==========" << std::endl;
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
         } else {
-            std::cout << "==========FAILED==========" << std::endl;
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
         }
         return 0;
     }
@@ -105,9 +105,9 @@ class TEST_dropFirstAndLast {
         std::cout << "Got: " << testOutput << std::endl;
         
         if (testOutput == "") {
-            std::cout << "==========PASSED==========" << std::endl;
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
         } else {
-            std::cout << "==========FAILED==========" << std::endl;
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
         }
         return 0;
     }

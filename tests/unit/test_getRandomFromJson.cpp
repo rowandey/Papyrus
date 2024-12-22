@@ -44,30 +44,133 @@ std::string getRandomFromJson(const std::string& jsonString) {
     return keys[randomIndex]; // Return a random key from the file
 }
 
+
+
+
+
+
+
+
+
+
+
+
 class TEST_getRandomFromJson {
     public:
 
     static int testValidJsonString () {
+        const std::string secondaryRunesJson = R"(
+        {
+            "8000":"Precision",
+            "8100":"Domination",
+            "8200":"Sorcery",
+            "8300":"Inspiration",
+            "8400":"Resolve"
+        }
+        )";
 
+        std::cout << "\nTesting valid JSON \n" << std::endl;
+        std::string testOutput = getRandomFromJson(secondaryRunesJson);
+        
+        std::cout << "Expecting: 8000 || 8100 || 8200 || 8300 || 8400" << std::endl;
+        std::cout << "Got: " << testOutput << std::endl;
+        
+        if (testOutput == "8000" || testOutput == "8100" || testOutput == "8200" || testOutput == "8300" || testOutput == "8400") {
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
+        } else {
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
+        }
+
+        return 0;
     }
 
     static int testInvalidJson () {
         
-    }
-
-    static int testNotStringPassed () {
+        // Missing the } at the end of the JSON object
+        const std::string secondaryRunesJson = R"(
+        {
+            "8000":"Precision",
+            "8100":"Domination",
+            "8200":"Sorcery",
+            "8300":"Inspiration",
+            "8400":"Resolve"
         
+        )";
+
+        std::cout << "\nTesting invalid JSON \n" << std::endl;
+        std::string testOutput = getRandomFromJson(secondaryRunesJson);
+        
+        std::cout << "Expecting: \"\"" << std::endl;
+        std::cout << "Got: " << testOutput << std::endl;
+        
+        if (testOutput == "") {
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
+        } else {
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
+        }
+
+        return 0;
     }
     
     static int testInvalidJsonNormalString () {
+        const std::string secondaryRunesJson = "BILBO BAGGINS";
+
+        std::cout << "\nTesting invalid JSON. Normal string as input \n" << std::endl;
+        std::string testOutput = getRandomFromJson(secondaryRunesJson);
         
+        std::cout << "Expecting: Error" << std::endl;
+        std::cout << "Got: " << testOutput << std::endl;
+        
+        if (testOutput == "") {
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
+        } else {
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
+        }
+
+        return 0;
     }
 
     static int testRandomString () {
+        const std::string secondaryRunesJson = "ljekfnbvjkebwvkjewbvebqv";
+
+        std::cout << "\nTesting invalid JSON. Random string as input \n" << std::endl;
+        std::string testOutput = getRandomFromJson(secondaryRunesJson);
         
+        std::cout << "Expecting: Error" << std::endl;
+        std::cout << "Got: " << testOutput << std::endl;
+        
+        if (testOutput == "") {
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
+        } else {
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
+        }
+
+        return 0;
     }
 
     static int testEmptyString () {
+        const std::string secondaryRunesJson = "";
+
+        std::cout << "\nTesting invalid JSON. Empty string as input \n" << std::endl;
+        std::string testOutput = getRandomFromJson(secondaryRunesJson);
         
+        std::cout << "Expecting: Error" << std::endl;
+        std::cout << "Got: " << testOutput << std::endl;
+        
+        if (testOutput == "") {
+            std::cout << "\033[32m==========PASSED==========\033[0m" << std::endl;
+        } else {
+            std::cout << "\033[31m==========FAILED==========\033[0m" << std::endl;
+        }
+
+        return 0;
     }
 };
+
+int main () {
+    TEST_getRandomFromJson::testValidJsonString();
+    TEST_getRandomFromJson::testInvalidJson();
+    TEST_getRandomFromJson::testInvalidJsonNormalString();
+    TEST_getRandomFromJson::testRandomString();
+    TEST_getRandomFromJson::testEmptyString();
+}
