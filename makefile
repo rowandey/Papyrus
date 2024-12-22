@@ -1,6 +1,10 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++23 -I$(OPENSSL_DIR)  # Include local OpenSSL headers
+ifeq ($(shell uname), Darwin)
+    CXXFLAGS = -std=c++2b -I$(OPENSSL_DIR)  # macOS-specific flags
+else
+    CXXFLAGS = -std=c++23 -I$(OPENSSL_DIR)  # Default flags
+endif
 LDFLAGS = -L$(OPENSSL_DIR) -lssl -lcrypto  # Link local OpenSSL libraries
 
 # Directories
