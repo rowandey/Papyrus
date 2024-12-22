@@ -330,6 +330,9 @@ Game Name + Tag: bsawatestuser#test
 - Create make based github actions to auto compile per commit
 - Investigate only having one participant in template and expanding the template with code at runtime
 
+- Add AWS CloudWatch connection to ocean plugin for convenient metrics tracking
+	- Configured in ocean plugin `.env` file
+
 - Auth
 - Investigate C++ coroutines for faster concurrency
 
