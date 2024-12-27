@@ -32,7 +32,7 @@ Lets get into how we do this...
 4. [Notable Command Line Arguments](#notable-command-line-arguments)
 6. [Ask The Dev](#ask-the-dev)
 7. [Disclaimer](#disclaimer)
-8. [Contributing](#contributing-🤝)
+8. [Contributing](#contributing)
 
 ---
 
@@ -241,7 +241,7 @@ This section is completely for fun. I named the project based off the latin word
 
 ---
 
-## Contributing 🤝
+## Contributing
 
 If you would like to contribute to this project it is quite easy (I may be biased since it is my project). Follow the [Getting Started](#getting-started) section and that will get you up and running. 
 
