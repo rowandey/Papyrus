@@ -32,6 +32,7 @@ Lets get into how we do this...
 4. [Notable Command Line Arguments](#notable-command-line-arguments)
 6. [Ask The Dev](#ask-the-dev)
 7. [Disclaimer](#disclaimer)
+8. [Contributing](#contributing-🤝)
 
 ---
 
