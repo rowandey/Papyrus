@@ -1,14 +1,13 @@
 #pragma once
-#include <string>
+
 #include <memory>
+#include <string>
+
+// project dependencies
 #include "json.hpp"
-#include <variant>
 
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include "httplib.h"
-
-
-using json = nlohmann::json;
 
 class apiClient {
 public:

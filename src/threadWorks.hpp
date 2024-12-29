@@ -1,18 +1,11 @@
 #pragma once
 
-#include <iostream>
 #include <atomic>
 #include <mutex>
 #include <string>
-#include <chrono>
-#include <thread>
-#include <vector>
-#include <cctype>
-#include <csignal>
-#include "matchBuilder.hpp"
-#include "utilities.hpp"
-#include "apiClient.hpp"
-#include "oceanBuilder.hpp"
+
+class apiClient;
+class MillisecondClock;
 
 class threadWorks {
 public:
@@ -20,7 +13,7 @@ public:
     static std::mutex consoleMutex;                      // Used in the signal handler
     static std::atomic<int> totalPayloadsSent;           // Shared across threads
     static std::atomic<int> totalPayloadsSuccessful;     // Shared across threads
-    static std::atomic<int> packetsPerSecond;          // Shared across threads
+    static std::atomic<int> packetsPerSecond;            // Shared across threads
 
     // Signal handler to stop the program
     static void signalHandler(int signal);

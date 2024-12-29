@@ -1,5 +1,21 @@
 #include "threadWorks.hpp"
 
+#include <atomic>
+#include <iostream>
+#include <mutex>
+#include <string>
+
+#include "apiClient.hpp"
+#include "matchBuilder.hpp"
+#include "millisecondClock.hpp"
+#include "myRandom.hpp"
+#include "oceanBuilder.hpp"
+
+// project dependencies
+#include "json.hpp"
+
+using json = nlohmann::json;
+
 // Static member initialization
 std::atomic<bool> threadWorks::isProgramActive(true);
 std::mutex threadWorks::consoleMutex;
@@ -41,7 +57,7 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         // Catches payload not found errors essentially. If it can not parse it
         // then it was mostly not found or malformed.
         try {
-            json jsonPayload = json::parse(f); 
+            json jsonPayload = json::parse(f);
         } catch (const nlohmann::json_abi_v3_11_3::detail::parse_error& e) {
             std::lock_guard<std::mutex> lock(errorMutex);
             std::cerr << "Parsing Error: Payload file not found or incorrect JSON" << std::endl;

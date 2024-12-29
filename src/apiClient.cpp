@@ -1,5 +1,14 @@
 #include "apiClient.hpp"
 
+#include <memory>
+#include <string>
+
+// project dependencies
+#include "json.hpp"
+
+#define CPPHTTPLIB_OPENSSL_SUPPORT
+#include "httplib.h"
+
 using json = nlohmann::json;
 
 // Constructor to initialize the server address
@@ -39,7 +48,7 @@ std::string apiClient::sendGETRequest() {
     const std::string requestCombined = (endpoint.empty() ? "/" : endpoint) + (parameter.empty() ? "" : parameter);
 
     httplib::Result res;
-    
+
     if (sslClient) {
         res = sslClient->Get(requestCombined.c_str());
     } else if (client) {
@@ -69,7 +78,7 @@ std::string apiClient::sendPOSTRequest() {
     }
 
     httplib::Result res;
-    
+
     if (sslClient) {
         sslClient->set_read_timeout(7, 0);
         sslClient->set_write_timeout(7, 0);
@@ -79,7 +88,7 @@ std::string apiClient::sendPOSTRequest() {
     } else {
         std::cout << "Neither client nor sslClient is initialized." << std::endl;
     }
-    
+
     if (res) {
         if (res->status == 200) {
             return "200";
