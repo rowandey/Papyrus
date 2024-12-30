@@ -1,6 +1,10 @@
-#include "common.hpp"
+#include <csignal>
+#include <iostream>
+#include <thread>
+#include <vector>
 
-using json = nlohmann::json;
+#include "cliHelper.hpp"
+#include "threadWorks.hpp"
 
 int main(int argc, char* argv[]) {
     // Runtime configuration variables declared and initialized with default values
@@ -13,8 +17,8 @@ int main(int argc, char* argv[]) {
 
     // Prints the large PAPYRUS banner at the start of the program
     cliHelper::printBanner(target, endpoint, numThreads, rateLimit);
-    
-    // Signal handler controlling ctl + c program halting 
+
+    // Signal handler controlling ctl + c program halting
     signal(SIGINT, threadWorks::signalHandler);
     std::cout << "Program is running. Press Ctrl+C to stop.\n";
 

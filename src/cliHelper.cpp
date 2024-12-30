@@ -1,40 +1,9 @@
-#include "utilities.hpp"
+#include "cliHelper.hpp"
 
-////////////////////////
-// CLOCK
-////////////////////////
-// Start the clock by recording the current time
-void MillisecondClock::start() {
-    initialStart = std::chrono::high_resolution_clock::now();
-    currentStart = std::chrono::high_resolution_clock::now();
-}
-
-// Get the elapsed time in milliseconds since the clock was started
-long long MillisecondClock::perSecondCheck() {
-    auto now = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - currentStart);
-    return duration.count();
-}
-
-// Get the elapsed time in milliseconds since the clock was started
-long long MillisecondClock::elapsedMilliseconds() {
-    auto now = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - initialStart);
-    return duration.count();
-}
-
-// Reset the clock to start counting from the current time
-// Used in calculating packets per second
-void MillisecondClock::resetClock() {
-    currentStart = std::chrono::high_resolution_clock::now();
-}
-
-
-
-
-////////////////////////
-// CLI Helper
-////////////////////////
+#include <climits>
+#include <cmath>
+#include <iostream>
+#include <string>
 
 // Helper function to validate and parse integer arguments
 int cliHelper::parseIntArg(const char* arg, const std::string& flagName) {
@@ -131,56 +100,4 @@ void cliHelper::displayHelp() {
 // 1 if it is
 bool cliHelper::isValidInt(double num) {
     return std::floor(num) == num && num >= INT_MIN && num <= INT_MAX;
-}
-
-
-
-
-
-////////////////////////
-// My Random
-////////////////////////
-
-int myRandom::generateRandomInt(int min, int max) {
-    std::random_device rd;  // Seed source
-    std::mt19937 gen(rd()); // Mersenne Twister RNG
-    std::uniform_int_distribution<> distrib(min, max);
-    return distrib(gen);
-}
-
-std::string myRandom::generateRandomString(size_t length) {
-    const std::string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    std::random_device rd;  // Seed source
-    std::mt19937 gen(rd()); // Mersenne Twister RNG
-    std::uniform_int_distribution<> distrib(0, chars.size() - 1);
-
-    std::string randomStr;
-    for (size_t i = 0; i < length; ++i) {
-        randomStr += chars[distrib(gen)];
-    }
-    return randomStr;
-}
-
-std::string myRandom::generateRandomNumberString(size_t length) {
-    const std::string chars = "0123456789";
-    std::random_device rd;  // Seed source
-    std::mt19937 gen(rd()); // Mersenne Twister RNG
-    std::uniform_int_distribution<> distrib(0, chars.size() - 1);
-
-    std::string randomStr;
-    for (size_t i = 0; i < length; ++i) {
-        randomStr += chars[distrib(gen)];
-    }
-    return randomStr;
-}
-
-bool myRandom::getRandomBool() {
-    // Seed the random number generator
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    // Define the distribution for 0 or 1
-    std::uniform_int_distribution<> distrib(0, 1);
-
-    // Return true if random number is 1, else false
-    return distrib(gen) == 1;
 }

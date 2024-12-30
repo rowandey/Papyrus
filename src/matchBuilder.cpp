@@ -1,9 +1,17 @@
 #include "matchBuilder.hpp"
 
+#include <iostream>
+#include <random>
+#include <string>
+
+#include "json.hpp"
+#include "mapping.hpp"
+#include "myRandom.hpp"
+
 using json = nlohmann::json;
 
 // TODO: Inspect if its best practice to hardcode path to matchTemplate
-json matchBuilder::randomMatch() {   
+json matchBuilder::randomMatch() {
     json matchTemplate;
     try {
         matchTemplate = json::parse(matchTemplateJsonMinified);
@@ -98,7 +106,6 @@ std::string matchBuilder::dropFirstAndLast(const std::string& str) {
 
 // Static helper function to get a random key from a given JSON file
 std::string matchBuilder::getRandomFromJson(const std::string& jsonString) {
-
     json items;
 
     try {

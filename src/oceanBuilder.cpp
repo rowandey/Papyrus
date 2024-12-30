@@ -1,5 +1,14 @@
 #include "oceanBuilder.hpp"
 
+#include <iostream>
+#include <random>
+
+#include "mapping.hpp"
+#include "myRandom.hpp"
+
+// project dependencies
+#include "json.hpp"
+
 using json = nlohmann::json;
 
 json oceanBuilder::randomOcean() {
@@ -10,7 +19,7 @@ json oceanBuilder::randomOcean() {
         std::cerr << "JSON Parse Error: " << e.what() << std::endl;
         // Handle the error or return early
     }
-    
+
     oceanTemplate["overrides"]["business_unit"]["name"] = "Papy Test";
     // oceanTemplate["overrides"]["business_unit"]["name"] = getRandomFromJson();
     oceanTemplate["overrides"]["application"]["name"] = myRandom::generateRandomString(7);
@@ -27,7 +36,6 @@ std::string oceanBuilder::dropFirstAndLast(const std::string& str) {
 
 // Static helper function to get a random value from a given JSON file
 std::string oceanBuilder::getRandomFromJson() {
-
     json items = json::parse(sportsCars);
 
     // Collect all values
