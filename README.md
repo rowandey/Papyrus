@@ -116,7 +116,7 @@ If you want to launch a bunch of GET requests to a specific site:
 ./papy --threads 4 --target "https://www.google.com"
 ```
 ![Papy GET](docs/documentationImages/papyGET.gif "Papy GET")
-> This shows that you can query public websites but please use this responsibly. Overuse or non-permitted usage depending on use case could cause problems for you or your target. Best to use the tool on resources you own.
+> WARNING: This is to demonstrate you can query public websites but use this responsibly. Overuse or non-permitted usage could cause legal problems for you. Best to use the tool on resources you own.
 
 If you want to send a static payload from a JSON file then simply specify the file path to your JSON file. The following command looks to the directory structure `../archive/mappingFiles/testPayload.json` for example to send `testPayload.json` as the body of the POST requests. This command also displays the functionality of the `--rate` flag which rate limits the requests by adding a delay of X milliseconds between each request.
 ```bash
