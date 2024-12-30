@@ -59,6 +59,12 @@ If you are a user familiar with a CLI then you can use this tool! It was intenti
 - Easy to integrate with other tooling
 - Light weight
 
+### Dependencies
+The project has 3 main dependencies that were vendored into the project. As of the current implementation they are: 
+- nlohmann/json version 3.11.3
+- httplib.h version 0.18.1
+- OpenSSL version 3.4.0 
+
 ---
 
 ## Getting Started
@@ -110,6 +116,7 @@ If you want to launch a bunch of GET requests to a specific site:
 ./papy --threads 4 --target "https://www.google.com"
 ```
 ![Papy GET](docs/documentationImages/papyGET.gif "Papy GET")
+> This shows that you can query public websites but please use this responsibly. Overuse or non-permitted usage depending on use case could cause problems for you or your target. Best to use the tool on resources you own.
 
 If you want to send a static payload from a JSON file then simply specify the file path to your JSON file. The following command looks to the directory structure `../archive/mappingFiles/testPayload.json` for example to send `testPayload.json` as the body of the POST requests. This command also displays the functionality of the `--rate` flag which rate limits the requests by adding a delay of X milliseconds between each request.
 ```bash
@@ -337,9 +344,6 @@ Tips from DemiTastes on theo disc
 - README Examples of randomized data sent to mtrack
 - Fix dependancy structure to limit overlap as much as possible
 - Move deps to their own dep folder or something
-- Remove the following line from doc and replace it with owned endpoint to not cause problems
-	- `./papy --threads 4 --target "https://www.google.com"`
-	- Google might yell at me
 
 
 - Add AWS CloudWatch connection to ocean plugin for convenient metrics tracking
