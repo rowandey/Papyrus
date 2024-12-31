@@ -11,7 +11,7 @@ LDFLAGS = -L$(OPENSSL_DIR) -lssl -lcrypto  # Link local OpenSSL libraries
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
-OPENSSL_DIR = $(SRC_DIR)/openssl/include  # Local OpenSSL directory
+OPENSSL_DIR = $(SRC_DIR)/dependencies/openssl/include  # Local OpenSSL directory
 
 # Source files and object files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)

@@ -4,7 +4,7 @@
 #include <random>
 #include <string>
 
-#include "json.hpp"
+#include "dependencies/json.hpp"
 #include "mapping.hpp"
 #include "myRandom.hpp"
 

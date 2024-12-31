@@ -26,7 +26,7 @@ Things of note in the header files are `httplib.h`, `json.hpp`, `openssl`, and t
 Regarding the build process, since the project is relatively simple I did not need any complicated build systems so I used a makefile to make sure that the variables and environmental factors are consistent across builds. I will not bother putting the whole `makefile` here so I will just mention notable portions of it. 
 
 - The project is currently being built with `-std=c++23`
-- In the build flags we specify `-I$(OPENSSL_DIR)/include` which will include all of the openssl files in our `src/openssl/` directory which are necessary for HTTPS traffic and will be added to the build.  
+- In the build flags we specify `-I$(OPENSSL_DIR)/include` which will include all of the openssl files in our `src/dependencies/openssl/` directory which are necessary for HTTPS traffic and will be added to the build.  
 
 
 ## Project File Structure
@@ -50,7 +50,7 @@ Papy/
 |   |-- httplib.h
 |   |-- common.hpp
 |   |-- mapping.hpp
-|   |-- openssl/
+|   |-- dependencies/openssl/
 |   |   |-- ALL OPENSSL FILES...
 |-- build/
 |-- doc/

@@ -3,7 +3,7 @@
 #include <string>
 
 // project dependencies
-#include "json.hpp"
+#include "dependencies/json.hpp"
 
 class oceanBuilder {
 public:

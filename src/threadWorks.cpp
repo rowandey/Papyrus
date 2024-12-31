@@ -14,7 +14,7 @@
 #include "oceanBuilder.hpp"
 
 // project dependencies
-#include "json.hpp"
+#include "dependencies/json.hpp"
 
 using json = nlohmann::json;
 

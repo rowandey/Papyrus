@@ -4,10 +4,10 @@
 #include <string>
 
 // project dependencies
-#include "json.hpp"
+#include "dependencies/json.hpp"
 
 #define CPPHTTPLIB_OPENSSL_SUPPORT
-#include "httplib.h"
+#include "dependencies/httplib.h"
 
 using json = nlohmann::json;
 
