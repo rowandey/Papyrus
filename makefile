@@ -1,21 +1,27 @@
-# Compiler and flags
-CXX = g++
-ifeq ($(shell uname), Darwin)
-    CXXFLAGS = -std=c++2b -I$(OPENSSL_DIR)  # macOS-specific flags
-else
-    CXXFLAGS = -std=c++23 -I$(OPENSSL_DIR)  # Default flags
-endif
-LDFLAGS = -L$(OPENSSL_DIR) -lssl -lcrypto  # Link local OpenSSL libraries
-
 # Directories
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
 OPENSSL_DIR = $(SRC_DIR)/openssl/include  # Local OpenSSL directory
 
+# Compiler and flags
+CXX = g++
+CXXFLAGS_COMMON = -I$(OPENSSL_DIR) -MMD -MP   # Include dependency tracking
+ifeq ($(shell uname), Darwin)
+	CXXFLAGS = -std=c++2b $(CXXFLAGS_COMMON)  # macOS-specific flags
+else
+	CXXFLAGS = -std=c++23 $(CXXFLAGS_COMMON)  # Default flags
+endif
+
+# Linker flags
+LDFLAGS = -L$(OPENSSL_DIR) -lssl -lcrypto  # Link local OpenSSL libraries
+
 # Source files and object files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+
+# Track build dependencies
+DEP_FILES = $(SRC_FILES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.d)
 
 # Output executable
 TARGET = $(BIN_DIR)/papy
@@ -29,11 +35,13 @@ directories:
 
 # Link object files to create the executable
 $(TARGET): $(OBJ_FILES)
-	$(CXX) $(OBJ_FILES) -o $@ $(LDFLAGS)  # Link OpenSSL libraries
+	$(CXX) $(OBJ_FILES) -o $@ $(LDFLAGS)
 
 # Rule to compile .cpp to .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | directories
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+-include $(DEP_FILES)
 
 # Clean up object files and executable
 clean:
