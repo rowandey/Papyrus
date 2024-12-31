@@ -5,7 +5,7 @@
 #include <string>
 
 class apiClient;
-class MillisecondClock;
+class millisecondClock;
 
 class threadWorks {
 public:
@@ -19,7 +19,7 @@ public:
     static void signalHandler(int signal);
 
     // Function to send requests and optionally log verbose output
-    static void sendRequest(apiClient& client, bool verbose, std::string payload, MillisecondClock& clock);
+    static void sendRequest(apiClient& client, bool verbose, std::string payload, millisecondClock& clock);
 
     // Worker thread function that sends requests based on the provided parameters
     static void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string parameter);

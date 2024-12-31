@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-class MillisecondClock {
+class millisecondClock {
 public:
     // Start the clock by recording the current time
     void start();
