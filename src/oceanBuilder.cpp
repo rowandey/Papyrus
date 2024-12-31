@@ -14,7 +14,7 @@ using json = nlohmann::json;
 json oceanBuilder::randomOcean() {
     json oceanTemplate;
     try {
-        oceanTemplate = json::parse(oceanPayloadTemplate);
+        oceanTemplate = json::parse(mapping::oceanPayloadTemplate);
     } catch (const nlohmann::json::parse_error& e) {
         std::cerr << "JSON Parse Error: " << e.what() << std::endl;
         // Handle the error or return early
@@ -36,7 +36,7 @@ std::string oceanBuilder::dropFirstAndLast(const std::string& str) {
 
 // Static helper function to get a random value from a given JSON file
 std::string oceanBuilder::getRandomFromJson() {
-    json items = json::parse(sportsCars);
+    json items = json::parse(mapping::sportsCars);
 
     // Collect all values
     std::vector<std::string> values;
