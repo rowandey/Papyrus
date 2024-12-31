@@ -59,7 +59,7 @@ class TEST_getRandomFromJson {
     public:
 
     static int testValidJsonString () {
-        const std::string secondaryRunesJson = R"(
+        const std::string SECONDARY_RUNES_JSON = R"(
         {
             "8000":"Precision",
             "8100":"Domination",
@@ -70,7 +70,7 @@ class TEST_getRandomFromJson {
         )";
 
         std::cout << "\nTesting valid JSON \n" << std::endl;
-        std::string testOutput = getRandomFromJson(secondaryRunesJson);
+        std::string testOutput = getRandomFromJson(SECONDARY_RUNES_JSON);
         
         std::cout << "Expecting: 8000 || 8100 || 8200 || 8300 || 8400" << std::endl;
         std::cout << "Got: " << testOutput << std::endl;
@@ -87,7 +87,7 @@ class TEST_getRandomFromJson {
     static int testInvalidJson () {
         
         // Missing the } at the end of the JSON object
-        const std::string secondaryRunesJson = R"(
+        const std::string SECONDARY_RUNES_JSON = R"(
         {
             "8000":"Precision",
             "8100":"Domination",
@@ -98,7 +98,7 @@ class TEST_getRandomFromJson {
         )";
 
         std::cout << "\nTesting invalid JSON \n" << std::endl;
-        std::string testOutput = getRandomFromJson(secondaryRunesJson);
+        std::string testOutput = getRandomFromJson(SECONDARY_RUNES_JSON);
         
         std::cout << "Expecting: \"\"" << std::endl;
         std::cout << "Got: " << testOutput << std::endl;
@@ -113,10 +113,10 @@ class TEST_getRandomFromJson {
     }
     
     static int testInvalidJsonNormalString () {
-        const std::string secondaryRunesJson = "BILBO BAGGINS";
+        const std::string SECONDARY_RUNES_JSON = "BILBO BAGGINS";
 
         std::cout << "\nTesting invalid JSON. Normal string as input \n" << std::endl;
-        std::string testOutput = getRandomFromJson(secondaryRunesJson);
+        std::string testOutput = getRandomFromJson(SECONDARY_RUNES_JSON);
         
         std::cout << "Expecting: Error" << std::endl;
         std::cout << "Got: " << testOutput << std::endl;
@@ -131,10 +131,10 @@ class TEST_getRandomFromJson {
     }
 
     static int testRandomString () {
-        const std::string secondaryRunesJson = "ljekfnbvjkebwvkjewbvebqv";
+        const std::string SECONDARY_RUNES_JSON = "ljekfnbvjkebwvkjewbvebqv";
 
         std::cout << "\nTesting invalid JSON. Random string as input \n" << std::endl;
-        std::string testOutput = getRandomFromJson(secondaryRunesJson);
+        std::string testOutput = getRandomFromJson(SECONDARY_RUNES_JSON);
         
         std::cout << "Expecting: Error" << std::endl;
         std::cout << "Got: " << testOutput << std::endl;
@@ -149,10 +149,10 @@ class TEST_getRandomFromJson {
     }
 
     static int testEmptyString () {
-        const std::string secondaryRunesJson = "";
+        const std::string SECONDARY_RUNES_JSON = "";
 
         std::cout << "\nTesting invalid JSON. Empty string as input \n" << std::endl;
-        std::string testOutput = getRandomFromJson(secondaryRunesJson);
+        std::string testOutput = getRandomFromJson(SECONDARY_RUNES_JSON);
         
         std::cout << "Expecting: Error" << std::endl;
         std::cout << "Got: " << testOutput << std::endl;
