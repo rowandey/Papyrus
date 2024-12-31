@@ -9,8 +9,6 @@
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include "dependencies/httplib.h"
 
-using json = nlohmann::json;
-
 // Constructor to initialize the server address
 apiClient::apiClient(const std::string& serverAddress) {
     // Determine whether to use HTTP or HTTPS client
@@ -40,7 +38,7 @@ void apiClient::setParameter(const std::string& parameter) {
     this->parameter = parameter;
 }
 
-void apiClient::setPayload(const json& payload) {
+void apiClient::setPayload(const nlohmann::json& payload) {
     this->payload = payload;
 }
 

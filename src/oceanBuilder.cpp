@@ -21,7 +21,6 @@ json oceanBuilder::randomOcean() {
     }
 
     oceanTemplate["overrides"]["business_unit"]["name"] = "Papy Test";
-    // oceanTemplate["overrides"]["business_unit"]["name"] = getRandomFromJson();
     oceanTemplate["overrides"]["application"]["name"] = myRandom::generateRandomString(7);
     oceanTemplate["overrides"]["project"]["name"] = getRandomFromJson();
 

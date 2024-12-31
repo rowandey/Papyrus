@@ -1,6 +1,5 @@
 #include "cliHelper.hpp"
 
-#include <climits>
 #include <cmath>
 #include <iostream>
 #include <string>

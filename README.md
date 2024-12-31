@@ -339,12 +339,8 @@ Game Name + Tag: bsawatestuser#test
 - Investigate only having one participant in template and expanding the template with code at runtime
 
 Tips from DemiTastes on theo disc
-- Put in a README somewhere the specific version of OPENSSL and other deps and where you got it
 - Is current OPENSSL Vendoring best way of implementing dep?
 - README Examples of randomized data sent to mtrack
-- Fix dependancy structure to limit overlap as much as possible
-- Move deps to their own dep folder or something
-
 
 - Add AWS CloudWatch connection to ocean plugin for convenient metrics tracking
 	- Configured in ocean plugin `.env` file
