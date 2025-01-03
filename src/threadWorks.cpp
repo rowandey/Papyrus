@@ -90,7 +90,11 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         }
 
         // TODO: This line prints a new line on Mac?
-        //std::cout << "\r" << std::string(100 , ' ') << "\r" ;
+        // "/033" ANSI escape character
+        // "[" indicates start of a control sequence
+        // "2" 2 specifies the entire line
+        // "K" clears the selection
+        // "\r" returns cursor to start of line
         std::cout << "\033[2K\r";
         // Print updated info on the same line
         std::cout << "\rTotal Sent: " << totalPayloadsSent
