@@ -8,7 +8,7 @@
 class matchBuilder {
 public:
     // Function to generate a random match based on the template
-    nlohmann::json randomMatch();
+    static nlohmann::json randomMatch();
 
 private:
     // Internal function to remove first and last characters from a string

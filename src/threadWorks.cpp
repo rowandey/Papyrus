@@ -44,12 +44,10 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
     if (payload.empty()) {
         response = client.sendGETRequest();
     } else if (payload == "lol") {
-        matchBuilder randMatch;
-        client.setPayload(randMatch.randomMatch().dump(4));
+        client.setPayload(matchBuilder::randomMatch().dump(4));
         response = client.sendPOSTRequest();
     } else if (payload == "ocean") {
-        oceanBuilder myOcean;
-        client.setPayload(myOcean.randomOcean());
+        client.setPayload(oceanBuilder::randomOcean());
         response = client.sendPOSTRequest();
     } else {
 
