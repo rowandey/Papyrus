@@ -18,7 +18,7 @@ int cliHelper::parseIntArg(const char* arg, const std::string& flagName) {
 }
 
 // Runtime banner for program execution
-void cliHelper::printBanner (std::string target, std::string endpoint, int numThreads, int rateLimit) {
+void cliHelper::printBanner (std::string& target, std::string& endpoint, int& numThreads, int& rateLimit) {
     std::cout << "==========================================" << std::endl;
     std::cout << " ____   _    ______   ______  _   _ ____  " << std::endl;
     std::cout << "|  _ \\ / \\  |  _ \\ \\ / /  _ \\| | | / ___| " << std::endl;
@@ -69,7 +69,7 @@ void cliHelper::parseArguments(int argc, char* argv[], int& numThreads, int& pay
         } catch (const std::exception& e) {
             std::cerr << e.what() << '\n';
             std::abort();
-            exit(1);
+            std::exit(EXIT_FAILURE);
         }
     }
 
