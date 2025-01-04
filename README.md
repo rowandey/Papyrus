@@ -333,18 +333,15 @@ Game Name + Tag: bsawatestuser#test
 
 ### Todo:
 
-- Spend time cleaning up possible seg fault causing code
 - Create make based github actions to auto compile per commit
 - Investigate only having one participant in template and expanding the template with code at runtime
 
 Tips from DemiTastes on theo disc
-- Is current OPENSSL Vendoring best way of implementing dep?
 - README Examples of randomized data sent to mtrack
 
 - Add AWS CloudWatch connection to ocean plugin for convenient metrics tracking
 	- Configured in ocean plugin `.env` file
 
-- Auth
 - Investigate C++ coroutines for faster concurrency
 
 ### Recent Changes:

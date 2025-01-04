@@ -66,6 +66,23 @@ std::string apiClient::sendGETRequest() {
 }
 
 std::string apiClient::sendPOSTRequest() {
+    // TODO: Add const std::string& apiToken to handle bearer tokens
+    // Set the Authorization and Content-Type headers
+    /*
+    httplib::Headers headers = {
+        {"Authorization", "Bearer " + apiToken},
+        {"Content-Type", "application/json"}
+    };
+
+    res = sslClient->Post(requestCombined.c_str(), payload.dump(), "application/json");
+    res = client->Post(requestCombined.c_str(), payload.dump(), "application/json");
+
+    These lines need to be changed to 
+
+    res = sslClient->Post(requestCombined.c_str(), payload.dump(), headers);
+    res = client->Post(requestCombined.c_str(), payload.dump(), headers);
+    */
+    
     const std::string requestCombined = (endpoint.empty() ? "/" : endpoint) + (parameter.empty() ? "" : parameter);
 
     if (endpoint.empty()) {
