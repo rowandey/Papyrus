@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <string>
+#include <climits>
 
 // Helper function to validate and parse integer arguments
 int cliHelper::parseIntArg(const char* arg, const std::string& flagName) {
