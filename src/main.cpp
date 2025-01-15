@@ -23,7 +23,8 @@ int main(int argc, char* argv[]) {
     std::cout << "Program is running. Press Ctrl+C to stop.\n";
 
     // Launch threads
-    std::vector<std::thread> threads;
+    std::vector<std::thread> threads(numThreads);
+    threads.reserve(numThreads);
     for (int i = 0; i < numThreads; ++i) {
         threads.emplace_back(&threadWorks::runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike, payload, parameter);
     }
