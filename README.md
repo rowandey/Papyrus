@@ -394,6 +394,7 @@ Tips from DemiTastes on theo disc
 
 - Binary size was reduced from 3.6MB to 2.9MB. This was done by cleaning up includes(some more is still required), and trimming down mapping json objects.
 
+- Simplify the JSON parsing for items to be a single parse pulling 6 random items rather than 6 different parses in getRandomFromJson()
 
 Little present if you read all the way to the end:
 

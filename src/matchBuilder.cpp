@@ -44,9 +44,13 @@ json matchBuilder::randomMatch() {
 
     // Used in assigning the first user to bsawatestuser#test
     bool isFirstIteration = true;
+    
+    
 
     // Will loop 10 times, once for each participant in game
     for (json& participant : matchTemplate["info"]["participants"]) {
+        std::vector<std::string> participantItems = getRandomFromItemsJson(mapping::ITEMS_JSON, 7);
+
         // Randomly generate kills, assists, and other stats
         participant["assists"] = myRandom::generateRandomInt(0, 25);
         participant["deaths"] = myRandom::generateRandomInt(0, 25);
@@ -66,13 +70,13 @@ json matchBuilder::randomMatch() {
         participant["championName"] = getRandomFromJson(mapping::CHAMPSIONS_JSON);
 
         // Randomizes items purchased
-        participant["item0"] = getRandomFromJson(mapping::ITEMS_JSON);
-        participant["item1"] = getRandomFromJson(mapping::ITEMS_JSON);
-        participant["item2"] = getRandomFromJson(mapping::ITEMS_JSON);
-        participant["item3"] = getRandomFromJson(mapping::ITEMS_JSON);
-        participant["item4"] = getRandomFromJson(mapping::ITEMS_JSON);
-        participant["item5"] = getRandomFromJson(mapping::ITEMS_JSON);
-        participant["item6"] = getRandomFromJson(mapping::ITEMS_JSON);
+        participant["item0"] = participantItems[0];
+        participant["item1"] = participantItems[1];
+        participant["item2"] = participantItems[2];
+        participant["item3"] = participantItems[3];
+        participant["item4"] = participantItems[4];
+        participant["item5"] = participantItems[5];
+        participant["item6"] = participantItems[6];
 
         // Randomizes summoner spells
         participant["summoner1Id"] = getRandomFromJson(mapping::SUMMMONERS_JSON);
@@ -140,4 +144,50 @@ std::string matchBuilder::getRandomFromJson(const std::string& jsonString) {
     int randomIndex = distrib(gen);
 
     return keys[randomIndex]; // Return a random key from the file
+}
+
+
+// Static helper function to get a random key from a given JSON file
+std::vector<std::string> matchBuilder::getRandomFromItemsJson(const std::string& jsonString, const int& count) {
+    json items;
+
+    std::vector<std::string> returnKeys;
+    returnKeys.reserve(7);
+
+    try {
+        items = json::parse(jsonString);
+    } catch (const nlohmann::json::parse_error& e) {
+        std::cerr << "JSON Parse Error in getRandomFromJson: " << e.what() << std::endl;
+        return {};
+    }
+
+    // Ensure the JSON is not empty
+    if (items.empty()) {
+        std::cerr << "Error: items JSON is empty!" << std::endl;
+        return {};
+    }
+
+    // Collect all keys
+    std::vector<std::string> keys;
+    for (auto it = items.begin(); it != items.end(); ++it) {
+        keys.push_back(it.key());
+    }
+
+    // Check if the keys vector is empty
+    if (keys.empty()) {
+        std::cerr << "Error: No keys available in JSON object." << std::endl;
+        return {};
+    }
+
+    // Generate a random index
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, keys.size() - 1);
+    int randomIndex = distrib(gen);
+
+    for (int i = 0; i < returnKeys.size(); i++) {
+        returnKeys[i] = keys[randomIndex];
+    }
+
+    return returnKeys; // Return a random key from the file
 }
