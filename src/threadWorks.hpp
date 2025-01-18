@@ -23,4 +23,6 @@ public:
 
     // Worker thread function that sends requests based on the provided parameters
     static void runWorkerThread(const std::string& targetURL, const std::string& endpoint, bool verbose, int payloadCount, int rateLimit, int ramp, int spike, std::string payload, std::string parameter);
+
+    static std::string gzip_compress(const std::string &data);
 };

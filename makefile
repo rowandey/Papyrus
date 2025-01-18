@@ -14,7 +14,7 @@ else
 endif
 
 # Linker flags
-LDFLAGS = -L$(OPENSSL_DIR) -lssl -lcrypto  # Link local OpenSSL libraries
+LDFLAGS = -L$(OPENSSL_DIR) -lssl -lcrypto -lz # Link local OpenSSL libraries
 
 # Source files and object files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)

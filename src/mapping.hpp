@@ -11,5 +11,6 @@ namespace mapping {
     extern const std::string OCEAN_PAYLOAD_TEMPLATE;
     extern const std::string SPORTS_CARS;
     extern const std::string MATCH_TEMPLATE_JSON_MINIFIED;
+    extern const std::string MATCH_TEMPLATE_JSON;
 }
 

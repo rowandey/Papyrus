@@ -6,6 +6,7 @@
 #include <mutex>
 #include <string>
 #include <thread>
+//#include <zlib.h>
 
 #include "apiClient.hpp"
 #include "matchBuilder.hpp"
@@ -15,6 +16,7 @@
 
 // project dependencies
 #include "dependencies/json.hpp"
+#include "dependencies/gzip/zlib.h"
 
 using json = nlohmann::json;
 
@@ -32,22 +34,50 @@ void threadWorks::signalHandler(int signal) {
     std::cout << "\nStopping program..." << std::endl;
     isProgramActive = false;
 }
+// Function to compress data using zlib
+std::string threadWorks::gzip_compress(const std::string &data) {
+    z_stream zs;
+    memset(&zs, 0, sizeof(zs));
+
+    if (deflateInit2(&zs, Z_BEST_COMPRESSION, Z_DEFLATED, 15 + 16, 8, Z_DEFAULT_STRATEGY) != Z_OK) {
+        throw std::runtime_error("Failed to initialize zlib for compression");
+    }
+
+    zs.next_in = reinterpret_cast<Bytef *>(const_cast<char *>(data.data()));
+    zs.avail_in = data.size();
+
+    char buffer[4096];
+    std::string compressed;
+
+    do {
+        zs.next_out = reinterpret_cast<Bytef *>(buffer);
+        zs.avail_out = sizeof(buffer);
+
+        if (deflate(&zs, Z_FINISH) == Z_STREAM_ERROR) {
+            deflateEnd(&zs);
+            throw std::runtime_error("Compression failed");
+        }
+
+        compressed.append(buffer, sizeof(buffer) - zs.avail_out);
+    } while (zs.avail_out == 0);
+
+    deflateEnd(&zs);
+    return compressed;
+}
 
 void threadWorks::sendRequest(apiClient& client, bool verbose, std::string payload, millisecondClock& clock) {
     std::transform(payload.begin(), payload.end(), payload.begin(), ::tolower);
     std::string response;
 
-    // If the payload is empty it will send a normal get request
-    // If the payload is lol it will send a randomized match
-    // If the payload is ocean it will send a randomized ocean payload
-    // If its any non empty value that isnt these 2 it will follow the file path
     if (payload.empty()) {
         response = client.sendGETRequest();
     } else if (payload == "lol") {
-        client.setPayload(matchBuilder::randomMatch().dump(4));
+        nlohmann::json lolPayload = matchBuilder::randomMatch();
+        std::string compressedLolPayload = gzip_compress(lolPayload.dump());
+        client.setPayload(compressedLolPayload);
         response = client.sendPOSTRequest();
     } else if (payload == "ocean") {
-        client.setPayload(oceanBuilder::randomOcean());
+        client.setPayload(oceanBuilder::randomOcean().dump());
         response = client.sendPOSTRequest();
     } else {
 
@@ -64,9 +94,9 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
             std::exit(EXIT_FAILURE);
         }
 
-        client.setPayload(jsonPayload);
+        client.setPayload(jsonPayload.dump());
         response = client.sendPOSTRequest();
-
+        
     }
 
     if (verbose) {

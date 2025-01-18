@@ -94,7 +94,7 @@ json matchBuilder::randomMatch() {
             participant["summonerName"] = myRandom::generateRandomString(8);
         }
     }
-
+    
     return matchTemplate;
 }
 

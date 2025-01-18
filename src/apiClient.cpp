@@ -82,6 +82,11 @@ std::string apiClient::sendPOSTRequest() {
     res = sslClient->Post(requestCombined.c_str(), payload.dump(), headers);
     res = client->Post(requestCombined.c_str(), payload.dump(), headers);
     */
+
+   httplib::Headers headers = {
+        {"Content-Encoding", "gzip"},
+        {"Content-Type", "application/json"}
+    };
     
     const std::string requestCombined = (endpoint.empty() ? "/" : endpoint) + (parameter.empty() ? "" : parameter);
 
@@ -97,9 +102,9 @@ std::string apiClient::sendPOSTRequest() {
     if (sslClient) {
         sslClient->set_read_timeout(7, 0);
         sslClient->set_write_timeout(7, 0);
-        res = sslClient->Post(requestCombined.c_str(), payload.dump(), "application/json");
+        res = sslClient->Post(requestCombined.c_str(), headers, payload, "application/json");
     } else if (client) {
-        res = client->Post(requestCombined.c_str(), payload.dump(), "application/json");
+        res = client->Post(requestCombined.c_str(), headers, payload, "application/json");
     } else {
         std::cout << "Neither client nor sslClient is initialized." << std::endl;
     }
