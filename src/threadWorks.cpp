@@ -16,6 +16,7 @@
 
 // project dependencies
 #include "dependencies/json.hpp"
+// https://github.com/madler/zlib
 #include "dependencies/gzip/zlib.h"
 
 using json = nlohmann::json;
@@ -96,7 +97,7 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
 
         client.setPayload(jsonPayload.dump());
         response = client.sendPOSTRequest();
-        
+
     }
 
     if (verbose) {
