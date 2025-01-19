@@ -396,6 +396,12 @@ Tips from DemiTastes on theo disc
 
 - Simplify the JSON parsing for items to be a single parse pulling 6 random items rather than 6 different parses in getRandomFromJson()
 
+
+### Performance Increases
+- Went from 110 to 170 with GZIP addition
+- Went from 170 to 380 with removing recreation of random device per call of generateRandomInt
+
+
 Little present if you read all the way to the end:
 
 <div align="center">
