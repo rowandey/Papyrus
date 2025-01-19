@@ -1,9 +1,11 @@
 #pragma once
 
+#include <random> 
 #include <string>
 
 class myRandom {
 public:
+
     // Generates a random integer between min and max (inclusive)
     static int generateRandomInt(int min, int max);
 
@@ -15,4 +17,7 @@ public:
 
     // Generates a random boolean (true or false)
     static bool getRandomBool();
+private:
+    static std::random_device rd;  // Seed source
+    static std::mt19937 gen;
 };

@@ -3,11 +3,14 @@
 #include <string>
 #include <random>
 
+// Constructor to initialize the random number generator with a seed
+std::random_device myRandom::rd;
+std::mt19937 myRandom::gen(myRandom::rd());
+
 int myRandom::generateRandomInt(int min, int max) {
-    std::random_device rd;  // Seed source
-    std::mt19937 gen(rd()); // Mersenne Twister RNG
     std::uniform_int_distribution<> distrib(min, max);
     return distrib(gen);
+    
 }
 
 std::string myRandom::generateRandomString(size_t length) {

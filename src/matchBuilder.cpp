@@ -152,7 +152,7 @@ std::vector<std::string> matchBuilder::getRandomFromItemsJson(const std::string&
     json items;
 
     std::vector<std::string> returnKeys;
-    returnKeys.reserve(7);
+    returnKeys.resize(count);
 
     try {
         items = json::parse(jsonString);
@@ -185,7 +185,7 @@ std::vector<std::string> matchBuilder::getRandomFromItemsJson(const std::string&
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
     int randomIndex = distrib(gen);
 
-    for (int i = 0; i < returnKeys.size(); i++) {
+    for (int i = 0; i < count; i++) {
         returnKeys[i] = keys[randomIndex];
     }
 
