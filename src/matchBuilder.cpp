@@ -13,14 +13,7 @@ using json = nlohmann::json;
 // TODO: Inspect if its best practice to hardcode path to matchTemplate
 json matchBuilder::randomMatch() {
 
-    json matchTemplate;
-    try {
-        matchTemplate = json::parse(mapping::MATCH_TEMPLATE_JSON_MINIFIED);
-    } catch (const nlohmann::json::parse_error& e) {
-        std::cerr << "JSON Parse Error: " << e.what() << std::endl;
-        // Handle the error or return early
-    }
-    
+    json matchTemplate = mapping::MATCH_TEMPLATE_JSON;
 
     // TODO: JSON payload can be parsed but structure is not validated
 
@@ -49,13 +42,9 @@ json matchBuilder::randomMatch() {
 
     // Batch fetching random values to save on runtime massively
     std::vector<std::string> participantItems = getRandomVectorFromJSON(mapping::ITEMS_JSON, 70);
-
     std::vector<std::string> participantChamp = getRandomVectorFromJSON(mapping::CHAMPIONS_JSON, 10);
-
     std::vector<std::string> participantSummoners = getRandomVectorFromJSON(mapping::SUMMMONERS_JSON, 20);
-
     std::vector<std::string> participantKeystone = getRandomVectorFromJSON(mapping::KEYSTONES_JSON, 10);
-
     std::vector<std::string> participantSecondary = getRandomVectorFromJSON(mapping::SECONDARY_RUNES_JSON, 10);
 
     // Will loop 10 times, once for each participant in game
@@ -164,26 +153,18 @@ std::string matchBuilder::getRandomFromJson(const std::string& jsonString) {
 
 
 // Static helper function to get a random key from a given JSON file
-std::vector<std::string> matchBuilder::getRandomVectorFromJSON(const std::string& jsonString, const int& count) {
-    json items;
+std::vector<std::string> matchBuilder::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count) {
 
     std::vector<std::string> returnKeys;
     returnKeys.resize(count);
 
-    try {
-        items = json::parse(jsonString);
-    } catch (const nlohmann::json::parse_error& e) {
-        std::cerr << "JSON Parse Error in getRandomFromJson: " << e.what() << std::endl;
-        return {};
-    }
-
     // Ensure the JSON is not empty
-    if (items.empty()) {
+    if (jsonObject.empty()) {
         std::cerr << "Error: items JSON is empty!" << std::endl;
         return {};
     }
 
-    if (!items.is_object()) {
+    if (!jsonObject.is_object()) {
         std::cerr << "Error: 'items' is not a valid JSON object!" << std::endl;
         return returnKeys;  // Exit or handle error
     }
@@ -192,7 +173,7 @@ std::vector<std::string> matchBuilder::getRandomVectorFromJSON(const std::string
 
     // Collect all keys
     std::vector<std::string> keys;
-    for (auto it = items.begin(); it != items.end(); ++it) {
+    for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
         if (!it.key().empty()) {
             // std::cout << "Key: " << it.key() << "\tValue: " << it.value() << std::endl;
             keys.push_back(it.key());

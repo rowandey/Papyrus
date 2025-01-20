@@ -437,6 +437,20 @@ std::vector<std::string> participantKeystone = getRandomVectorFromJSON(mapping::
 std::vector<std::string> participantSecondary = getRandomVectorFromJSON(mapping::SECONDARY_RUNES_JSON, 10);
 ```
 
+- Went from 830 to 870 by making the mapping objects natively of type nlohman::json rather than strings that get parsed per program loop execution
+```cpp
+nlohmann::json KEYSTONES_JSON;
+nlohmann::json SECONDARY_RUNES_JSON;
+nlohmann::json SUMMMONERS_JSON;
+nlohmann::json ITEMS_JSON;
+nlohmann::json CHAMPIONS_JSON;
+```
+
+- Went from 870 to 905~ by doing the same for the MATCH_TEMPLATE_JSON that each game is built off of
+```cpp
+nlohmann::json MATCH_TEMPLATE_JSON;
+```
+
 
 Little present if you read all the way to the end:
 
