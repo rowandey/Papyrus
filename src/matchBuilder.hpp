@@ -17,5 +17,5 @@ private:
     // Internal function to get a random key from a JSON file
     static std::string getRandomFromJson(const std::string& filename);
 
-    static std::vector<std::string> getRandomFromItemsJson(const std::string& filename, const int& count);
+    static std::vector<std::string> getRandomItem(const std::string& filename, const int& count);
 };

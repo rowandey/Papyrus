@@ -399,7 +399,7 @@ Tips from DemiTastes on theo disc
 
 ### Performance Increases
 - Went from 110 to 170 with GZIP addition
-- Went from 170 to 380 with removing recreation of random device per call of generateRandomInt
+- Went from 170 to 360 with removing recreation of random device per call of generateRandomInt
 
 
 Little present if you read all the way to the end:

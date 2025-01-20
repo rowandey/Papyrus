@@ -12,6 +12,7 @@ using json = nlohmann::json;
 
 // TODO: Inspect if its best practice to hardcode path to matchTemplate
 json matchBuilder::randomMatch() {
+
     json matchTemplate;
     try {
         matchTemplate = json::parse(mapping::MATCH_TEMPLATE_JSON_MINIFIED);
@@ -19,6 +20,7 @@ json matchBuilder::randomMatch() {
         std::cerr << "JSON Parse Error: " << e.what() << std::endl;
         // Handle the error or return early
     }
+    
 
     // TODO: JSON payload can be parsed but structure is not validated
 
@@ -44,12 +46,18 @@ json matchBuilder::randomMatch() {
 
     // Used in assigning the first user to bsawatestuser#test
     bool isFirstIteration = true;
+
+    /* 
+    TODO: Have getRandomItem run once pulling 70 items at random in a single parse of ITEMS_JSON and put all items onto a vector. As we assign items per loop of the below for loop, we pop items off of the vector and continue to assign them as needed until all item slots are full. This change will make it so that the parses of ITEMS_JSON will drop dramatically
     
-    
+    Prase once per item:    70 parse(s)
+    Prase 7 per person:     10 parse(s)
+    Parse 70 per game:      01 parse(s)
+    */
 
     // Will loop 10 times, once for each participant in game
     for (json& participant : matchTemplate["info"]["participants"]) {
-        std::vector<std::string> participantItems = getRandomFromItemsJson(mapping::ITEMS_JSON, 7);
+        std::vector<std::string> participantItems = getRandomItem(mapping::ITEMS_JSON, 7);
 
         // Randomly generate kills, assists, and other stats
         participant["assists"] = myRandom::generateRandomInt(0, 25);
@@ -148,7 +156,7 @@ std::string matchBuilder::getRandomFromJson(const std::string& jsonString) {
 
 
 // Static helper function to get a random key from a given JSON file
-std::vector<std::string> matchBuilder::getRandomFromItemsJson(const std::string& jsonString, const int& count) {
+std::vector<std::string> matchBuilder::getRandomItem(const std::string& jsonString, const int& count) {
     json items;
 
     std::vector<std::string> returnKeys;
@@ -183,9 +191,9 @@ std::vector<std::string> matchBuilder::getRandomFromItemsJson(const std::string&
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
-    int randomIndex = distrib(gen);
 
     for (int i = 0; i < count; i++) {
+        int randomIndex = distrib(gen);
         returnKeys[i] = keys[randomIndex];
     }
 

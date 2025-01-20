@@ -21,6 +21,7 @@
 
 using json = nlohmann::json;
 
+
 // Static member initialization
 std::atomic<bool> threadWorks::isProgramActive(true);
 std::mutex threadWorks::consoleMutex;
@@ -160,4 +161,5 @@ void threadWorks::runWorkerThread(const std::string& targetURL, const std::strin
             std::this_thread::sleep_for(std::chrono::milliseconds(myRandom::generateRandomInt(0, spike)));
         }
     }
+    
 }
