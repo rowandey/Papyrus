@@ -398,9 +398,44 @@ Tips from DemiTastes on theo disc
 
 
 ### Performance Increases
-- Went from 110 to 170 with GZIP addition (18kb to 2.3kb packet sizes)
+- Went from 110 to 170 by adding GZIP encoding and running gzip_compress method on payload before running set-payload reducing size (18kb to 2.3kb packet sizes)   
+```cpp
+std::string threadWorks::gzip_compress(const std::string &data)
+
+//Ex.
+nlohmann::json lolPayload = matchBuilder::randomMatch();
+std::string compressedLolPayload = gzip_compress(lolPayload.dump());
+client.setPayload(compressedLolPayload);
+response = client.sendPOSTRequest();
+```
 - Went from 170 to 360 with removing recreation of random device per call of generateRandomInt
+```cpp
+// Constructor to initialize the random number generator with a seed
+std::random_device myRandom::rd;
+std::mt19937 myRandom::gen(myRandom::rd());
+
+int myRandom::generateRandomInt(int min, int max) {
+    std::uniform_int_distribution<> distrib(min, max);
+    return distrib(gen);
+    
+}
+```
+
 - Went from 360 to 400 with pulling 70 items per match in a single parse rather than parsing IEMS_JSON 70 times a match
+```cpp
+std::vector<std::string> participantItems = getRandomVectorFromJSON(mapping::ITEMS_JSON, 70);
+```
+
+- Went from 400 to 830 by batch parsing CHAMPIONS_JSON SUMMMONERS_JSON KEYSTONES_JSON SECONDARY_RUNES_JSON using:
+```cpp
+std::vector<std::string> participantChamp = getRandomVectorFromJSON(mapping::CHAMPIONS_JSON, 10);
+
+std::vector<std::string> participantSummoners = getRandomVectorFromJSON(mapping::SUMMMONERS_JSON, 20);
+
+std::vector<std::string> participantKeystone = getRandomVectorFromJSON(mapping::KEYSTONES_JSON, 10);
+
+std::vector<std::string> participantSecondary = getRandomVectorFromJSON(mapping::SECONDARY_RUNES_JSON, 10);
+```
 
 
 Little present if you read all the way to the end:

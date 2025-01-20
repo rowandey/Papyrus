@@ -47,16 +47,16 @@ json matchBuilder::randomMatch() {
     // Used in assigning the first user to bsawatestuser#test
     bool isFirstIteration = true;
 
-    /* 
-    TODO: Have getRandomItem run once pulling 70 items at random in a single parse of ITEMS_JSON and put all items onto a vector. As we assign items per loop of the below for loop, we pop items off of the vector and continue to assign them as needed until all item slots are full. This change will make it so that the parses of ITEMS_JSON will drop dramatically
-    
-    Prase once per item:    70 parse(s)
-    Prase 7 per person:     10 parse(s)
-    Parse 70 per game:      01 parse(s)
-    */
-    
-    // Do the same thing for other json related getRandom functions
-    std::vector<std::string> participantItems = getRandomItem(mapping::ITEMS_JSON, 70);
+    // Batch fetching random values to save on runtime massively
+    std::vector<std::string> participantItems = getRandomVectorFromJSON(mapping::ITEMS_JSON, 70);
+
+    std::vector<std::string> participantChamp = getRandomVectorFromJSON(mapping::CHAMPIONS_JSON, 10);
+
+    std::vector<std::string> participantSummoners = getRandomVectorFromJSON(mapping::SUMMMONERS_JSON, 20);
+
+    std::vector<std::string> participantKeystone = getRandomVectorFromJSON(mapping::KEYSTONES_JSON, 10);
+
+    std::vector<std::string> participantSecondary = getRandomVectorFromJSON(mapping::SECONDARY_RUNES_JSON, 10);
 
     // Will loop 10 times, once for each participant in game
     for (json& participant : matchTemplate["info"]["participants"]) {
@@ -78,7 +78,9 @@ json matchBuilder::randomMatch() {
         participant["champExperience"] = myRandom::generateRandomInt(1, 12576);
         participant["champLevel"] = myRandom::generateRandomInt(1, 18);
         participant["championId"] = myRandom::generateRandomInt(1, 200);
-        participant["championName"] = getRandomFromJson(mapping::CHAMPSIONS_JSON);
+
+        participant["championName"] = participantChamp[0];
+        participantChamp.erase(participantChamp.begin());
 
         // Randomizes items purchased
         for (int i = 0; i < 7; i++){
@@ -88,12 +90,17 @@ json matchBuilder::randomMatch() {
         }
 
         // Randomizes summoner spells
-        participant["summoner1Id"] = getRandomFromJson(mapping::SUMMMONERS_JSON);
-        participant["summoner2Id"] = getRandomFromJson(mapping::SUMMMONERS_JSON);
+        participant["summoner1Id"] = participantSummoners[0];
+        participantSummoners.erase(participantSummoners.begin());
+        participant["summoner2Id"] = participantSummoners[0];
+        participantSummoners.erase(participantSummoners.begin());
 
         // Randomizes keystone rune and secondary school
-        participant["perks"]["styles"][0]["selections"][0]["perk"] = getRandomFromJson(mapping::KEYSTONES_JSON);
-        participant["perks"]["styles"][1]["style"] = getRandomFromJson(mapping::SECONDARY_RUNES_JSON);
+        participant["perks"]["styles"][0]["selections"][0]["perk"] = participantKeystone[0];
+        participantKeystone.erase(participantKeystone.begin());
+
+        participant["perks"]["styles"][1]["style"] = participantSecondary[0];
+        participantSecondary.erase(participantSecondary.begin());
 
         // Random Summoner Name and Riot Account data
         if (isFirstIteration) {
@@ -157,7 +164,7 @@ std::string matchBuilder::getRandomFromJson(const std::string& jsonString) {
 
 
 // Static helper function to get a random key from a given JSON file
-std::vector<std::string> matchBuilder::getRandomItem(const std::string& jsonString, const int& count) {
+std::vector<std::string> matchBuilder::getRandomVectorFromJSON(const std::string& jsonString, const int& count) {
     json items;
 
     std::vector<std::string> returnKeys;
@@ -176,10 +183,22 @@ std::vector<std::string> matchBuilder::getRandomItem(const std::string& jsonStri
         return {};
     }
 
+    if (!items.is_object()) {
+        std::cerr << "Error: 'items' is not a valid JSON object!" << std::endl;
+        return returnKeys;  // Exit or handle error
+    }
+
+    //std::cout << items.dump(4) << std::endl;
+
     // Collect all keys
     std::vector<std::string> keys;
     for (auto it = items.begin(); it != items.end(); ++it) {
-        keys.push_back(it.key());
+        if (!it.key().empty()) {
+            // std::cout << "Key: " << it.key() << "\tValue: " << it.value() << std::endl;
+            keys.push_back(it.key());
+        } else {
+            std::cerr << "Warning: Found an invalid key in the JSON object." << std::endl;
+        }
     }
 
     // Check if the keys vector is empty
