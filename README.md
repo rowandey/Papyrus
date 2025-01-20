@@ -451,6 +451,40 @@ nlohmann::json CHAMPIONS_JSON;
 nlohmann::json MATCH_TEMPLATE_JSON;
 ```
 
+- Went from 900 to 2400 by removing the random_devices from each call of generateRandomNumberString, generateRandomString, and getRandomBool.
+
+```cpp
+std::random_device myRandom::rd;
+std::mt19937 myRandom::gen(myRandom::rd());
+```
+
+- Went from 2400 to 3000 by making the strings containing the set of characters the random device will pull from a char array and constant to the compiler (constexpr). Also made the size of the char array a constexpr so that we do not need to compute it repeatedly.
+
+```cpp
+constexpr char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+constexpr size_t chars_len = sizeof(chars) - 1;
+
+std::uniform_int_distribution<> distrib(0, chars_len - 1);
+std::string randomStr;
+for (size_t i = 0; i < length; ++i) {
+	randomStr += chars[distrib(gen)];
+}
+return randomStr;
+```
+
+- Went from 3000 to 3300 by reserving the bits for the string that gets generated at the time the function is called so no resizing is required. Also made `std::uniform_int_distribution` static. It did not need to be remade every execution.
+```cpp
+constexpr char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+constexpr size_t chars_len = sizeof(chars) - 1;
+
+static std::uniform_int_distribution<> distrib(0, chars_len - 1);
+std::string randomStr;
+randomStr.reserve(length);
+for (size_t i = 0; i < length; ++i) {
+	randomStr += chars[distrib(gen)];
+}
+return randomStr;
+```
 
 Little present if you read all the way to the end:
 

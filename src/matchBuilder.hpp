@@ -14,8 +14,5 @@ private:
     // Internal function to remove first and last characters from a string
     std::string dropFirstAndLast(const std::string& str);
 
-    // Internal function to get a random key from a JSON file
-    static std::string getRandomFromJson(const std::string& filename);
-
     static std::vector<std::string> getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count);
 };
