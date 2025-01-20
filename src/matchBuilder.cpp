@@ -54,10 +54,13 @@ json matchBuilder::randomMatch() {
     Prase 7 per person:     10 parse(s)
     Parse 70 per game:      01 parse(s)
     */
+    
+    // Do the same thing for other json related getRandom functions
+    std::vector<std::string> participantItems = getRandomItem(mapping::ITEMS_JSON, 70);
 
     // Will loop 10 times, once for each participant in game
     for (json& participant : matchTemplate["info"]["participants"]) {
-        std::vector<std::string> participantItems = getRandomItem(mapping::ITEMS_JSON, 7);
+        // std::vector<std::string> participantItems = getRandomItem(mapping::ITEMS_JSON, 7);
 
         // Randomly generate kills, assists, and other stats
         participant["assists"] = myRandom::generateRandomInt(0, 25);
@@ -78,13 +81,11 @@ json matchBuilder::randomMatch() {
         participant["championName"] = getRandomFromJson(mapping::CHAMPSIONS_JSON);
 
         // Randomizes items purchased
-        participant["item0"] = participantItems[0];
-        participant["item1"] = participantItems[1];
-        participant["item2"] = participantItems[2];
-        participant["item3"] = participantItems[3];
-        participant["item4"] = participantItems[4];
-        participant["item5"] = participantItems[5];
-        participant["item6"] = participantItems[6];
+        for (int i = 0; i < 7; i++){
+            std::string key = "item" + std::to_string(i);
+            participant[key] = participantItems[0];
+            participantItems.erase(participantItems.begin());
+        }
 
         // Randomizes summoner spells
         participant["summoner1Id"] = getRandomFromJson(mapping::SUMMMONERS_JSON);

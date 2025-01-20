@@ -398,8 +398,9 @@ Tips from DemiTastes on theo disc
 
 
 ### Performance Increases
-- Went from 110 to 170 with GZIP addition
+- Went from 110 to 170 with GZIP addition (18kb to 2.3kb packet sizes)
 - Went from 170 to 360 with removing recreation of random device per call of generateRandomInt
+- Went from 360 to 400 with pulling 70 items per match in a single parse rather than parsing IEMS_JSON 70 times a match
 
 
 Little present if you read all the way to the end:
