@@ -1,7 +1,7 @@
+#include <string>
+
 #include "mapping.hpp"
 #include "dependencies/json.hpp"
-
-#include <string>
 
 namespace mapping{
 

@@ -1,13 +1,13 @@
-#include "oceanBuilder.hpp"
-
 #include <iostream>
 #include <random>
 
-#include "mapping.hpp"
-#include "myRandom.hpp"
-
 // project dependencies
 #include "dependencies/json.hpp"
+
+#include "mapping.hpp"
+#include "myRandom.hpp"
+#include "oceanBuilder.hpp"
+
 
 using json = nlohmann::json;
 
@@ -25,12 +25,6 @@ json oceanBuilder::randomOcean() {
     oceanTemplate["overrides"]["project"]["name"] = getRandomFromJson();
 
     return oceanTemplate;
-}
-
-// Internal function to remove the first and last characters of a string
-std::string oceanBuilder::dropFirstAndLast(const std::string& str) {
-    if (str.length() > 2) { return str.substr(1, str.length() - 2); }
-    return ""; // Return an empty string if the input is too short
 }
 
 // Static helper function to get a random value from a given JSON file

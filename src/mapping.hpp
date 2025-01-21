@@ -1,7 +1,8 @@
 #pragma once
 
-#include "dependencies/json.hpp"
 #include <string>
+
+#include "dependencies/json.hpp"
 
 namespace mapping {
     extern const nlohmann::json KEYSTONES_JSON;

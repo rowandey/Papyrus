@@ -1,11 +1,11 @@
-#include "cliHelper.hpp"
-
 #include <cmath>
 #include <iostream>
 #include <string>
 #include <climits>
 
-// Helper function to validate and parse integer arguments
+#include "cliHelper.hpp"
+
+// Properly ingests CLI arguments to correct type
 int cliHelper::parseIntArg(const char* arg, const std::string& flagName) {
     try {
         return std::stoi(arg);
@@ -18,7 +18,6 @@ int cliHelper::parseIntArg(const char* arg, const std::string& flagName) {
     }
 }
 
-// Runtime banner for program execution
 void cliHelper::printBanner (std::string& target, std::string& endpoint, int& numThreads, int& rateLimit) {
     std::cout << "==========================================" << std::endl;
     std::cout << " ____   _    ______   ______  _   _ ____  " << std::endl;
@@ -34,7 +33,6 @@ void cliHelper::printBanner (std::string& target, std::string& endpoint, int& nu
     std::cout <<  "==========================================" << std::endl;
 }
 
-// Helper function for parsing command-line arguments
 void cliHelper::parseArguments(int argc, char* argv[], int& numThreads, int& payloadCount, int& rateLimit, int& ramp, int& spike, std::string& target, std::string& endpoint, bool& verbose, std::string& payload, std::string& parameter) {
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
@@ -77,7 +75,6 @@ void cliHelper::parseArguments(int argc, char* argv[], int& numThreads, int& pay
     if (target.empty()) throw std::runtime_error("Error: Target URL is required.");
 }
 
-// Function to display help message
 void cliHelper::displayHelp() {
     std::cout << "Usage: ./program [options] {value}\n"
             << "Options:\n"
@@ -96,8 +93,6 @@ void cliHelper::displayHelp() {
             << "./papy --threads 4 --target \"http://127.0.0.1\" --endpoint \"/printJson\" --payload ocean --verbose --rate 2000\n";
 }
 
-// Helper function to check if a number is a valid integer or not and returns
-// 1 if it is
 bool cliHelper::isValidInt(double num) {
     return std::floor(num) == num && num >= INT_MIN && num <= INT_MAX;
 }

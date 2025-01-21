@@ -1,6 +1,6 @@
-#include "millisecondClock.hpp"
-
 #include <chrono>
+
+#include "millisecondClock.hpp"
 
 // Start the clock by recording the current time
 void millisecondClock::start() {

@@ -8,7 +8,7 @@
 
 int main(int argc, char* argv[]) {
     
-    // Runtime configuration variables declared and initialized with default values
+    // Base variables that are altered based off CLI arguments
     int numThreads = 1, payloadCount = 0, rateLimit = 0, ramp = 0, spike = 0;
     bool verbose = false;
     std::string target, endpoint, payload, parameter;
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Program is running. Press Ctrl+C to stop.\n";
 
     // Launch threads
-    std::vector<std::thread> threads(numThreads);
+    std::vector<std::thread> threads;
     threads.reserve(numThreads);
     for (int i = 0; i < numThreads; ++i) {
         threads.emplace_back(&threadWorks::runWorkerThread, target, endpoint, verbose, payloadCount, rateLimit, ramp, spike, payload, parameter);

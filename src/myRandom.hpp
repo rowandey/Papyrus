@@ -3,6 +3,8 @@
 #include <random> 
 #include <string>
 
+#include "dependencies/json.hpp"
+
 class myRandom {
 public:
 
@@ -17,6 +19,9 @@ public:
 
     // Generates a random boolean (true or false)
     static bool getRandomBool();
+
+    static std::vector<std::string> getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count);
+    
 private:
     static std::random_device rd;  // Seed source
     static std::mt19937 gen;

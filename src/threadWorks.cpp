@@ -1,23 +1,21 @@
-#include "threadWorks.hpp"
-
 #include <atomic>
 #include <fstream>
 #include <iostream>
 #include <mutex>
 #include <string>
 #include <thread>
-//#include <zlib.h>
+
+// project dependencies
+#include "dependencies/json.hpp"
+// https://github.com/madler/zlib
+#include "dependencies/gzip/zlib.h"
 
 #include "apiClient.hpp"
 #include "matchBuilder.hpp"
 #include "millisecondClock.hpp"
 #include "myRandom.hpp"
 #include "oceanBuilder.hpp"
-
-// project dependencies
-#include "dependencies/json.hpp"
-// https://github.com/madler/zlib
-#include "dependencies/gzip/zlib.h"
+#include "threadWorks.hpp"
 
 using json = nlohmann::json;
 

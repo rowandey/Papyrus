@@ -1,5 +1,3 @@
-#include "apiClient.hpp"
-
 #include <memory>
 #include <string>
 
@@ -8,6 +6,8 @@
 
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include "dependencies/httplib.h"
+
+#include "apiClient.hpp"
 
 // Constructor to initialize the server address
 apiClient::apiClient(const std::string& serverAddress) {
