@@ -1,10 +1,10 @@
+#include "myRandom.hpp"
+
 #include <string>
 #include <random>
 #include <iostream>
 
 #include "dependencies/json.hpp"
-
-#include "myRandom.hpp"
 
 // Constructor to initialize the random number generator with a seed.
 // These are declared static so there is only one instance across all objects
@@ -66,6 +66,7 @@ bool myRandom::getKeysFromJsonObject(std::vector<std::string>& returnKeys, const
             returnKeys.push_back(it.key());
         } else {
             std::cerr << "Warning: Found an invalid key in the JSON object." << std::endl;
+            return false;
         }
     }
 
@@ -77,8 +78,10 @@ bool myRandom::getKeysFromJsonObject(std::vector<std::string>& returnKeys, const
     return true;
 }
 
-bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& returnKeys, const nlohmann::json& jsonObject, size_t count) {
-    returnKeys.reserve(count);
+bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData, const nlohmann::json& jsonObject, size_t count) {
+    // We know we'll need exactly count elements, so reserve space for them
+    // to reduce the number of reallocations.
+    participantData.reserve(count);
 
     // We only care about the keys of this JSON object.
     std::vector<std::string> keys;
@@ -91,7 +94,7 @@ bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& returnKeys, con
 
     for (int i = 0; i < count; i++) {
         int randomIndex = distrib(gen);
-        returnKeys.push_back(keys[randomIndex]);
+        participantData.push_back(keys[randomIndex]);
     }
 
     return true;

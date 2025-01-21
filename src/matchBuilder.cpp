@@ -70,25 +70,25 @@ json matchBuilder::randomMatch() {
         participant["champLevel"] = myRandom::generateRandomInt(1, 18);
         participant["championId"] = myRandom::generateRandomInt(1, 200);
 
-        participant["championName"] = participantChamp[0];
-        participantChamp.erase(participantChamp.begin());
+        participant["championName"] = participantChamp.back();
+        participantChamp.pop_back();
 
         for (int i = 0; i < 7; i++){
             std::string key = "item" + std::to_string(i);
-            participant[key] = participantItems[0];
-            participantItems.erase(participantItems.begin());
+            participant[key] = participantItems.back();
+            participantItems.pop_back();
         }
 
-        participant["summoner1Id"] = participantSummoners[0];
-        participantSummoners.erase(participantSummoners.begin());
-        participant["summoner2Id"] = participantSummoners[0];
-        participantSummoners.erase(participantSummoners.begin());
+        participant["summoner1Id"] = participantSummoners.back();
+        participantSummoners.pop_back();
+        participant["summoner2Id"] = participantSummoners.back();
+        participantSummoners.pop_back();
 
-        participant["perks"]["styles"][0]["selections"][0]["perk"] = participantKeystone[0];
-        participantKeystone.erase(participantKeystone.begin());
+        participant["perks"]["styles"][0]["selections"][0]["perk"] = participantKeystone.back();
+        participantKeystone.pop_back();
 
-        participant["perks"]["styles"][1]["style"] = participantSecondary[0];
-        participantSecondary.erase(participantSecondary.begin());
+        participant["perks"]["styles"][1]["style"] = participantSecondary.back();
+        participantSecondary.pop_back();
 
         // First iteration static placeholder name used for debugging
         if (isFirstIteration) {
