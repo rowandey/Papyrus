@@ -1,8 +1,8 @@
 #include "myRandom.hpp"
 
-#include <string>
-#include <random>
 #include <iostream>
+#include <random>
+#include <string>
 
 #include "dependencies/json.hpp"
 

@@ -1,17 +1,15 @@
-#include <iostream>
-#include <random>
+#include "matchBuilder.hpp"
+
 #include <string>
 
 #include "dependencies/json.hpp"
 
-#include "matchBuilder.hpp"
 #include "mapping.hpp"
 #include "myRandom.hpp"
 
 using json = nlohmann::json;
 
 json matchBuilder::randomMatch() {
-
     json matchTemplate = mapping::MATCH_TEMPLATE_JSON;
 
     matchTemplate["info"]["gameCreation"] = 9466848;
