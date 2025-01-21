@@ -50,41 +50,42 @@ bool myRandom::getRandomBool() {
     return distrib(gen) == 1;
 }
 
-std::vector<std::string> myRandom::getKeysFromJsonObject(const nlohmann::json& jsonObject) {
-    std::vector<std::string> keys;
+bool myRandom::getKeysFromJsonObject(std::vector<std::string>& returnKeys, const nlohmann::json& jsonObject) {
+    if (jsonObject.empty()) {
+        std::cerr << "Error: items JSON is empty!" << std::endl;
+        return false;
+    }
+
+    if (!jsonObject.is_object()) {
+        std::cerr << "Error: 'items' is not a valid JSON object!" << std::endl;
+        return false;
+    }
 
     for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
         if (!it.key().empty()) {
-            keys.push_back(it.key());
+            returnKeys.push_back(it.key());
         } else {
             std::cerr << "Warning: Found an invalid key in the JSON object." << std::endl;
         }
     }
 
-    if (keys.empty()) {
+    if (returnKeys.empty()) {
         std::cerr << "Error: No keys available in JSON object." << std::endl;
-        return {};
+        return false;
     }
 
-    return keys;
+    return true;
 }
 
-std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, size_t count) {
-    std::vector<std::string> returnKeys;
+bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& returnKeys, const nlohmann::json& jsonObject, size_t count) {
     returnKeys.reserve(count);
 
-    if (jsonObject.empty()) {
-        std::cerr << "Error: items JSON is empty!" << std::endl;
-        return {};
-    }
-
-    if (!jsonObject.is_object()) {
-        std::cerr << "Error: 'items' is not a valid JSON object!" << std::endl;
-        return {};
-    }
-
     // We only care about the keys of this JSON object.
-    std::vector<std::string> keys = getKeysFromJsonObject(jsonObject);
+    std::vector<std::string> keys;
+    bool success = getKeysFromJsonObject(keys, jsonObject);
+    if (!success) {
+        return false;
+    }
 
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
 
@@ -93,5 +94,5 @@ std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json&
         returnKeys.push_back(keys[randomIndex]);
     }
 
-    return returnKeys; // Return a random key from the file
+    return true;
 }
