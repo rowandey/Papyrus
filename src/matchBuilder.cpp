@@ -41,11 +41,26 @@ json matchBuilder::randomMatch() {
     bool isFirstIteration = true;
 
     // Batch fetching random values to save on runtime massively
-    std::vector<std::string> participantItems = getRandomVectorFromJSON(mapping::ITEMS_JSON, 70);
-    std::vector<std::string> participantChamp = getRandomVectorFromJSON(mapping::CHAMPIONS_JSON, 10);
-    std::vector<std::string> participantSummoners = getRandomVectorFromJSON(mapping::SUMMMONERS_JSON, 20);
-    std::vector<std::string> participantKeystone = getRandomVectorFromJSON(mapping::KEYSTONES_JSON, 10);
-    std::vector<std::string> participantSecondary = getRandomVectorFromJSON(mapping::SECONDARY_RUNES_JSON, 10);
+    std::vector<std::string> participantItems;
+    participantItems.reserve(1400);
+    participantItems = getRandomVectorFromJSON(mapping::ITEMS_JSON, 70);
+
+    std::vector<std::string> participantChamp;
+    participantChamp.reserve(100);
+    participantChamp = getRandomVectorFromJSON(mapping::CHAMPIONS_JSON, 10);
+
+    std::vector<std::string> participantSummoners;
+    participantSummoners.reserve(150);
+    participantSummoners = getRandomVectorFromJSON(mapping::SUMMMONERS_JSON, 20);
+
+    std::vector<std::string> participantKeystone;
+    participantKeystone.reserve(200);
+    participantKeystone = getRandomVectorFromJSON(mapping::KEYSTONES_JSON, 10);
+
+
+    std::vector<std::string> participantSecondary;
+    participantSecondary.reserve(110); 
+    participantSecondary= getRandomVectorFromJSON(mapping::SECONDARY_RUNES_JSON, 10);
 
     // Will loop 10 times, once for each participant in game
     for (json& participant : matchTemplate["info"]["participants"]) {
