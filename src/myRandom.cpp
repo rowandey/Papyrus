@@ -54,22 +54,9 @@ bool myRandom::getRandomBool() {
 
 }
 
-std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count) {
-
-    std::vector<std::string> returnKeys;
-    returnKeys.resize(count);
-
-    if (jsonObject.empty()) {
-        std::cerr << "Error: items JSON is empty!" << std::endl;
-        return {};
-    }
-
-    if (!jsonObject.is_object()) {
-        std::cerr << "Error: 'items' is not a valid JSON object!" << std::endl;
-        return {};
-    }
-
+std::vector<std::string> getKeysFromJsonObject(const nlohmann::json& jsonObject) {
     std::vector<std::string> keys;
+
     for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
         if (!it.key().empty()) {
             keys.push_back(it.key());
@@ -83,8 +70,25 @@ std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json&
         return {};
     }
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    return keys;
+}
+
+std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count) {
+    std::vector<std::string> returnKeys;
+    returnKeys.resize(count);
+
+    if (jsonObject.empty()) {
+        std::cerr << "Error: items JSON is empty!" << std::endl;
+        return {};
+    }
+
+    if (!jsonObject.is_object()) {
+        std::cerr << "Error: 'items' is not a valid JSON object!" << std::endl;
+        return {};
+    }
+
+    std::vector<std::string> keys = getKeysFromJsonObject(jsonObject);
+
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
 
     for (int i = 0; i < count; i++) {
