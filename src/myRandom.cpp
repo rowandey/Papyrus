@@ -50,7 +50,7 @@ bool myRandom::getRandomBool() {
     return distrib(gen) == 1;
 }
 
-bool myRandom::getKeysFromJsonObject(std::vector<std::string>& returnKeys, const nlohmann::json& jsonObject) {
+bool myRandom::getKeysFromJsonObject(std::vector<std::string>& keys, const nlohmann::json& jsonObject) {
     if (jsonObject.empty()) {
         std::cerr << "Error: items JSON is empty!" << std::endl;
         return false;
@@ -63,14 +63,14 @@ bool myRandom::getKeysFromJsonObject(std::vector<std::string>& returnKeys, const
 
     for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
         if (!it.key().empty()) {
-            returnKeys.push_back(it.key());
+            keys.push_back(it.key());
         } else {
             std::cerr << "Warning: Found an invalid key in the JSON object." << std::endl;
             return false;
         }
     }
 
-    if (returnKeys.empty()) {
+    if (keys.empty()) {
         std::cerr << "Error: No keys available in JSON object." << std::endl;
         return false;
     }
