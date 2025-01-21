@@ -20,8 +20,8 @@ int myRandom::generateRandomInt(int min, int max) {
 std::string myRandom::generateRandomString(size_t length) {
     constexpr char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     constexpr size_t chars_len = sizeof(chars) - 1;
-
     static std::uniform_int_distribution<> distrib(0, chars_len - 1);
+
     std::string randomStr;
     randomStr.reserve(length);
     for (size_t i = 0; i < length; ++i) {
@@ -50,7 +50,7 @@ bool myRandom::getRandomBool() {
     return distrib(gen) == 1;
 }
 
-std::vector<std::string> getKeysFromJsonObject(const nlohmann::json& jsonObject) {
+std::vector<std::string> myRandom::getKeysFromJsonObject(const nlohmann::json& jsonObject) {
     std::vector<std::string> keys;
 
     for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
@@ -69,7 +69,7 @@ std::vector<std::string> getKeysFromJsonObject(const nlohmann::json& jsonObject)
     return keys;
 }
 
-std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count) {
+std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, size_t count) {
     std::vector<std::string> returnKeys;
     returnKeys.reserve(count);
 
