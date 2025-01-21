@@ -50,7 +50,9 @@ bool myRandom::getRandomBool() {
     return distrib(gen) == 1;
 }
 
-void getKeysFromJsonObject(const nlohmann::json& jsonObject, std::vector<std::string>& keys) {
+std::vector<std::string> getKeysFromJsonObject(const nlohmann::json& jsonObject) {
+    std::vector<std::string> keys;
+
     for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
         if (!it.key().empty()) {
             keys.push_back(it.key());
@@ -67,8 +69,9 @@ void getKeysFromJsonObject(const nlohmann::json& jsonObject, std::vector<std::st
     return keys;
 }
 
-void myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count, std::vector<std::string>& returnKeys) {
-    returnKeys.reserve(count);
+std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count) {
+    std::vector<std::string> returnKeys;
+    returnKeys.resize(count);
 
     if (jsonObject.empty()) {
         std::cerr << "Error: items JSON is empty!" << std::endl;
@@ -81,14 +84,13 @@ void myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const i
     }
 
     // We only care about the keys of this JSON object.
-    std::vector<std::string> keys;
-    getKeysFromJsonObject(jsonObject, keys);
+    std::vector<std::string> keys = getKeysFromJsonObject(jsonObject);
 
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
 
     for (int i = 0; i < count; i++) {
         int randomIndex = distrib(gen);
-        returnKeys.push_back(keys[randomIndex]);
+        returnKeys[i] = keys[randomIndex];
     }
 
     return returnKeys; // Return a random key from the file
