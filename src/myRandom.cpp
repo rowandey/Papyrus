@@ -90,7 +90,7 @@ std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json&
 
     for (int i = 0; i < count; i++) {
         int randomIndex = distrib(gen);
-        returnKeys[i] = keys[randomIndex];
+        returnKeys.push_back(keys[randomIndex]);
     }
 
     return returnKeys; // Return a random key from the file
