@@ -6,19 +6,18 @@
 
 #include "myRandom.hpp"
 
-// Constructor to initialize the random number generator with a seed
+// Constructor to initialize the random number generator with a seed.
+// These are declared static so there is only one instance across all objects
+// of the myRandom class.
 std::random_device myRandom::rd;
 std::mt19937 myRandom::gen(myRandom::rd());
 
 int myRandom::generateRandomInt(int min, int max) {
-
     static std::uniform_int_distribution<> distrib(min, max);
     return distrib(gen);
-
 }
 
 std::string myRandom::generateRandomString(size_t length) {
-
     constexpr char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     constexpr size_t chars_len = sizeof(chars) - 1;
 
@@ -29,11 +28,9 @@ std::string myRandom::generateRandomString(size_t length) {
         randomStr += chars[distrib(gen)];
     }
     return randomStr;
-
 }
 
 std::string myRandom::generateRandomNumberString(size_t length) {
-
     constexpr char chars[] = "0123456789";
     constexpr size_t chars_len = sizeof(chars) - 1;
     static std::uniform_int_distribution<> distrib(0, chars_len - 1);
@@ -51,7 +48,6 @@ bool myRandom::getRandomBool() {
 
     // Return true if random number is 1, else false
     return distrib(gen) == 1;
-
 }
 
 std::vector<std::string> getKeysFromJsonObject(const nlohmann::json& jsonObject) {
@@ -87,6 +83,7 @@ std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json&
         return {};
     }
 
+    // We only care about the keys of this JSON object.
     std::vector<std::string> keys = getKeysFromJsonObject(jsonObject);
 
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
