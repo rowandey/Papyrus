@@ -305,7 +305,7 @@ using socket_t = int;
 #endif
 
 #ifdef CPPHTTPLIB_ZLIB_SUPPORT
-#include <zlib.h>
+#include "gzip/zlib.h"
 #endif
 
 #ifdef CPPHTTPLIB_BROTLI_SUPPORT

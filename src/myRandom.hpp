@@ -20,7 +20,7 @@ public:
     // Generates a random boolean (true or false)
     static bool getRandomBool();
 
-    static void getRandomVectorFromJSON(std::vector<std::string>& participantData,  const nlohmann::json& jsonObject, const int& count);
+    static bool getRandomVectorFromJSON(std::vector<std::string>& participantData,  const nlohmann::json& jsonObject, const int& count);
     
 private:
     static std::random_device rd;  // Seed source

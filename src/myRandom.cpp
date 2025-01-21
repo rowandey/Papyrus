@@ -54,16 +54,18 @@ bool myRandom::getRandomBool() {
 
 }
 
-void myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData, const nlohmann::json& jsonObject, const int& count) {
+bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData, const nlohmann::json& jsonObject, const int& count) {
+
+    participantData.reserve(count);
 
     if (jsonObject.empty()) {
         std::cerr << "Error: items JSON is empty!" << std::endl;
-        return;
+        return false;
     }
 
     if (!jsonObject.is_object()) {
         std::cerr << "Error: 'items' is not a valid JSON object!" << std::endl;
-        return;
+        return false;
     }
 
     std::vector<std::string> keys;
@@ -72,13 +74,13 @@ void myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData
             keys.push_back(it.key());
         } else {
             std::cerr << "Warning: Found an invalid key in the JSON object." << std::endl;
-            return;
+            return false;
         }
     }
 
     if (keys.empty()) {
         std::cerr << "Error: No keys available in JSON object." << std::endl;
-        return;
+        return false;
     }
 
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
@@ -87,4 +89,7 @@ void myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData
         int randomIndex = distrib(gen);
         participantData.push_back(keys[randomIndex]);
     }
+    
+    return true;
+
 }

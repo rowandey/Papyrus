@@ -3,10 +3,11 @@ SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
 OPENSSL_DIR = $(SRC_DIR)/dependencies/openssl/include  # Local OpenSSL directory
+ZLIB_DIR = $(SRC_DIR)/dependencies/gzip/include
 
 # Compiler and flags
 CXX = g++
-CXXFLAGS_COMMON = -I$(OPENSSL_DIR) -MMD -MP   # Include dependency tracking
+CXXFLAGS_COMMON = -I$(OPENSSL_DIR) -I$(ZLIB_DIR) -MMD -MP   # Include dependency tracking
 ifeq ($(shell uname), Darwin)
 	CXXFLAGS = -std=c++2b $(CXXFLAGS_COMMON)  # macOS-specific flags
 else
@@ -14,7 +15,7 @@ else
 endif
 
 # Linker flags
-LDFLAGS = -L$(OPENSSL_DIR) -lssl -lcrypto -lz # Link local OpenSSL libraries
+LDFLAGS = -L$(OPENSSL_DIR) -L$(ZLIB_DIR) -lssl -lcrypto -lz # Link local OpenSSL libraries
 
 # Source files and object files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
