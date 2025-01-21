@@ -1,6 +1,6 @@
 #pragma once
 
-#include <random> 
+#include <random>
 #include <string>
 
 #include "dependencies/json.hpp"
@@ -20,8 +20,11 @@ public:
     // Generates a random boolean (true or false)
     static bool getRandomBool();
 
-    static bool getRandomVectorFromJSON(std::vector<std::string>& participantData,  const nlohmann::json& jsonObject, const int& count);
-    
+
+    static bool getKeysFromJsonObject(std::vector<std::string>& keys, const nlohmann::json& jsonObject);
+
+    static bool getRandomVectorFromJSON(std::vector<std::string>& participantData, const nlohmann::json& jsonObject, size_t count);
+
 private:
     static std::random_device rd;  // Seed source
     static std::mt19937 gen;

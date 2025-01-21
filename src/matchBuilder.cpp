@@ -1,17 +1,15 @@
-#include <iostream>
-#include <random>
+#include "matchBuilder.hpp"
+
 #include <string>
 
 #include "dependencies/json.hpp"
 
-#include "matchBuilder.hpp"
 #include "mapping.hpp"
 #include "myRandom.hpp"
 
 using json = nlohmann::json;
 
 json matchBuilder::randomMatch() {
-
     json matchTemplate = mapping::MATCH_TEMPLATE_JSON;
 
     matchTemplate["info"]["gameCreation"] = 9466848;
@@ -69,7 +67,7 @@ json matchBuilder::randomMatch() {
         participant["champExperience"] = myRandom::generateRandomInt(1, 12576);
         participant["champLevel"] = myRandom::generateRandomInt(1, 18);
         participant["championId"] = myRandom::generateRandomInt(1, 200);
-        
+
         participant["championName"] = participantChamp.back();
         participantChamp.pop_back();
 
@@ -95,13 +93,13 @@ json matchBuilder::randomMatch() {
             participant["riotIdGameName"] = "bsawatestuser";
             participant["riotIdTagline"] = "test";
             participant["summonerName"] = "bsawatestuser";
-            isFirstIteration = false; 
+            isFirstIteration = false;
         } else {
             participant["riotIdGameName"] = myRandom::generateRandomString(8);
             participant["riotIdTagline"] = myRandom::generateRandomString(3);
             participant["summonerName"] = myRandom::generateRandomString(8);
         }
     }
-    
+
     return matchTemplate;
 }

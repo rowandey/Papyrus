@@ -1,39 +1,36 @@
-#include <string>
-#include <random>
+#include "myRandom.hpp"
+
 #include <iostream>
+#include <random>
+#include <string>
 
 #include "dependencies/json.hpp"
 
-#include "myRandom.hpp"
-
-// Constructor to initialize the random number generator with a seed
+// Constructor to initialize the random number generator with a seed.
+// These are declared static so there is only one instance across all objects
+// of the myRandom class.
 std::random_device myRandom::rd;
 std::mt19937 myRandom::gen(myRandom::rd());
 
 int myRandom::generateRandomInt(int min, int max) {
-
     static std::uniform_int_distribution<> distrib(min, max);
     return distrib(gen);
-
 }
 
 std::string myRandom::generateRandomString(size_t length) {
-
     constexpr char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     constexpr size_t chars_len = sizeof(chars) - 1;
-
     static std::uniform_int_distribution<> distrib(0, chars_len - 1);
+
     std::string randomStr;
     randomStr.reserve(length);
     for (size_t i = 0; i < length; ++i) {
         randomStr += chars[distrib(gen)];
     }
     return randomStr;
-
 }
 
 std::string myRandom::generateRandomNumberString(size_t length) {
-
     constexpr char chars[] = "0123456789";
     constexpr size_t chars_len = sizeof(chars) - 1;
     static std::uniform_int_distribution<> distrib(0, chars_len - 1);
@@ -51,12 +48,10 @@ bool myRandom::getRandomBool() {
 
     // Return true if random number is 1, else false
     return distrib(gen) == 1;
-
 }
 
-bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData, const nlohmann::json& jsonObject, const int& count) {
 
-    participantData.reserve(count);
+bool myRandom::getKeysFromJsonObject(std::vector<std::string>& keys, const nlohmann::json& jsonObject) {
 
     if (jsonObject.empty()) {
         std::cerr << "Error: items JSON is empty!" << std::endl;
@@ -68,7 +63,6 @@ bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData
         return false;
     }
 
-    std::vector<std::string> keys;
     for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
         if (!it.key().empty()) {
             keys.push_back(it.key());
@@ -81,6 +75,23 @@ bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData
     if (keys.empty()) {
         std::cerr << "Error: No keys available in JSON object." << std::endl;
         return false;
+
+    }
+
+    return true;
+}
+
+bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData, const nlohmann::json& jsonObject, size_t count) {
+    // We know we'll need exactly count elements, so reserve space for them
+    // to reduce the number of reallocations.
+    participantData.reserve(count);
+
+    // We only care about the keys of this JSON object.
+    std::vector<std::string> keys;
+    bool success = getKeysFromJsonObject(keys, jsonObject);
+    if (!success) {
+        return false;
+
     }
 
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
@@ -89,7 +100,7 @@ bool myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData
         int randomIndex = distrib(gen);
         participantData.push_back(keys[randomIndex]);
     }
-    
-    return true;
 
+    return true;
 }
+
