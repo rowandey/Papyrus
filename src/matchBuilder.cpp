@@ -39,25 +39,19 @@ json matchBuilder::randomMatch() {
 
     // Batch fetching random values to save on runtime massively
     std::vector<std::string> participantItems;
-    participantItems.reserve(1700);
-    participantItems = myRandom::getRandomVectorFromJSON(mapping::ITEMS_JSON, 70);
+    myRandom::getRandomVectorFromJSON(participantItems, mapping::ITEMS_JSON, 70);
 
     std::vector<std::string> participantChamp;
-    participantChamp.reserve(100);
-    participantChamp = myRandom::getRandomVectorFromJSON(mapping::CHAMPIONS_JSON, 10);
+    myRandom::getRandomVectorFromJSON(participantChamp, mapping::CHAMPIONS_JSON, 10);
 
     std::vector<std::string> participantSummoners;
-    participantSummoners.reserve(150);
-    participantSummoners = myRandom::getRandomVectorFromJSON(mapping::SUMMMONERS_JSON, 20);
+    myRandom::getRandomVectorFromJSON(participantSummoners, mapping::SUMMMONERS_JSON, 20);
 
     std::vector<std::string> participantKeystone;
-    participantKeystone.reserve(200);
-    participantKeystone = myRandom::getRandomVectorFromJSON(mapping::KEYSTONES_JSON, 10);
-
+    myRandom::getRandomVectorFromJSON(participantKeystone, mapping::KEYSTONES_JSON, 10);
 
     std::vector<std::string> participantSecondary;
-    participantSecondary.reserve(110); 
-    participantSecondary= myRandom::getRandomVectorFromJSON(mapping::SECONDARY_RUNES_JSON, 10);
+    myRandom::getRandomVectorFromJSON(participantSecondary, mapping::SECONDARY_RUNES_JSON, 10);
 
     // Will loop 10 times, once for each participant in game
     for (json& participant : matchTemplate["info"]["participants"]) {
@@ -101,13 +95,13 @@ json matchBuilder::randomMatch() {
             participant["riotIdGameName"] = "bsawatestuser";
             participant["riotIdTagline"] = "test";
             participant["summonerName"] = "bsawatestuser";
-            isFirstIteration = false; 
+            isFirstIteration = false;
         } else {
             participant["riotIdGameName"] = myRandom::generateRandomString(8);
             participant["riotIdTagline"] = myRandom::generateRandomString(3);
             participant["summonerName"] = myRandom::generateRandomString(8);
         }
     }
-    
+
     return matchTemplate;
 }
