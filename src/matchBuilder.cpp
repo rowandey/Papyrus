@@ -39,25 +39,19 @@ json matchBuilder::randomMatch() {
 
     // Batch fetching random values to save on runtime massively
     std::vector<std::string> participantItems;
-    participantItems.reserve(1700);
-    participantItems = myRandom::getRandomVectorFromJSON(mapping::ITEMS_JSON, 70);
+    myRandom::getRandomVectorFromJSON(participantItems, mapping::ITEMS_JSON, 70);
 
     std::vector<std::string> participantChamp;
-    participantChamp.reserve(100);
-    participantChamp = myRandom::getRandomVectorFromJSON(mapping::CHAMPIONS_JSON, 10);
+    myRandom::getRandomVectorFromJSON(participantChamp, mapping::CHAMPIONS_JSON, 10);
 
     std::vector<std::string> participantSummoners;
-    participantSummoners.reserve(150);
-    participantSummoners = myRandom::getRandomVectorFromJSON(mapping::SUMMMONERS_JSON, 20);
+    myRandom::getRandomVectorFromJSON(participantSummoners, mapping::SUMMMONERS_JSON, 20);
 
     std::vector<std::string> participantKeystone;
-    participantKeystone.reserve(200);
-    participantKeystone = myRandom::getRandomVectorFromJSON(mapping::KEYSTONES_JSON, 10);
-
+    myRandom::getRandomVectorFromJSON(participantKeystone, mapping::KEYSTONES_JSON, 10);
 
     std::vector<std::string> participantSecondary;
-    participantSecondary.reserve(110); 
-    participantSecondary= myRandom::getRandomVectorFromJSON(mapping::SECONDARY_RUNES_JSON, 10);
+    myRandom::getRandomVectorFromJSON(participantSecondary, mapping::SECONDARY_RUNES_JSON, 10);
 
     // Will loop 10 times, once for each participant in game
     for (json& participant : matchTemplate["info"]["participants"]) {
@@ -75,26 +69,26 @@ json matchBuilder::randomMatch() {
         participant["champExperience"] = myRandom::generateRandomInt(1, 12576);
         participant["champLevel"] = myRandom::generateRandomInt(1, 18);
         participant["championId"] = myRandom::generateRandomInt(1, 200);
-
-        participant["championName"] = participantChamp[0];
-        participantChamp.erase(participantChamp.begin());
+        
+        participant["championName"] = participantChamp.back();
+        participantChamp.pop_back();
 
         for (int i = 0; i < 7; i++){
             std::string key = "item" + std::to_string(i);
-            participant[key] = participantItems[0];
-            participantItems.erase(participantItems.begin());
+            participant[key] = participantItems.back();
+            participantItems.pop_back();
         }
 
-        participant["summoner1Id"] = participantSummoners[0];
-        participantSummoners.erase(participantSummoners.begin());
-        participant["summoner2Id"] = participantSummoners[0];
-        participantSummoners.erase(participantSummoners.begin());
+        participant["summoner1Id"] = participantSummoners.back();
+        participantSummoners.pop_back();
+        participant["summoner2Id"] = participantSummoners.back();
+        participantSummoners.pop_back();
 
-        participant["perks"]["styles"][0]["selections"][0]["perk"] = participantKeystone[0];
-        participantKeystone.erase(participantKeystone.begin());
+        participant["perks"]["styles"][0]["selections"][0]["perk"] = participantKeystone.back();
+        participantKeystone.pop_back();
 
-        participant["perks"]["styles"][1]["style"] = participantSecondary[0];
-        participantSecondary.erase(participantSecondary.begin());
+        participant["perks"]["styles"][1]["style"] = participantSecondary.back();
+        participantSecondary.pop_back();
 
         // First iteration static placeholder name used for debugging
         if (isFirstIteration) {

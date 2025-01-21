@@ -54,19 +54,14 @@ bool myRandom::getRandomBool() {
 
 }
 
-std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count) {
-
-    std::vector<std::string> returnKeys;
-    returnKeys.resize(count);
+void myRandom::getRandomVectorFromJSON(std::vector<std::string>& participantData, const nlohmann::json& jsonObject, const int& count) {
 
     if (jsonObject.empty()) {
         std::cerr << "Error: items JSON is empty!" << std::endl;
-        return {};
     }
 
     if (!jsonObject.is_object()) {
         std::cerr << "Error: 'items' is not a valid JSON object!" << std::endl;
-        return {};
     }
 
     std::vector<std::string> keys;
@@ -80,17 +75,12 @@ std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json&
 
     if (keys.empty()) {
         std::cerr << "Error: No keys available in JSON object." << std::endl;
-        return {};
     }
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, keys.size() - 1);
 
     for (int i = 0; i < count; i++) {
         int randomIndex = distrib(gen);
-        returnKeys[i] = keys[randomIndex];
+        participantData.push_back(keys[randomIndex]);
     }
-
-    return returnKeys; // Return a random key from the file
 }
