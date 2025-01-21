@@ -71,7 +71,7 @@ std::vector<std::string> getKeysFromJsonObject(const nlohmann::json& jsonObject)
 
 std::vector<std::string> myRandom::getRandomVectorFromJSON(const nlohmann::json& jsonObject, const int& count) {
     std::vector<std::string> returnKeys;
-    returnKeys.resize(count);
+    returnKeys.reserve(count);
 
     if (jsonObject.empty()) {
         std::cerr << "Error: items JSON is empty!" << std::endl;
