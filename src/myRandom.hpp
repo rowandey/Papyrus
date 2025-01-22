@@ -25,6 +25,6 @@ public:
     static bool getRandomVectorFromJSON(std::vector<std::string>& participantData, const nlohmann::json& jsonObject, size_t count);
 
 private:
-    static std::random_device rd;  // Seed source
-    static std::mt19937 gen;
+    static thread_local std::random_device rd;  // Seed source
+    static thread_local std::mt19937 gen;
 };
