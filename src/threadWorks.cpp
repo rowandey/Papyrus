@@ -135,6 +135,7 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
                   << " | Failed: " << (totalPayloadsSent - totalPayloadsSuccessful)
                   << " | Packets/s: " << packetsPerSecond
                   << " | Elapsed Time: " << clock.elapsedMilliseconds()
+		  << "     "  // clear a few characters past the end
                   << std::flush;
     }
 }
