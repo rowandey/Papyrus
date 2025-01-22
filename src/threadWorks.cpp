@@ -120,7 +120,7 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
             totalPayloadsSuccessful++;
         }
 
-        // Only display status update once every 100ms
+        // Limit how frequently we display the update message
         static auto last_update_time = std::chrono::steady_clock::now();
         auto now = std::chrono::steady_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_update_time);
