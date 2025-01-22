@@ -1,4 +1,5 @@
 #include <atomic>
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <mutex>
@@ -118,6 +119,16 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         if (response == "200") {
             totalPayloadsSuccessful++;
         }
+
+        // Only display status update once every 100ms
+        static auto last_update_time = std::chrono::steady_clock::now();
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_update_time);
+        if (elapsed.count() < 100) {
+            return; // Less than 100ms since last update, skip this one
+        }
+
+        last_update_time = now;
 
         // TODO: This line prints a new line on Mac?
         // "/033" ANSI escape character
