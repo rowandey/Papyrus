@@ -125,7 +125,10 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         // "2" 2 specifies the entire line
         // "K" clears the selection
         // "\r" returns cursor to start of line
-        std::cout << "\033[2K\r";
+        // NOTE: There's no need for this on Linux because \r will send the cursor
+        // back to the front of the line where it will just overwrite the display.
+        // Doing it this way also shows up better when routed to a file.
+        //std::cout << "\033[2K\r";
         // Print updated info on the same line
         std::cout << "\rTotal Sent: " << totalPayloadsSent
                   << " | Successful: " << totalPayloadsSuccessful
@@ -159,5 +162,4 @@ void threadWorks::runWorkerThread(const std::string& targetURL, const std::strin
             std::this_thread::sleep_for(std::chrono::milliseconds(myRandom::generateRandomInt(0, spike)));
         }
     }
-    
 }
