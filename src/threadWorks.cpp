@@ -1,4 +1,5 @@
 #include <atomic>
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <mutex>
@@ -118,6 +119,20 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         if (response == "200") {
             totalPayloadsSuccessful++;
         }
+
+        // Limit how frequently we display the update message
+        static auto last_update_time = std::chrono::steady_clock::now();
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_update_time);
+
+        // 20 Hz refresh rate = less than screen, almost max human eye
+        constexpr unsigned int DELAY_MS = 50;
+        if (elapsed.count() < DELAY_MS) {
+            // It's been less than the delay time, so skip displaying an update.
+            return;
+        }
+
+        last_update_time = now;
 
         // TODO: This line prints a new line on Mac?
         // "/033" ANSI escape character
