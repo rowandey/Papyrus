@@ -840,6 +840,7 @@ namespace mapping{
    }
    )";
 
+   // TODO: Randomize the participant IDs
    const nlohmann::json MATCH_TEMPLATE_JSON = {
       {
          "metadata", {

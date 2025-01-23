@@ -331,19 +331,6 @@ cd bin
 #### Test User
 Game Name + Tag: bsawatestuser#test
 
-### Todo:
-
-- Create make based github actions to auto compile per commit
-- Investigate only having one participant in template and expanding the template with code at runtime
-
-Tips from DemiTastes on theo disc
-- README Examples of randomized data sent to mtrack
-
-- Add AWS CloudWatch connection to ocean plugin for convenient metrics tracking
-	- Configured in ocean plugin `.env` file
-
-- Investigate C++ coroutines for faster concurrency
-
 ### Recent Changes:
 - Rebuilt the header structure for the application
 - Investigated Coroutines
@@ -486,8 +473,66 @@ for (size_t i = 0; i < length; ++i) {
 return randomStr;
 ```
 
-- at 8.4k
-- seg faults atm, FIND THAT SEG FAULT!!!!!!!!!!!!!!!!!!!!!!
+- Went from 3.3k to 6k by removing the local random device in the matchBuilder::getRandomVectorFromJSON method and moved  getRandomVectorFromJSON to myRandom for stability and performance by using only a single random device.
+
+- Went from 6k to 8k by removing declarations and copies of unnecessary vectors. Inside of the getRandomVectorFromJSON there was a vector that was used to append the requested random items from the JSON object and returned. This method resulted in an unnecessary declaration and copy. Passed original vector by reference and removed unnecessary copy and declaration of useless vector. Directly editing OG vector. 
+
+```cpp
+std::vector<std::string> participantItems;
+participantItems = myRandom::getRandomVectorFromJSON(mapping::ITEMS_JSON, 70);
+
+std::vector<std::string> participantItems;
+myRandom::getRandomVectorFromJSON(participantItems, mapping::ITEMS_JSON, 70);
+```
+
+- WE ARE GETTING A LOT OF SEG FAULTS AT 8K
+- Went from 8k to 7.6k The seg faults were caused by the global random device generator experiencing a race condition(The program was so slow up until now it didnt experience it, we hit real speeds and it experienced a race condition more often). Each thread was given its own local random device and generator. 
+
+- SO CLOSEEEE
+
+- It was at this point I took another look at `htop` while the program was running. CPU cores locked at 60% under full load, why? We were now getting limited by the TERMINAL. Since the terminal metrics line writes once per requests and we were now able to toss out 7.6k per second, we were actually experiencing more blocking operations while we waited to write to the screen and wasted time when we could be sending requests. That and with all of the efficiencies we added, turns out our limation was that we can send out requests so much faster and we were waiting for responses on my standard 16 threads testing command. So we could turn the core count up... by a lot...
+
+```cpp
+std::cout 	<< "\rTotal Sent: " << totalPayloadsSent
+			<< " | Successful: " << totalPayloadsSuccessful
+			<< " | Failed: " << (totalPayloadsSent - totalPayloadsSuccessful)
+			<< " | Packets/s: " << packetsPerSecond
+			<< " | Elapsed Time: " << clock.elapsedMilliseconds()
+		  	<< "     "  // clear a few characters past the end
+            << std::flush;
+```
+
+- Went from 7.6k 20k Up until now we were using blinders basically. This is also the part of the journey where we realise that running the Papy client, the GO endpoint and the PostgreSQL database on the same box is causing unintended performance issues for the non papy services LOL. HOWEVER even with this in mind. We can still reach 12k requests per second to the box. Even though all CPU cores are at 100% cause of the Papy client.
+
+### Todo:
+
+- Create make based github actions to auto compile per commit
+- Investigate only having one participant in template and expanding the template with code at runtime
+
+Tips from DemiTastes on theo disc
+- README Examples of randomized data sent to mtrack
+
+- Add AWS CloudWatch connection to ocean plugin for convenient metrics tracking
+	- Configured in ocean plugin `.env` file
+
+
+Next steps:
+
+- Make the sending part of the net code better
+- Read about core-mapping if you dig into the caches and from there you will understand why crossing what you have in your CPU called DIE does for net code
+- Reading about core mapping to deal with inefficient cache use would be a good idea
+
+- Some parallelization can be done
+	- Batching area probably (depending on how much data you are working with)
+	- Same with the generators
+
+```
+Useful GDB commands:
+
+info threads
+thread #
+bt
+```
 
 Little present if you read all the way to the end:
 

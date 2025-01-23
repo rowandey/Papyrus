@@ -126,7 +126,7 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_update_time);
 
         // 20 Hz refresh rate = less than screen, almost max human eye
-        constexpr unsigned int DELAY_MS = 50;
+        constexpr unsigned int DELAY_MS = 25;
         if (elapsed.count() < DELAY_MS) {
             // It's been less than the delay time, so skip displaying an update.
             return;
@@ -134,16 +134,6 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
 
         last_update_time = now;
 
-        // TODO: This line prints a new line on Mac?
-        // "/033" ANSI escape character
-        // "[" indicates start of a control sequence
-        // "2" 2 specifies the entire line
-        // "K" clears the selection
-        // "\r" returns cursor to start of line
-        // NOTE: There's no need for this on Linux because \r will send the cursor
-        // back to the front of the line where it will just overwrite the display.
-        // Doing it this way also shows up better when routed to a file.
-        //std::cout << "\033[2K\r";
         // Print updated info on the same line
         std::cout << "\rTotal Sent: " << totalPayloadsSent
                   << " | Successful: " << totalPayloadsSuccessful
