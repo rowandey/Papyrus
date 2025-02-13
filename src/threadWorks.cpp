@@ -103,7 +103,7 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
     if (verbose) {
         std::cout << "Response: " << response << std::endl;
     } else {
-        totalPayloadsSent++;
+        
 
         // Mutex guarded packets per second calculations
         std::lock_guard<std::mutex> guard(consoleMutex);
@@ -119,6 +119,10 @@ void threadWorks::sendRequest(apiClient& client, bool verbose, std::string paylo
         if (response == "200") {
             totalPayloadsSuccessful++;
         }
+
+        // Having totalPayloadsSent++ at the top of the namespace caused the 
+        // failed stat to blip
+        totalPayloadsSent++;
 
         // Limit how frequently we display the update message
         static auto last_update_time = std::chrono::steady_clock::now();

@@ -718,7 +718,7 @@ namespace mapping{
       {"Zilean", "26"},
       {"Zoe", "142"},
       {"Zyra", "143"}
-    };
+   };
 
    const std::string OCEAN_PAYLOAD_TEMPLATE = R"(
    {
