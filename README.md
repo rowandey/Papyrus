@@ -113,7 +113,7 @@ Lets launch some requests! The following are examples of possible use cases and 
 
 If you want to launch a bunch of GET requests to a specific site:
 ```bash
-./papy --threads 4 --target "https://www.google.com"
+./papy --threads 4 --target "https://www.{YOUR_TARGET_IP_ADDR}.com"
 ```
 ![Papy GET](docs/documentationImages/papyGET.gif "Papy GET")
 > WARNING: This is to demonstrate you can query public websites but use this responsibly. Overuse or non-permitted usage could cause legal problems for you. Best to use the tool on resources you own.
