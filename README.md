@@ -29,7 +29,7 @@ Lets get into how we do this...
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
 3. [User Interface](#user-interface)
-4. [Notable Command Line Arguments](#command-line-arguments)
+4. [Command Line Arguments](#command-line-arguments)
 6. [Ask The Dev](#ask-the-dev)
 7. [Disclaimer](#disclaimer)
 8. [Contributing](#contributing)
