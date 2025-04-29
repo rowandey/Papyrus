@@ -82,7 +82,7 @@ void cliHelper::displayHelp() {
             << "  -th, --threads [num]      Number of threads to run (default: 1)\n"
             << "  -ta, --target [url]       Target URL ex. \"http://mtrack.com\"\n"
             << "  -e, --endpoint [path]     API endpoint ex. \"/addMatch\"\n"
-            << "  -pa, --parameter [string]  String of parameters that will be appeneded to address.\n"
+            << "  -pa, --parameter [string]  String of parameters that will be appended to address.\n"
             << "  -c, --count [num]         Number of payloads to send\n"
             << "  -r, --rate [ms]           Rate limit in milliseconds between sent payloads\n"
             << "  -v, --verbose             Enable verbose output\n"
