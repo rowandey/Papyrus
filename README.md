@@ -166,46 +166,49 @@ Since this was designed to be simple as well as a Command Line Interface tool th
 
 ---
 
-## Notable Command Line Arguments
+## Command Line Arguments
 
-### --threads [num]
+### -h, --help
+This argument has no parameter, it is not meant to be used with running the actual application, and will override any other arguments given alongside it. It displays all possible command line arguments (see below), how the command should be formated, and an example command to run the application. 
+
+### -th, --threads [num]
 This parameter lets you specify the amount of CPU threads you want to use for the programs execution. The more you add the more concurrent requests will be sent. If you try to assign more threads that you have physically then the speed will not necessarily increase due to the CPU having to switch between the active tasks anyways so there is no real point to assigning more threads that you physically have on your CPU. Faster threads however do assist in the speed of requests per thread.
 
-### --target [url]
+### -ta, --target [url]
 Assigns the url of the target. Should be in the format `http://www.mtrack.com`. Specifically the `http://` or `https://` portion of the address must be included. This is because this is how Papy determines which protocols to use to send the requests. 
 
-### --endpoint [path]
+### -e, --endpoint [path]
 Specifies the endpoint of the specific server. This endpoint string gets appended to the target address. So if you want to query the target `https://www.mtrack.com` and the endpoint `/addMatch` you can use the command:
 ```bash
 ./papy --threads 1 --target "https://www.mtrack.com" --endpoint "/addMatch"
 ```
 
-### --parameter [string]
+### -pa, --parameter [string]
 The `--parameter` flag lets you specify end of URL paramaters. For example, the following Papy command will yield the final url of `https://www.mtrack.com/addMatch?variable=BOB`.
 ```bash
 ./papy --threads 1 --target "https://www.mtrack.com" --endpoint "/addMatch" --parameter "?variable=BOB"
 ```
 
-### --count [num]
+### -c, --count [num]
 This parameter will let you specify the amount of payloads that each thread will launch. If you have a single thread and specify `--count` to be 10 then Papy will launch 10 requests. If you however have `--threads` set to 4 and you have `--count` set to 10 it will launch 40 requests. The count number is FOR EACH THREAD.  
 
-### --rate [ms]
+### -r, --rate [ms]
 `--rate` specifies the delay in milliseconds between payloads being sent out. If you specify `--rate 2000` then there will be a 2 secon delay between each set of packets being sent out. Once again if you have the threadcount set to 4 and a delay of 2000 then 4 packets will be sent out every 2 seconds. The delay is also per thread.
 
 
-### --verbose
+### -v, --verbose
 This flag has no parameter. If it is present in the command line arguments it will enable verbose output. It will show you the response of each request being sent out. Without this flag all you will see in terms of the responses of the requests is the main statistics line for Papy.
 ```
 Total Sent: 36 | Successful: 36 | Failed: 0 | Packets/s: 1 | Elapsed Time: 70099
 ```
 
-### --spike [ms]
+### -s, --spike [ms]
 This flag lets you specify a "spike" time. What happens is that whatever delay in ms you set for this flag will be used to calculate when the payloads will be sent out. Each request will be sent out at a random delay between zero and the number that you set. This makes the traffic much more chaotic and similar to real world situations.
 
-### --ramp [ms]
+### -ra, --ramp [ms]
 This flag lets you specify test a ramping simulation. The traffic will have a delay of the one you set for the `--ramp` flag and then get halved each time a payload is sent. It will ramp faster and faster until it runs at the max speed capable of your hardware.
 
-### --payload [num]
+### -p, --payload [null] || [string] || [filepath]
 This is where a good amount of the meat of the functionality is. Depending on the payload that you set you will have behavior vary drastically. At the moment there are 4 main operating modes:
 - No payload
 - `lol`
